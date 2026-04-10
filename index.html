@@ -529,6 +529,8 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
   .page.print-target{display:block!important;animation:none!important}
   .page.print-target + .page.print-target{page-break-before:always}
   .card.print-card{border:none!important;border-radius:0!important;box-shadow:none!important;padding:24px 32px!important;margin:0!important}
+  /* On cover page, only show the cover design card, hide the client form card */
+  .page.print-target.cover-target .card.print-card:not(.cover-print-card){display:none!important}
   .doc-header{border-bottom:2px solid #1a1714!important}
   .q-row.total-row{background:#1a1714!important;color:#fff!important}
   .doc-total-row td{background:#1a1714!important;color:#fff!important}
@@ -537,17 +539,17 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
   .q-row{border-bottom:1px solid #e8e0d4!important}
   @page{margin:12mm 14mm;size:A4}
   /* Cover page: full page, centred, no margins */
+  .page.print-target.cover-target{page-break-after:always}
   .cover-print-card{
-    position:fixed!important;top:0!important;left:0!important;
-    width:100vw!important;height:100vh!important;
+    width:100%!important;
+    min-height:calc(297mm - 24mm)!important;
     display:flex!important;flex-direction:column!important;
     align-items:center!important;justify-content:center!important;
     padding:40px!important;margin:0!important;
     border:none!important;border-radius:0!important;
     background:#fff!important;
   }
-  @page cover{margin:0;size:A4}
-  .page.print-target.cover-target{page:cover}
+  @page{margin:12mm 14mm;size:A4}
 }
 </style>
 </head>
