@@ -1,3 +1,4 @@
+index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KINGDOM PAINTING INC. — Master Estimate</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 <script src="https://apis.google.com/js/api.js"></script>
 <script src="https://accounts.google.com/gsi/client"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <script>
 // ════════════════════════════════════════════════
 // GOOGLE DRIVE INTEGRATION
@@ -192,9 +195,8 @@ async function saveToDrive(){
 
 
 </script>
-<script src="https://accounts.google.com/gsi/client"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+<script>
+
 // ── PDF → DRIVE ──
 let gdLocalTokenClient = null;
 let gdLocalToken = null;
@@ -311,6 +313,7 @@ async function gdSavePDFsToDrive(){
 })();
 
 
+
 </script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -376,6 +379,7 @@ body{min-height:100vh}
 .room-arrow{font-size:10px;color:var(--ink4);transition:transform .2s;display:inline-block}
 .room-arrow.open{transform:rotate(90deg)}
 .room-name-input{font-family:var(--serif);font-size:15px;border:none;background:transparent;color:var(--ink);padding:0;width:180px;cursor:text}
+.room-name-input::placeholder{color:var(--ink4);font-style:italic}
 .room-name-input:focus{outline:none;border-bottom:1px solid var(--gold)}
 .room-badge{font-size:11px;color:var(--ink3);background:var(--cream2);border-radius:20px;padding:3px 10px}
 .room-del{background:none;border:none;cursor:pointer;color:var(--ink4);font-size:18px;line-height:1;padding:2px 6px}
@@ -415,8 +419,8 @@ body{min-height:100vh}
 
 /* ── INVOICE / DOCUMENT STYLES ── */
 .doc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;padding-bottom:20px;border-bottom:2px solid var(--ink)}
-.doc-company{font-family:var(--serif);font-size:26px;color:var(--ink)}
-.doc-type{font-size:11px;color:var(--gold);font-weight:500;text-transform:uppercase;letter-spacing:.12em;margin-top:2px}
+.doc-company{font-family:var(--serif);font-size:26px;color:var(--gold)}
+.doc-type{font-size:11px;color:var(--ink);font-weight:500;text-transform:uppercase;letter-spacing:.12em;margin-top:2px}
 .doc-meta{text-align:right;font-size:12px;color:var(--ink2);line-height:1.8}
 .doc-meta strong{color:var(--ink)}
 .doc-section{margin-bottom:20px}
@@ -436,11 +440,12 @@ body{min-height:100vh}
 /* ── BREAKDOWN TABLE ── */
 .breakdown-table{width:100%;border-collapse:collapse;font-size:12px}
 .breakdown-table th{padding:8px 12px;background:var(--ink);color:var(--cream3);text-align:left;font-weight:400;font-size:11px;text-transform:uppercase;letter-spacing:.06em}
-.breakdown-table td{padding:8px 12px;border-bottom:1px solid var(--cream2)}
+.breakdown-table td{padding:8px 12px;border-bottom:1px solid var(--cream2);overflow:hidden;text-overflow:ellipsis}
 .breakdown-table tr:hover td{background:var(--cream)}
 .breakdown-table .subtotal-row td{background:var(--cream2);font-weight:500}
 .breakdown-table .grand-row td{background:var(--ink);color:#fff;font-weight:500}
 .num{text-align:right;font-variant-numeric:tabular-nums}
+.breakdown-table th.num,.breakdown-table td.num{text-align:center}
 
 /* ── RATES TABLE ── */
 .rates-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
@@ -474,9 +479,53 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
 
 @media(max-width:700px){
   .grid2,.grid3,.grid4,.stats,.prep-checks{grid-template-columns:1fr}
-  .surf-grid{grid-template-columns:1fr 70px 70px}
-  .pay-grid{grid-template-columns:1fr}
+  .surf-grid{grid-template-columns:140px 76px 76px 1fr}
+  /* pay-grid: keep 3 cols until very narrow */
   .main{padding:14px}
+}
+
+/* ── iPad mini 8.3" (744px portrait / 1133px landscape) ── */
+@media(max-width:768px){
+  /* Global */
+  .main{padding:12px;max-width:100%}
+  .card{padding:14px;margin-bottom:10px}
+  .card-title{font-size:12px}
+  .tabs{padding:0 10px}
+  .tab{padding:10px 12px;font-size:11px}
+
+  /* Rooms — 2-col grids */
+  .grid4{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:repeat(2,1fr);gap:8px}
+  .stat{padding:10px 12px}
+  .stat .val{font-size:18px}
+  .surf-grid{grid-template-columns:140px 76px 76px 1fr;gap:6px}
+  .prep-grid{grid-template-columns:1fr 1fr!important}
+  .paint-grid{grid-template-columns:1fr 1fr!important;gap:6px!important}
+  .room-stat-bar{grid-template-columns:1fr 1fr 1fr!important;gap:6px!important}
+  .irreg-grid{grid-template-columns:repeat(3,1fr)!important}
+  .stairs-grid{grid-template-columns:1fr 1fr!important}
+  .room-head{padding:12px 14px}
+  .room-body{padding:0 14px 14px}
+
+  /* Cover — keep print card, shrink form */
+  #page-cover .card:not(.cover-print-card){padding:14px}
+  #page-cover .cover-print-card{padding:32px 20px!important}
+  #page-cover .grid2{grid-template-columns:1fr 1fr}
+
+  /* Fields */
+  .field label{font-size:10px}
+  .field input,.field select,.field textarea{font-size:12px;padding:6px 8px}
+  .add-btn{font-size:12px;padding:8px}
+  .pay-grid{grid-template-columns:repeat(3,1fr)!important}
+  .pay-card{padding:10px}
+  .pay-amount{font-size:16px}
+}
+
+@media(max-width:500px){
+  .grid4,.grid2,.stats{grid-template-columns:1fr!important}
+  .paint-grid,.room-stat-bar,.stairs-grid{grid-template-columns:1fr!important}
+  #page-cover .grid2{grid-template-columns:1fr!important}
+  .pay-grid{grid-template-columns:1fr!important}
 }
 .drive-btn{
   display:inline-flex;align-items:center;gap:7px;
@@ -670,7 +719,7 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
     <div class="card-title">Client information</div>
     <div class="grid2" style="margin-bottom:12px">
       <div class="field"><label>Client name</label><input type="text" id="ci-name" oninput="syncClient()" placeholder="Full name"></div>
-      <div class="field"><label>Phone</label><input type="text" id="ci-phone" placeholder="(xxx) xxx-xxxx"></div>
+      <div class="field"><label>Phone</label><input type="text" id="ci-phone" placeholder="(xxx) xxx-xxxx" oninput="fmtPhone(this)" maxlength="14"></div>
       <div class="field"><label>Address line 1</label><input type="text" id="ci-addr1" oninput="syncClient()" placeholder="Street address"></div>
       <div class="field"><label>Address line 2</label><input type="text" id="ci-addr2" oninput="syncClient()" placeholder="City, Province, Postal"></div>
       <div class="field"><label>Email</label><input type="email" id="ci-email" oninput="syncClient()" placeholder="client@email.com"></div>
@@ -702,7 +751,7 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
     <div class="stat"><div class="lbl">Total doors</div><div class="val" id="bd-doors">0</div></div>
   </div>
   <div class="stats">
-    <div class="stat"><div class="lbl">Total hours</div><div class="val" id="bd-hours">0</div></div>
+    <div class="stat"><div class="lbl">Total hours / worker</div><div class="val" id="bd-hours">0</div></div>
     <div class="stat"><div class="lbl">Est. project days</div><div class="val" id="bd-days">0</div></div>
     <div class="stat"><div class="lbl">Labour cost</div><div class="val gold" id="bd-labour">$0</div></div>
     <div class="stat"><div class="lbl">Active rooms</div><div class="val" id="bd-rooms">0</div></div>
@@ -710,15 +759,44 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
   <div class="card">
     <div class="card-title">Per-room labour breakdown</div>
     <table class="breakdown-table" id="bd-table">
-      <thead><tr><th>Room</th><th>Surface</th><th class="num">Area</th><th class="num">Coats</th><th class="num">Rate (unit/hr)</th><th class="num">Hours</th><th class="num">Cost</th></tr></thead>
+      <thead><tr><th>Surface</th><th class="num">Area</th><th class="num">Coats</th><th class="num">Rate (unit/hr)</th><th class="num">Hours</th><th class="num">Cost</th></tr></thead>
       <tbody id="bd-tbody"></tbody>
     </table>
   </div>
   <div class="card">
     <div class="card-title">Total labour by surface</div>
     <table class="breakdown-table" id="bd-surface-table">
-      <thead><tr><th>Surface</th><th class="num">Total area</th><th class="num">Hours</th><th class="num">Days (8hr)</th><th class="num">Cost</th></tr></thead>
+      <thead><tr><th>Surface</th><th class="num">Total area</th><th class="num">Hours</th><th class="num">Days</th><th class="num">Cost</th></tr></thead>
       <tbody id="bd-surface-tbody"></tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-title">Total paint</div>
+    <table class="breakdown-table" id="bd-paint-table" style="table-layout:fixed;width:100%">
+      <colgroup>
+        <col style="width:28%">
+        <col style="width:18%">
+        <col style="width:11%">
+        <col style="width:8%">
+        <col style="width:9%">
+        <col style="width:11%">
+        <col style="width:11%">
+      </colgroup>
+      <thead><tr><th>Product</th><th>Colour</th><th class="num">Area (sqft)</th><th class="num">Unit</th><th class="num">Est. qty</th><th class="num">Price ea.</th><th class="num">Total</th></tr></thead>
+      <tbody id="bd-paint-tbody"></tbody>
+    </table>
+    <table class="breakdown-table" style="margin-top:0;border-top:2px solid var(--cream3);table-layout:fixed;width:100%" id="bd-primers-table">
+      <colgroup>
+        <col style="width:28%">
+        <col style="width:18%">
+        <col style="width:11%">
+        <col style="width:8%">
+        <col style="width:9%">
+        <col style="width:11%">
+        <col style="width:11%">
+      </colgroup>
+      <thead><tr><th>Primer</th><th>Colour</th><th class="num">Area (sqft)</th><th class="num">Unit</th><th class="num">Est. qty</th><th class="num">Price ea.</th><th class="num">Total</th></tr></thead>
+      <tbody id="bd-primers-tbody"></tbody>
     </table>
   </div>
   <div class="card">
@@ -727,29 +805,6 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
     <table class="breakdown-table" id="bd-colour-table">
       <thead><tr><th>Colour</th><th>Surface</th><th>Rooms</th><th class="num">Total sqft / lin ft / units</th></tr></thead>
       <tbody id="bd-colour-tbody"></tbody>
-    </table>
-  </div>
-  <div class="grid2">
-    <div class="card">
-      <div class="card-title">Total paint in gallons</div>
-      <table class="breakdown-table" id="bd-gallons-table">
-        <thead><tr><th>Product</th><th>Colour</th><th class="num">Area (sqft)</th><th class="num">Est. qty</th><th class="num">Price ea.</th><th class="num">Total</th></tr></thead>
-        <tbody id="bd-gallons-tbody"></tbody>
-      </table>
-    </div>
-    <div class="card">
-      <div class="card-title">Total paint in pails</div>
-      <table class="breakdown-table" id="bd-pails-table">
-        <thead><tr><th>Product</th><th>Colour</th><th class="num">Area (sqft)</th><th class="num">Est. qty</th><th class="num">Price ea.</th><th class="num">Total</th></tr></thead>
-        <tbody id="bd-pails-tbody"></tbody>
-      </table>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-title">Total primers</div>
-    <table class="breakdown-table" id="bd-primers-table">
-      <thead><tr><th>Product</th><th>Rooms</th><th class="num">Est. qty</th><th class="num">Price ea.</th><th class="num">Total</th></tr></thead>
-      <tbody id="bd-primers-tbody"></tbody>
     </table>
   </div>
 </div>
@@ -774,35 +829,19 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
       </div>
     </div>
 
-    <div class="doc-section">
-      <div class="doc-section-title">Preparation services</div>
-    </div>
+    <!-- Quote summary at top -->
+    <table class="doc-table" style="margin-bottom:16px">
+      <thead><tr><th>ITEM</th><th>Description</th><th class="right">Qty</th><th class="right">Amount</th></tr></thead>
+      <tbody id="q-line-tbody"></tbody>
+      <tfoot>
+        <tr id="q-disc-row" style="display:none"><td colspan="3" style="text-align:right"><span id="q-disc-label">Discount</span></td><td class="right"><span id="q-disc-val">−$0.00</span></td></tr>
+        <tr><td colspan="3" style="text-align:right;font-size:12px;color:var(--ink3)">Subtotal</td><td class="right" id="q-subtotal">$0.00</td></tr>
+        <tr><td colspan="3" style="text-align:right;font-size:12px;color:var(--ink3)">HST (13%)</td><td class="right" id="q-tax">$0.00</td></tr>
+        <tr><td colspan="3" style="text-align:right;font-size:13px;font-weight:500;color:var(--ink)">TOTAL</td><td class="right" id="q-total" style="font-size:15px;font-weight:600;color:var(--ink)">$0.00</td></tr>
+      </tfoot>
+    </table>
 
-    <div class="doc-section">
-      <div class="doc-section-title">Areas being serviced</div>
-      <table class="doc-table" id="sow-areas-table">
-        <thead><tr><th>Area</th><th class="right">Sqft Walls</th><th class="right">Sqft Ceiling</th><th class="right">Lin Ft Trims</th><th class="right">Doors</th></tr></thead>
-        <tbody id="sow-areas-tbody"></tbody>
-      </table>
-    </div>
 
-    <div class="doc-section">
-      <div class="doc-section-title">Paints to be used</div>
-      <div id="sow-paints"></div>
-    </div>
-
-    <hr class="divider">
-
-    <div class="doc-section">
-      <div class="doc-section-title">Quote summary</div>
-      <div class="quote-box">
-        <div class="q-row"><span class="q-label">Labour &amp; Materials</span><span class="q-val" id="q-labour">$0.00</span></div>
-        <div class="q-row discount-row" id="q-disc-row" style="display:none"><span class="q-label" id="q-disc-label">Discount</span><span class="q-val" id="q-disc-val">−$0.00</span></div>
-        <div class="q-row"><span class="q-label">Subtotal</span><span class="q-val" id="q-subtotal">$0.00</span></div>
-        <div class="q-row"><span class="q-label">HST (13%)</span><span class="q-val" id="q-tax">$0.00</span></div>
-        <div class="q-row total-row"><span>Total</span><span id="q-total">$0.00</span></div>
-      </div>
-    </div>
 
     <div class="doc-section">
       <div class="doc-section-title">Payment terms</div>
@@ -910,7 +949,7 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
       <hr class="divider">
       <div class="toggle-row" style="margin-bottom:8px">
         <input type="checkbox" id="lr-taxes" checked onchange="recalcRates()">
-        <span>Apply payroll taxes (130% multiplier)</span>
+        <span>Apply payroll taxes</span>
       </div>
       <div class="toggle-row" style="margin-bottom:8px">
         <input type="checkbox" id="lr-discount" onchange="recalcRates()">
@@ -1019,9 +1058,9 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
       <div class="card-title">Doors — units per hour</div>
       <table class="doc-table"><thead><tr><th>Coats</th><th class="right">Sqft/Unit</th><th class="right">Units/Hr</th></tr></thead>
         <tbody>
-          <tr><td>1 coat</td><td class="right"><input type="number" min="1" value="21" style="width:70px;text-align:right;font-size:13px;padding:4px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="updStdDoorSqft(1,+this.value)"></td><td class="right"><input type="number" min="1" value="84" style="width:70px;text-align:right;font-size:13px;padding:4px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="updStd('doors',1,+this.value)"></td></tr>
-          <tr><td>2 coats</td><td class="right"><input type="number" min="1" value="21" style="width:70px;text-align:right;font-size:13px;padding:4px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="updStdDoorSqft(2,+this.value)"></td><td class="right"><input type="number" min="1" value="42" style="width:70px;text-align:right;font-size:13px;padding:4px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="updStd('doors',2,+this.value)"></td></tr>
-          <tr><td>3 coats</td><td class="right"><input type="number" min="1" value="21" style="width:70px;text-align:right;font-size:13px;padding:4px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="updStdDoorSqft(3,+this.value)"></td><td class="right"><input type="number" min="1" value="21" style="width:70px;text-align:right;font-size:13px;padding:4px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="updStd('doors',3,+this.value)"></td></tr>
+          <tr><td>1 coat</td><td class="right"><input type="number" min="1" value="42" style="width:70px;text-align:right;font-size:13px;padding:4px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="updStdDoorSqft(1,+this.value)"></td><td class="right"><input type="number" min="1" value="84" style="width:70px;text-align:right;font-size:13px;padding:4px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="updStd('doors',1,+this.value)"></td></tr>
+          <tr><td>2 coats</td><td class="right"><input type="number" min="1" value="42" style="width:70px;text-align:right;font-size:13px;padding:4px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="updStdDoorSqft(2,+this.value)"></td><td class="right"><input type="number" min="1" value="42" style="width:70px;text-align:right;font-size:13px;padding:4px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="updStd('doors',2,+this.value)"></td></tr>
+          <tr><td>3 coats</td><td class="right"><input type="number" min="1" value="42" style="width:70px;text-align:right;font-size:13px;padding:4px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="updStdDoorSqft(3,+this.value)"></td><td class="right"><input type="number" min="1" value="21" style="width:70px;text-align:right;font-size:13px;padding:4px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="updStd('doors',3,+this.value)"></td></tr>
         </tbody>
       </table>
     </div>
@@ -1090,6 +1129,22 @@ const PAINTS=[
   {n:'Sherwin Williams - Porch & Fence Gallon',p:85},{n:'Sherwin Williams - Pro Industrial Epoxy',p:75}
 ];
 
+
+const DOOR_TYPES=[
+  {key:'flat',   label:'Flat Door',         price:50},
+  {key:'panel6', label:'6 Panel Door',       price:75},
+  {key:'glass',  label:'Glass Panel Door',   price:100},
+  {key:'custom', label:'Custom Door',        price:100}
+];
+
+const CEILING_PAINTS=[
+  {n:'Sherwin Williams - Promar 400 Gallon',p:35},
+  {n:'Sherwin Williams - Promar 400 Pail',p:140},
+  {n:'Benjamin Moore - Ultra Spec Gallon',p:50},
+  {n:'Benjamin Moore - Ultra Spec Pail',p:225},
+  {n:'Benjamin Moore - Waterborne Ceiling Gallon',p:75}
+];
+
 const PRIMERS=[
   {n:'Benjamin Moore - Drywall Primer Gallon',p:35},{n:'Benjamin Moore - Drywall Primer Pail',p:140},
   {n:'Benjamin Moore - Stix Primer Gallon',p:85},{n:'Benjamin Moore - Aqua Lock Primer Gallon',p:65},
@@ -1100,12 +1155,85 @@ const PRIMERS=[
 ];
 
 const COLOURS=[
-  {n:"OC-149 Decorator's White",h:'#F5F2EC'},{n:'CC-30 Oxford White',h:'#F2EFE5'},
-  {n:'OC-17 White Dove',h:'#EDE9DE'},{n:'OC-130 Cloud White',h:'#EAE5D6'},
-  {n:'OC-65 Chantilly Lace',h:'#F7F4EE'},{n:'OC-27 Balboa Mist',h:'#D8D2C4'},
-  {n:'OC-20 Pale Oak',h:'#C9BFB0'},{n:'HC-170 Stonington Grey',h:'#B0AFA8'},
-  {n:'2124-10 Wrought Iron',h:'#3B3D3F'},{n:'SW 7005 Pure White',h:'#F3EFE5'},
-  {n:'SW 7006 Extra White',h:'#F4F1E8'},{n:'SW 7008 Alabaster',h:'#EDE5D4'}
+  {n:"OC-65 Chantilly Lace",h:"#f4f6f1"},
+  {n:"OC-117 Simply White",h:"#f6f6ed"},
+  {n:"OC-17 White Dove",h:"#f4f0e8"},
+  {n:"OC-20 Pale Oak",h:"#ede5d8"},
+  {n:"OC-15 Baby Fawn",h:"#e8ddd0"},
+  {n:"OC-52 Gray Owl",h:"#d8d8cf"},
+  {n:"HC-81 Manchester Tan",h:"#dbd2bc"},
+  {n:"HC-172 Revere Pewter",h:"#c2baab"},
+  {n:"AF-100 Pashmina",h:"#d6cfc4"},
+  {n:"1560 Antique Pewter",h:"#8b8a7b"},
+  {n:"HC-165 Boothbay Gray",h:"#aab2b0"},
+  {n:"HC-154 Hale Navy",h:"#434b56"},
+  {n:"2123-50 Ocean Air",h:"#d3e1e1"},
+  {n:"HC-144 Palladian Blue",h:"#b5cece"},
+  {n:"2136-40 Aegean Teal",h:"#7a9fa0"},
+  {n:"HC-156 Van Deusen Blue",h:"#4a6a8a"},
+  {n:"2062-20 Gentleman's Gray",h:"#4a5560"},
+  {n:"1634 Santorini Blue",h:"#7090b0"},
+  {n:"2144-40 Soft Fern",h:"#c8cab2"},
+  {n:"HC-114 Saybrook Sage",h:"#b0b89a"},
+  {n:"1495 October Mist",h:"#b8c0a8"},
+  {n:"462 Vintage Vogue",h:"#8a9870"},
+  {n:"2041-10 Hunter Green",h:"#2a4030"},
+  {n:"HC-188 Essex Green",h:"#3a4a38"},
+  {n:"2100-20 Leather Saddle Brown",h:"#754e3f"},
+  {n:"2130-10 Black Bean Soup",h:"#3a2820"},
+  {n:"AF-180 Wenge",h:"#3c2d2b"},
+  {n:"HC-72 Branchport Brown",h:"#8c6a50"},
+  {n:"1001 North Creek Brown",h:"#7a5a40"},
+  {n:"HC-76 Davenport Tan",h:"#c09870"},
+  {n:"AF-250 Head Over Heels",h:"#efded2"},
+  {n:"1191 Love & Happiness",h:"#f0c8c0"},
+  {n:"052 Conch Shell",h:"#e8b8a8"},
+  {n:"1296 Sailor's Delight",h:"#d8a090"},
+  {n:"2174-60 Dream Whip",h:"#f8e8d8"},
+  {n:"2102-70 First Light",h:"#f8e0d8"},
+  {n:"1444 New Age",h:"#d6ced1"},
+  {n:"2117-60 Winter Gray",h:"#d0cad0"},
+  {n:"2070-60 Lavender Mist",h:"#d8d0e0"},
+  {n:"2071-60 Lily Lavender",h:"#d0c8dc"},
+  {n:"2116-40 Hazy Lilac",h:"#c0b0c8"},
+  {n:"2117-30 Shadow",h:"#b0a0b8"},
+  {n:"CSP-305 Crisp Linen",h:"#f9f6e7"},
+  {n:"HC-6 Windham Cream",h:"#ece0c0"},
+  {n:"2152-50 Golden Straw",h:"#e8d090"},
+  {n:"HC-12 Concord Ivory",h:"#e8d8a8"},
+  {n:"HC-11 Marblehead Gold",h:"#d8b860"},
+  {n:"HC-9 Chestertown Buff",h:"#dcc890"},
+  {n:"AF-290 Caliente",h:"#b03030"},
+  {n:"HC-181 Heritage Red",h:"#8a2828"},
+  {n:"2000-10 Red",h:"#c02020"},
+  {n:"2090-40 Wild Flower",h:"#c06060"},
+  {n:"2092-30 Boston Brick",h:"#a04838"},
+  {n:"AF-300 Dinner Party",h:"#6a1818"},
+  {n:"2175-70 Peach Parfait",h:"#f8d0b8"},
+  {n:"AF-185 Venetian Portico",h:"#c88060"},
+  {n:"AF-215 Italianate",h:"#c07040"},
+  {n:"070 Topaz",h:"#d08840"},
+  {n:"2015-10 Electric Orange",h:"#e06020"},
+  {n:"105 Terra Mauve",h:"#9c6040"},
+  {n:"HC-190 Black",h:"#1e1e1e"},
+  {n:"2131-10 Black Satin",h:"#313435"},
+  {n:"2131-20 Midnight",h:"#2a2e32"},
+  {n:"2120-30 Witching Hour",h:"#3a3430"},
+  {n:"1610 French Beret",h:"#4a4040"},
+  {n:"2124-10 Wrought Iron",h:"#3a3c3e"},
+  {n:"OC-26 Silver Satin",h:"#e3e2da"},
+  {n:"2129-20 Soot",h:"#373c41"},
+  {n:"HC-178 Charcoal Slate",h:"#646769"},
+  {n:"OC-57 White Heron",h:"#f0f1ea"},
+  {n:"AF-50 Etiquette",h:"#e5e0d5"},
+  {n:"OC-150 Brilliant White",h:"#ebeee9"},
+  {n:"CC-30 Oxford White",h:"#F2EFE5"},
+  {n:"OC-130 Cloud White",h:"#EAE5D6"},
+  {n:"OC-27 Balboa Mist",h:"#D8D2C4"},
+  {n:"HC-170 Stonington Grey",h:"#B0AFA8"},
+  {n:"SW 7005 Pure White",h:"#F3EFE5"},
+  {n:"SW 7006 Extra White",h:"#F4F1E8"},
+  {n:"SW 7008 Alabaster",h:"#EDE5D4"}
 ];
 
 const SUPPLIES=[
@@ -1145,6 +1273,16 @@ let globalRate=116.42;
 // ════════════════════════════════════════════════
 function fmt(n){return '$'+(+n||0).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',');}
 function fmtN(n){return Math.round(+n||0).toLocaleString();}
+function fmtPhone(el){
+  let v=el.value.replace(/\D/g,'').slice(0,10);
+  let out='';
+  if(v.length>0) out='('+v.slice(0,3);
+  if(v.length>=4) out+=') '+v.slice(3,6);
+  if(v.length>=7) out+='-'+v.slice(6,10);
+  el.value=out;
+}
+
+function stripUnit(name){return (name||'').replace(/\s+(Gallon|Pail|Can)\s*$/i,'').trim();}
 function today(){const d=new Date();return d.toLocaleDateString('en-CA',{year:'numeric',month:'long',day:'numeric'});}
 function sel(id){return document.getElementById(id);}
 function v(id){return sel(id)?sel(id).value:'';}
@@ -1161,20 +1299,27 @@ function paintOptsNoPrimer(sel_val=''){
     PAINTS.map(p=>`<option value="${p.n}" ${sel_val===p.n?'selected':''}>${p.n}</option>`).join('');
 }
 
+function ceilingPaintOpts(sel_val=''){
+  return '<option value="">— Select —</option>'+
+    CEILING_PAINTS.map(p=>`<option value="${p.n}" ${sel_val===p.n?'selected':''}>${p.n}</option>`).join('');
+}
+
 function primerOpts(sel_val=''){
   return '<option value="">— Select primer —</option>'+
     PRIMERS.map(p=>`<option value="${p.n}" ${sel_val===p.n?'selected':''}>${p.n}</option>`).join('');
 }
 
 function sheenOpts(sel_val=''){
-  const sheens=['Flat','Matte','Eggshell','Satin','Pearl','Semi-Gloss'];
+  const sheens=['Flat','Matte','Eggshell','Satin','Pearl','Semi-Gloss','TBD'];
   return '<option value="">— Sheen —</option>'+sheens.map(s=>`<option value="${s}" ${sel_val===s?'selected':''}>${s}</option>`).join('');
 }
 
 function colourOpts(sel_val=''){
   return '<option value="">— Select colour —</option>'+
     COLOURS.map(c=>`<option value="${c.n}" ${sel_val===c.n?'selected':''}>${c.n}</option>`).join()+
-    '<option value="Custom">Custom colour</option>';
+    '<option value="Custom">Custom colour</option>'+
+    '<option value="TBD">TBD</option>'+
+    '<option value="Matching Previous Colour">Matching Previous Colour</option>';
 }
 
 // ════════════════════════════════════════════════
@@ -1210,22 +1355,32 @@ function addRoom(){
   if(rooms.length>=10) return;
   roomCounter++;
   const newRoom={
-    id:roomCounter, name:'Room '+roomCounter,
-    length:0,width:0,height:9,prepHrs:0,
+    id:roomCounter, name:'',
+    length:0,width:0,height:'',prepHrs:0,irregular:false,irreg:[0,0,0,0,0,0],ceilLength:0,ceilWidth:0,
     walls:true,wallCoats:2,
     ceiling:false,ceilCoats:2,
     baseboards:false,baseCoats:2,baseLF:0,
     crown:false,crownCoats:2,crownLF:0,
     doorFrames:false,dfCoats:2,dfLF:0,
-    windows:false,winCoats:2,winLF:0,
+    windows:false,winCoats:2,winLF:0,winList:[{l:0,w:0}],
     doors:false,doorCoats:2,doorCount:0,
-    wallPaint:'',wallSheen:'',wallPrimer:'',ceilPaint:'',ceilSheen:'',ceilPrimer:'',trimPaint:'',trimSheen:'',trimPrimer:'',misc:'',
+    doorTypes:{flat:0,panel6:0,glass:0,custom:0},
+    stairs:false,stairCoats:2,stairTreads:0,stairRisers:0,stairLanding:0,stairStringer:0,
+    prep:{furniture:false,plastic:false,outlets:false,drywall:false,caulking:false,cleanup:false,custom:''},
+    wallPaint:'',wallSheen:'',wallPrimer:'',ceilPaint:'',ceilSheen:'',ceilPrimer:'',trimPaint:'',trimSheen:'',trimPrimer:'',stairPaint:'',stairSheen:'',stairPrimer:'',stairColour:'',
     wallColour:'',ceilColour:'',trimColour:'',
     notes:''
   };
   rooms.push(newRoom);
   renderRooms();
   recalcAll();
+  // Auto-open the new room and focus the name input
+  const newBody=document.querySelector(`.room-body[data-id="${newRoom.id}"]`);
+  const newArr=sel('arr_'+newRoom.id);
+  if(newBody){newBody.classList.add('open');}
+  if(newArr){newArr.classList.add('open');}
+  const newNameEl=sel('room-name-'+newRoom.id);
+  if(newNameEl){setTimeout(()=>{newNameEl.focus();newNameEl.select();},50);}
 }
 
 function removeRoom(id){
@@ -1248,7 +1403,7 @@ function renderRooms(){
     <div class="room-head" onclick="toggleRoom(${r.id})">
       <div class="room-head-left">
         <span class="room-arrow ${isOpen?'open':''}" id="arr_${r.id}">▶</span>
-        <input class="room-name-input" type="text" value="${r.name}" onclick="event.stopPropagation()" oninput="rooms.find(x=>x.id==${r.id}).name=this.value;document.getElementById('badge_${r.id}').textContent='${badge}'">
+        <input class="room-name-input" type="text" value="${r.name}" placeholder="Room ${r.id}" onclick="event.stopPropagation()" oninput="rooms.find(x=>x.id==${r.id}).name=this.value;document.getElementById('badge_${r.id}').textContent='${badge}'" id="room-name-${r.id}">
       </div>
       <div style="display:flex;align-items:center;gap:8px">
         <span class="room-badge" id="badge_${r.id}">${badge}</span>
@@ -1258,12 +1413,37 @@ function renderRooms(){
     <div class="room-body ${isOpen?'open':''}" data-id="${r.id}">
       <div style="padding-top:14px">
         <div class="card-title">Dimensions</div>
-        <div class="grid4" style="margin-bottom:12px">
-          <div class="field"><label>Length (ft)</label><input type="number" min="0" step="0.5" value="${r.length||''}" oninput="upd(${r.id},'length',+this.value)"></div>
-          <div class="field"><label>Width (ft)</label><input type="number" min="0" step="0.5" value="${r.width||''}" oninput="upd(${r.id},'width',+this.value)"></div>
-          <div class="field"><label>Height (ft)</label><input type="number" min="0" step="0.5" value="${r.height||9}" oninput="upd(${r.id},'height',+this.value)"></div>
+        <div class="grid4" style="margin-bottom:8px">
+          <div class="field"><label>${r.irregular?'Ceiling — Length (ft)':'Length (ft)'}</label><input type="number" min="0" step="0.5" value="${r.length||''}" placeholder="0" oninput="upd(${r.id},'length',+this.value)"></div>
+          <div class="field"><label>${r.irregular?'Ceiling — Width (ft)':'Width (ft)'}</label><input type="number" min="0" step="0.5" value="${r.width||''}" placeholder="0" oninput="upd(${r.id},'width',+this.value)"></div>
+          <div class="field"><label>Height (ft)</label><input type="number" min="0" step="0.5" value="${r.height===''||r.height===undefined?'':r.height}" placeholder="0" oninput="upd(${r.id},'height',this.value===''?'':+this.value)"></div>
           <div class="field"><label>Prep hours</label><input type="number" min="0" step="0.5" value="${r.prepHrs||''}" oninput="upd(${r.id},'prepHrs',+this.value)" placeholder="0"></div>
         </div>
+        ${r.irregular?`<div class="grid4" style="margin-bottom:8px">
+          <div class="field"><label>Ceiling — Length 2 (ft)</label><input type="number" min="0" step="0.5" value="${r.ceilLength||''}" placeholder="0" oninput="upd(${r.id},'ceilLength',+this.value)"></div>
+          <div class="field"><label>Ceiling — Width 2 (ft)</label><input type="number" min="0" step="0.5" value="${r.ceilWidth||''}" placeholder="0" oninput="upd(${r.id},'ceilWidth',+this.value)"></div>
+          <div class="field" style="grid-column:span 2"><div style="font-size:11px;color:var(--ink4);padding-top:20px">Optional second ceiling section — total ceiling = (L×W) + (L2×W2). Walls sqft uses the 6 segment boxes below.</div></div>
+        </div>`:''}
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:${r.irregular?'10px':'14px'}">
+          <input type="checkbox" id="irreg-cb-${r.id}" ${r.irregular?'checked':''} onchange="updIrreg(${r.id},this.checked)" style="width:15px;height:15px;accent-color:var(--gold);cursor:pointer">
+          <label for="irreg-cb-${r.id}" style="font-size:12px;color:var(--ink2);cursor:pointer">Irregular room</label>
+        </div>
+        ${r.irregular?`<div style="margin-bottom:14px">
+          <div style="font-size:11px;color:var(--ink4);margin-bottom:6px">Enter additional wall lengths (ft) — each × height is added to walls sqft</div>
+          <div class="irreg-grid" style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px">
+            ${r.irreg.map((v,i)=>`<input type="number" min="0" step="0.5" value="${v||''}" placeholder="L${i+1}" oninput="updIrregVal(${r.id},${i},+this.value)" style="font-size:12px;padding:6px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);text-align:right">`).join('')}
+          </div>
+        </div>`:''}
+        <div class="card-title">Preparation</div>
+        <div class="prep-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:14px">
+          <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);background:var(--cream2);padding:7px 10px;border-radius:var(--r);cursor:pointer"><input type="checkbox" ${r.prep.furniture?'checked':''} onchange="updPrep(${r.id},'furniture',this.checked)" style="accent-color:var(--gold);width:14px;height:14px"> Move furniture</label>
+          <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);background:var(--cream2);padding:7px 10px;border-radius:var(--r);cursor:pointer"><input type="checkbox" ${r.prep.plastic?'checked':''} onchange="updPrep(${r.id},'plastic',this.checked)" style="accent-color:var(--gold);width:14px;height:14px"> Cover furniture with plastic</label>
+          <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);background:var(--cream2);padding:7px 10px;border-radius:var(--r);cursor:pointer"><input type="checkbox" ${r.prep.outlets?'checked':''} onchange="updPrep(${r.id},'outlets',this.checked)" style="accent-color:var(--gold);width:14px;height:14px"> Remove outlets</label>
+          <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);background:var(--cream2);padding:7px 10px;border-radius:var(--r);cursor:pointer"><input type="checkbox" ${r.prep.drywall?'checked':''} onchange="updPrep(${r.id},'drywall',this.checked)" style="accent-color:var(--gold);width:14px;height:14px"> Drywall repairs (plastering &amp; sanding)</label>
+          <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);background:var(--cream2);padding:7px 10px;border-radius:var(--r);cursor:pointer"><input type="checkbox" ${r.prep.caulking?'checked':''} onchange="updPrep(${r.id},'caulking',this.checked)" style="accent-color:var(--gold);width:14px;height:14px"> Caulking</label>
+          <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);background:var(--cream2);padding:7px 10px;border-radius:var(--r);cursor:pointer"><input type="checkbox" ${r.prep.cleanup?'checked':''} onchange="updPrep(${r.id},'cleanup',this.checked)" style="accent-color:var(--gold);width:14px;height:14px"> Daily site clean up</label>
+        </div>
+        <div class="field" style="margin-bottom:14px"><label>Additional prep notes</label><input type="text" value="${r.prep.custom||''}" placeholder="Type any additional prep work…" oninput="updPrep(${r.id},'custom',this.value)"></div>
         <div class="card-title">Surfaces</div>
         <div style="margin-bottom:4px;font-size:11px;color:var(--ink4)">Toggle surface · select coats · enter linear feet where applicable</div>
         ${surfRow(r.id,'walls',r.walls,r.wallCoats,'Walls','wallCoats',null,null)}
@@ -1271,30 +1451,56 @@ function renderRooms(){
         ${surfRow(r.id,'baseboards',r.baseboards,r.baseCoats,'Baseboards','baseCoats','baseLF',r.baseLF,calcPerimeter(r))}
         ${surfRow(r.id,'crown',r.crown,r.crownCoats,'Crown Moulding','crownCoats','crownLF',r.crownLF,calcPerimeter(r))}
         ${surfRow(r.id,'doorFrames',r.doorFrames,r.dfCoats,'Door Frames','dfCoats','dfLF',r.dfLF,calcDoorFramesLF(r))}
-        ${surfRow(r.id,'windows',r.windows,r.winCoats,'Windows','winCoats','winLF',r.winLF)}
+        <div class="surf-grid" style="margin-bottom:${r.windows?'4px':'6px'}">
+          <label class="surf-label"><input type="checkbox" ${r.windows?'checked':''} onchange="upd(${r.id},'windows',this.checked)" style="width:14px;height:14px;accent-color:var(--gold)"> Windows</label>
+          <select class="coats-sel" onchange="upd(${r.id},'winCoats',+this.value)">
+            <option value="1" ${(r.winCoats||2)===1?'selected':''}>1 coat</option>
+            <option value="2" ${(r.winCoats||2)===2?'selected':''}>2 coats</option>
+            <option value="3" ${(r.winCoats||2)===3?'selected':''}>3 coats</option>
+          </select>
+          <span style="font-size:11px;color:var(--ink4)">LF: ${fmtN(calcWinLF(r))}</span>
+        </div>
+        ${r.windows?renderWinList(r):''}
         ${doorRow(r.id,r.doors,r.doorCoats,r.doorCount)}
+        <div class="surf-grid" style="margin-bottom:${r.stairs?'4px':'6px'}">
+          <label class="surf-label"><input type="checkbox" ${r.stairs?'checked':''} onchange="upd(${r.id},'stairs',this.checked)" style="width:14px;height:14px;accent-color:var(--gold)"> Stairs</label>
+          <select class="coats-sel" onchange="upd(${r.id},'stairCoats',+this.value)">
+            <option value="1" ${(r.stairCoats||2)===1?'selected':''}>1 coat</option>
+            <option value="2" ${(r.stairCoats||2)===2?'selected':''}>2 coats</option>
+            <option value="3" ${(r.stairCoats||2)===3?'selected':''}>3 coats</option>
+          </select>
+          <span style="font-size:11px;color:var(--ink4)">Flat rate per unit</span>
+          <span></span>
+        </div>
+        ${r.stairs?renderStairsPanel(r):''}
         <hr class="divider">
         <div class="card-title">Paint &amp; colours</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:10px">
+        <div class="paint-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:10px">
           <div class="field"><label>Wall paint</label><select onchange="upd(${r.id},'wallPaint',this.value)">${paintOptsNoPrimer(r.wallPaint)}</select></div>
           <div class="field"><label>Wall colour</label><select onchange="upd(${r.id},'wallColour',this.value)">${colourOpts(r.wallColour)}</select></div>
           <div class="field"><label>Wall sheen</label><select onchange="upd(${r.id},'wallSheen',this.value)">${sheenOpts(r.wallSheen)}</select></div>
-          <div class="field"><label>Wall primer</label><select onchange="upd(${r.id},'wallPrimer',this.value)">${primerOpts(r.wallPrimer)}</select></div>
-          <div class="field"><label>Ceiling paint</label><select onchange="upd(${r.id},'ceilPaint',this.value)">${paintOptsNoPrimer(r.ceilPaint)}</select></div>
+          <div class="field"><label>Wall primer ${r.wallCoats!==3?'<span style="font-size:10px;color:var(--ink4)">(3 coats only)</span>':''}</label><select onchange="upd(${r.id},'wallPrimer',this.value)" ${r.wallCoats!==3?'disabled style="opacity:0.4"':''}>${primerOpts(r.wallPrimer)}</select></div>
+          <div class="field"><label>Ceiling paint</label><select onchange="upd(${r.id},'ceilPaint',this.value)">${ceilingPaintOpts(r.ceilPaint)}</select></div>
           <div class="field"><label>Ceiling colour</label><select onchange="upd(${r.id},'ceilColour',this.value)">${colourOpts(r.ceilColour)}</select></div>
           <div class="field"><label>Ceiling sheen</label><select onchange="upd(${r.id},'ceilSheen',this.value)">${sheenOpts(r.ceilSheen)}</select></div>
-          <div class="field"><label>Ceiling primer</label><select onchange="upd(${r.id},'ceilPrimer',this.value)">${primerOpts(r.ceilPrimer)}</select></div>
+          <div class="field"><label>Ceiling primer ${r.ceilCoats!==3?'<span style="font-size:10px;color:var(--ink4)">(3 coats only)</span>':''}</label><select onchange="upd(${r.id},'ceilPrimer',this.value)" ${r.ceilCoats!==3?'disabled style="opacity:0.4"':''}>${primerOpts(r.ceilPrimer)}</select></div>
           <div class="field"><label>Trim &amp; door paint</label><select onchange="upd(${r.id},'trimPaint',this.value)">${paintOptsNoPrimer(r.trimPaint)}</select></div>
-          <div class="field"><label>Trim colour</label><select onchange="upd(${r.id},'trimColour',this.value)">${colourOpts(r.trimColour)}</select></div>
+          <div class="field"><label>Trim &amp; door colour</label><select onchange="upd(${r.id},'trimColour',this.value)">${colourOpts(r.trimColour)}</select></div>
           <div class="field"><label>Trim &amp; door sheen</label><select onchange="upd(${r.id},'trimSheen',this.value)">${sheenOpts(r.trimSheen)}</select></div>
-          <div class="field"><label>Trim &amp; door primer</label><select onchange="upd(${r.id},'trimPrimer',this.value)">${primerOpts(r.trimPrimer)}</select></div>
-          <div class="field"><label>Misc.</label><input type="text" value="${r.misc||''}" placeholder="Other products…" oninput="upd(${r.id},'misc',this.value)"></div>
+          <div class="field"><label>Trim &amp; door primer ${r.doorCoats!==3?'<span style="font-size:10px;color:var(--ink4)">(3 coats only)</span>':''}</label><select onchange="upd(${r.id},'trimPrimer',this.value)" ${r.doorCoats!==3?'disabled style="opacity:0.4"':''}>${primerOpts(r.trimPrimer)}</select></div>
+        ${r.stairs?`
+          <div class="field"><label>Stairs paint</label><select onchange="upd(${r.id},'stairPaint',this.value)">${paintOptsNoPrimer(r.stairPaint)}</select></div>
+          <div class="field"><label>Stairs colour</label><select onchange="upd(${r.id},'stairColour',this.value)">${colourOpts(r.stairColour)}</select></div>
+          <div class="field"><label>Stairs sheen</label><select onchange="upd(${r.id},'stairSheen',this.value)">${sheenOpts(r.stairSheen)}</select></div>
+          <div class="field"><label>Stairs primer</label><select onchange="upd(${r.id},'stairPrimer',this.value)">${primerOpts(r.stairPrimer)}</select></div>`:''}
         </div>
         ${colourChips(r)}
         <div class="field" style="margin-top:10px"><label>Notes</label><textarea oninput="upd(${r.id},'notes',this.value)">${r.notes||''}</textarea></div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--cream2)">
+        <div class="room-stat-bar" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--cream2)">
           <div class="stat" style="margin:0"><div class="lbl">Walls sqft</div><div class="val" id="rws_${r.id}">${fmtN(wsqft)}</div></div>
           <div class="stat" style="margin:0"><div class="lbl">Ceiling sqft</div><div class="val" id="rcs_${r.id}">${fmtN(csqft)}</div></div>
+          <div class="stat" style="margin:0"><div class="lbl">Trims lin ft</div><div class="val" id="rtrim_${r.id}">${fmtN(calcTrims(r))}</div></div>
+          <div class="stat" style="margin:0"><div class="lbl"># of doors</div><div class="val" id="rdoors_${r.id}">${calcTotalDoorCount(r)||0}</div></div>
           <div class="stat" style="margin:0"><div class="lbl">Labour cost</div><div class="val gold" id="rlc_${r.id}">${fmt(calcRoomCost(r))}</div></div>
         </div>
       </div>
@@ -1310,6 +1516,7 @@ function colourChips(r){
   if(r.wallColour){const c=COLOURS.find(x=>x.n===r.wallColour);chips.push(`<span class="colour-chip"><span class="chip-dot" style="background:${c?c.h:'#ccc'}"></span>Wall: ${r.wallColour}${r.wallSheen?' · '+r.wallSheen:''}</span>`);}
   if(r.ceilColour){const c=COLOURS.find(x=>x.n===r.ceilColour);chips.push(`<span class="colour-chip"><span class="chip-dot" style="background:${c?c.h:'#ccc'}"></span>Ceil: ${r.ceilColour}${r.ceilSheen?' · '+r.ceilSheen:''}</span>`);}
   if(r.trimColour){const c=COLOURS.find(x=>x.n===r.trimColour);chips.push(`<span class="colour-chip"><span class="chip-dot" style="background:${c?c.h:'#ccc'}"></span>Trim: ${r.trimColour}${r.trimSheen?' · '+r.trimSheen:''}</span>`);}
+  if(r.stairColour){const c=COLOURS.find(x=>x.n===r.stairColour);chips.push(`<span class="colour-chip"><span class="chip-dot" style="background:${c?c.h:'#ccc'}"></span>Stairs: ${r.stairColour}${r.stairSheen?' · '+r.stairSheen:''}</span>`);}
   return chips.length?`<div class="paint-chips">${chips.join('')}</div>`:'';
 }
 
@@ -1338,16 +1545,24 @@ function surfRow(rid,key,en,coats,label,coatsKey,lfKey,lfVal,autoVal){
 }
 
 function doorRow(rid,en,coats,count){
-  return `<div class="surf-grid">
+  const r=rooms.find(x=>x.id===rid);
+  const dt=r&&r.doorTypes?r.doorTypes:{flat:0,panel6:0,glass:0,custom:0};
+  const panelHtml=en?`<div style="margin:0 0 10px 18px;padding:10px;background:var(--cream2);border-radius:var(--r)">
+    <div style="font-size:10px;color:var(--ink4);margin-bottom:8px">Flat $50 &nbsp;&middot;&nbsp; 6 Panel $75 &nbsp;&middot;&nbsp; Glass Panel $100 &nbsp;&middot;&nbsp; Custom $100</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px" class="stairs-grid">
+      ${DOOR_TYPES.map(t=>`<div class="field"><label>${t.label}</label><input type="number" min="0" step="1" value="${dt[t.key]||''}" placeholder="0" oninput="updDoorType(${rid},'${t.key}',+this.value)" style="font-size:12px;padding:5px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);width:100%"></div>`).join('')}
+    </div>
+  </div>`:'';
+  return `<div class="surf-grid" style="margin-bottom:${en?'4px':'6px'}">
     <label class="surf-label"><input type="checkbox" ${en?'checked':''} onchange="upd(${rid},'doors',this.checked)"> Doors</label>
     <select class="coats-sel" onchange="upd(${rid},'doorCoats',+this.value)">
       <option value="1" ${coats==1?'selected':''}>1 coat</option>
       <option value="2" ${coats==2?'selected':''}>2 coats</option>
       <option value="3" ${coats==3?'selected':''}>3 coats</option>
     </select>
-    <input class="lf-input" type="number" min="0" step="1" value="${count||''}" placeholder="# doors" oninput="upd(${rid},'doorCount',+this.value)">
+    <span style="font-size:11px;color:var(--ink4)">Flat rate per type</span>
     <span></span>
-  </div>`;
+  </div>${panelHtml}`;
 }
 
 function toggleRoom(id){
@@ -1356,18 +1571,26 @@ function toggleRoom(id){
   if(!body)return;
   const open=body.classList.toggle('open');
   if(arr)arr.classList.toggle('open',open);
+  if(open){
+    const nameEl=sel('room-name-'+id);
+    if(nameEl){setTimeout(()=>{nameEl.focus();nameEl.select();},50);}
+  }
 }
 
 function upd(id,key,val){
   const r=rooms.find(x=>x.id===id);
   if(!r)return;
   r[key]=val;
-  // Auto-compute LF values based on room dimensions / door count
   autoFillTrimLF(r);
+  // Keys that change the room template structure need a full re-render
+  const rerenderKeys=['windows','irregular','wallCoats','ceilCoats','doorCoats','doors','stairs'];
+  if(rerenderKeys.includes(key)){renderRooms();recalcAll();return;}
   const ws=calcWalls(r),cs=calcCeil(r),lc=calcRoomCost(r);
-  const rws=sel('rws_'+id),rcs=sel('rcs_'+id),rlc=sel('rlc_'+id);
+  const rws=sel('rws_'+id),rcs=sel('rcs_'+id),rlc=sel('rlc_'+id),rtrim=sel('rtrim_'+id),rdoors=sel('rdoors_'+id);
   if(rws)rws.textContent=fmtN(ws);
   if(rcs)rcs.textContent=fmtN(cs);
+  if(rtrim)rtrim.textContent=fmtN(calcTrims(r));
+  if(rdoors)rdoors.textContent=calcTotalDoorCount(r)||0;
   if(rlc)rlc.textContent=fmt(lc);
   const badge=sel('badge_'+id);
   if(badge)badge.textContent=ws>0?fmtN(ws)+' sqft walls':'—';
@@ -1383,6 +1606,7 @@ function calcDoorFramesLF(r){
 }
 
 function autoFillTrimLF(r){
+  if(r.winList) r.winLF=calcWinLF(r);
   const perim=calcPerimeter(r);
   const dfLF=calcDoorFramesLF(r);
   if(r.baseboards) r.baseLF=perim;
@@ -1398,13 +1622,56 @@ function autoFillTrimLF(r){
 // ════════════════════════════════════════════════
 function calcWalls(r){
   if(!r.walls)return 0;
-  let sqft=2*(r.length+r.width)*r.height;
-  if(r.doors&&r.doorCount>0)sqft-=r.doorCount*21;
+  const h=r.height||0;
+  let sqft;
+  if(r.irregular){
+    sqft = r.irreg ? r.irreg.reduce((s,v)=>s+(+v||0)*h,0) : 0;
+  } else {
+    sqft = 2*(r.length+r.width)*h;
+  }
+  // Deduct door openings: each door = 21 sqft from walls
+  if(r.doors){const dc=calcTotalDoorCount(r);if(dc>0)sqft-=dc*21;}
+  // Subtract window openings (L×W per window)
+  if(r.windows&&r.winList){
+    r.winList.forEach(w=>{ sqft-=(+w.l||0)*(+w.w||0); });
+  }
   return Math.max(0,sqft);
 }
-function calcCeil(r){return r.ceiling?r.length*r.width:0;}
+function calcWinLF(r){
+  if(!r.winList) return r.winLF||0;
+  return r.winList.reduce((s,w)=>s+((+w.l||0)*2+(+w.w||0)*2),0);
+}
+
+function calcCeil(r){
+  if(!r.ceiling) return 0;
+  if(r.irregular){
+    const row1=(+r.length||0)*(+r.width||0);
+    const row2=(+r.ceilLength||0)*(+r.ceilWidth||0);
+    return row1+row2;
+  }
+  return r.length*r.width;
+}
 function calcTrims(r){return(r.baseboards?r.baseLF:0)+(r.crown?r.crownLF:0)+(r.doorFrames?r.dfLF:0)+(r.windows?r.winLF:0);}
 
+function calcDoorsCost(r){
+  if(!r.doors) return 0;
+  if(!r.doorTypes) return (r.doorCount||0)*50; // fallback
+  return DOOR_TYPES.reduce((s,t)=>s+((r.doorTypes[t.key]||0)*t.price),0);
+}
+
+function calcTotalDoorCount(r){
+  if(!r.doorTypes) return r.doorCount||0;
+  return DOOR_TYPES.reduce((s,t)=>s+(+r.doorTypes[t.key]||0),0);
+}
+
+function calcStairsSqft(r){
+  if(!r.stairs) return 0;
+  return (r.stairTreads||0)*(3*1.15) + (r.stairRisers||0)*(3*0.65) + (r.stairLanding||0)*(6*3.5);
+}
+function calcStairsCost(r){
+  if(!r.stairs) return 0;
+  return (r.stairTreads||0)*25 + (r.stairRisers||0)*25 + (r.stairLanding||0)*50 + (r.stairStringer||0)*100;
+}
 function calcRoomHours(r){
   let h=0;
   const ws=calcWalls(r),cs=calcCeil(r);
@@ -1414,11 +1681,12 @@ function calcRoomHours(r){
   if(r.crown&&r.crownLF>0)h+=r.crownLF/STANDARDS.crown[r.crownCoats];
   if(r.doorFrames&&r.dfLF>0)h+=r.dfLF/STANDARDS.doorFrames[r.dfCoats];
   if(r.windows&&r.winLF>0)h+=r.winLF/STANDARDS.windows[r.winCoats];
-  if(r.doors&&r.doorCount>0)h+=(r.doorCount*21)/STANDARDS.doors[r.doorCoats];
+  // Doors: hours based on sqft (# doors × 21) / STANDARDS.doors[coats]
+  if(r.doors){const dc=calcTotalDoorCount(r);if(dc>0)h+=(dc*21)/STANDARDS.doors[r.doorCoats];}
   h+=r.prepHrs||0;
   return h;
 }
-function calcRoomCost(r){const buf=+v('lr-buffer')||1.25;return calcRoomHours(r)*globalRate*buf;}
+function calcRoomCost(r){const buf=+v('lr-buffer')||1.25;const aw=workers.filter(w=>w.active).length||1;return calcRoomHours(r)*globalRate*aw*buf+calcStairsCost(r)+calcDoorsCost(r);}
 
 function recalcRates(){
   const billable=+v('lr-billable')||1700;
@@ -1457,20 +1725,21 @@ function recalcAll(){
     totDoors+=r.doors?(r.doorCount||0):0;
     totHours+=calcRoomHours(r);
   });
-  const labourAmt=totHours*globalRate*(+v('lr-buffer')||1.25);
+  const activeWorkerCount=workers.filter(w=>w.active).length||1;
+  const labourAmt=totHours*globalRate*activeWorkerCount*(+v('lr-buffer')||1.25);
   const discAmt=discOn?labourAmt*discPct:0;
   const subtotal=labourAmt-discAmt;
   const tax=subtotal*0.13;
   const total=subtotal+tax;
   const dep=total*0.1,bal45=total*0.45,fin=total-dep-bal45;
-  const days=Math.ceil(totHours/8);
+  const days=Math.ceil(totHours/6);
 
   // Breakdown
   if(sel('bd-walls'))sel('bd-walls').textContent=fmtN(totWalls);
   if(sel('bd-ceil'))sel('bd-ceil').textContent=fmtN(totCeil);
   if(sel('bd-trims'))sel('bd-trims').textContent=fmtN(totTrims);
   if(sel('bd-doors'))sel('bd-doors').textContent=totDoors;
-  if(sel('bd-hours'))sel('bd-hours').textContent=totHours.toFixed(1);
+  if(sel('bd-hours'))sel('bd-hours').textContent=(totHours/activeWorkerCount).toFixed(1);
   if(sel('bd-days'))sel('bd-days').textContent=days;
   if(sel('bd-labour'))sel('bd-labour').textContent=fmt(labourAmt);
   if(sel('bd-rooms'))sel('bd-rooms').textContent=rooms.length;
@@ -1486,8 +1755,9 @@ function recalcAll(){
       {key:'cr',label:'Crown',get:(r)=>({en:r.crown,coats:r.crownCoats,area:r.crownLF,std:'crown'})},
       {key:'df',label:'Door Frames',get:(r)=>({en:r.doorFrames,coats:r.dfCoats,area:r.dfLF,std:'doorFrames'})},
       {key:'win',label:'Windows',get:(r)=>({en:r.windows,coats:r.winCoats,area:r.winLF,std:'windows'})},
-      {key:'dr',label:'Doors',get:(r)=>({en:r.doors,coats:r.doorCoats,area:r.doorCount*21,std:'doors'})},
-      {key:'prep',label:'Prep',get:(r)=>({en:r.prepHrs>0,coats:1,area:r.prepHrs,std:null})}
+      {key:'dr',label:'Doors',get:(r)=>({en:r.doors&&calcTotalDoorCount(r)>0,coats:r.doorCoats,area:calcTotalDoorCount(r)*21,std:'doors',doorRate:(()=>{const dt=r.doorTypes||{};const total=calcTotalDoorCount(r)||1;const cost=calcDoorsCost(r);return'$'+(cost/total).toFixed(0)+'/door';})()})},
+      {key:'prep',label:'Prep',get:(r)=>({en:r.prepHrs>0,coats:1,area:r.prepHrs,std:null})},
+      {key:'stairs',label:'Stairs',get:(r)=>({en:r.stairs&&calcStairsCost(r)>0,coats:r.stairCoats||2,area:calcStairsSqft(r),stairsCost:calcStairsCost(r),std:null,fixedHrs:6})}
     ];
     rooms.forEach(r=>{
       let roomTotal=0;
@@ -1495,14 +1765,18 @@ function recalcAll(){
         const d=s.get(r);
         if(!d.en||!d.area)return;
         const rate=d.std?STANDARDS[d.std][d.coats]:1;
-        const hrs=d.std?(d.area/rate):(d.area);
-        const cost=hrs*globalRate*(+v('lr-buffer')||1.25);
+        const hrs=d.fixedHrs!==undefined?d.fixedHrs:(d.flat?0:(d.std?(d.area/rate):(d.area)));
+        const cost=d.stairsCost!==undefined?d.stairsCost:(d.flat?d.area:(hrs*globalRate*activeWorkerCount*(+v('lr-buffer')||1.25)));
         roomTotal+=cost;
-        tbody.innerHTML+=`<tr><td>${r.name}</td><td>${s.label}</td><td class="num">${fmtN(d.area)}</td><td class="num">${d.coats}</td><td class="num">${d.std?rate:'—'}</td><td class="num">${hrs.toFixed(1)}</td><td class="num">${fmt(cost)}</td></tr>`;
+        const showHrs=d.fixedHrs!==undefined?true:!d.flat;
+        const rateDisplay=d.doorRate?d.doorRate:(d.stairsCost!==undefined?'Flat $':(d.flat?'Flat $':(d.std?rate:'—')));
+        const hideArea=d.flat&&d.stairsCost===undefined;
+        const rDisplayName=r.name||'Room '+r.id;
+        if(!roomTotal) tbody.innerHTML+=`<tr style="background:var(--cream2)"><td colspan="6" style="font-weight:500;font-size:12px;padding:6px 12px">${rDisplayName}</td></tr>`;tbody.innerHTML+=`<tr><td style="padding-left:20px;font-size:12px;color:var(--ink2)">${s.label}</td><td class="num">${hideArea?'—':fmtN(d.area)}</td><td class="num">${hideArea?'—':d.coats}</td><td class="num">${rateDisplay}</td><td class="num">${showHrs?hrs.toFixed(1):'—'}</td><td class="num">${fmt(cost)}</td></tr>`;
       });
-      tbody.innerHTML+=`<tr class="subtotal-row"><td colspan="5">${r.name} total</td><td class="num"></td><td class="num">${fmt(roomTotal)}</td></tr>`;
+      tbody.innerHTML+=`<tr class="subtotal-row"><td colspan="5" style="text-align:right;padding-right:12px">${r.name||'Room '+r.id} subtotal</td><td class="num">${fmt(roomTotal)}</td></tr>`;
     });
-    tbody.innerHTML+=`<tr class="grand-row"><td colspan="5">Grand total</td><td class="num">${totHours.toFixed(1)}</td><td class="num">${fmt(labourAmt)}</td></tr>`;
+    const _aw=workers.filter(w=>w.active).length||1;tbody.innerHTML+=`<tr class="grand-row"><td colspan="5" style="text-align:right;padding-right:12px">Grand total</td><td class="num">${fmt(labourAmt)}</td></tr>`;
   }
 
   // Surface summary
@@ -1518,13 +1792,13 @@ function recalcAll(){
       if(r.crown&&r.crownLF){tArea+=r.crownLF;tHrs+=r.crownLF/STANDARDS.crown[r.crownCoats];}
       if(r.doorFrames&&r.dfLF){tArea+=r.dfLF;tHrs+=r.dfLF/STANDARDS.doorFrames[r.dfCoats];}
       if(r.windows&&r.winLF){tArea+=r.winLF;tHrs+=r.winLF/STANDARDS.windows[r.winCoats];}
-      if(r.doors&&r.doorCount){tArea+=r.doorCount*21;tHrs+=(r.doorCount*21)/STANDARDS.doors[r.doorCoats];}
+      if(r.doors){const dc=calcTotalDoorCount(r);if(dc>0){tArea+=dc*21;tHrs+=(dc*21)/STANDARDS.doors[r.doorCoats];}}
       surfTotals['Trims & Doors'].area+=tArea;surfTotals['Trims & Doors'].hrs+=tHrs;
       if(r.prepHrs){surfTotals.Prep.area+=r.prepHrs;surfTotals.Prep.hrs+=r.prepHrs;}
     });
     Object.entries(surfTotals).forEach(([name,d])=>{
       if(!d.hrs)return;
-      const _buf=+v('lr-buffer')||1.25;stbody.innerHTML+=`<tr><td>${name}</td><td class="num">${fmtN(d.area)}</td><td class="num">${d.hrs.toFixed(1)}</td><td class="num">${(d.hrs/8).toFixed(1)}</td><td class="num">${fmt(d.hrs*globalRate*_buf)}</td></tr>`;
+      const _buf=+v('lr-buffer')||1.25;const _aw2=workers.filter(w=>w.active).length||1;stbody.innerHTML+=`<tr><td>${name}</td><td class="num">${fmtN(d.area)}</td><td class="num">${d.hrs.toFixed(1)}</td><td class="num">${(d.hrs/6).toFixed(1)}</td><td class="num">${fmt(d.hrs*globalRate*_aw2*_buf)}</td></tr>`;
     });
   }
 
@@ -1544,8 +1818,9 @@ function recalcAll(){
     rooms.forEach(r=>{
       if(r.walls && r.wallColour) addCol(r.wallColour,'Walls',r.name,calcWalls(r));
       if(r.ceiling && r.ceilColour) addCol(r.ceilColour,'Ceiling',r.name,calcCeil(r));
-      const trimArea=(r.baseboards?r.baseLF:0)+(r.crown?r.crownLF:0)+(r.doorFrames?r.dfLF:0)+(r.windows?r.winLF:0)+(r.doors?r.doorCount*21:0);
+      const trimArea=(r.baseboards?r.baseLF:0)+(r.crown?r.crownLF:0)+(r.doorFrames?r.dfLF:0)+(r.windows?r.winLF:0);
       if(trimArea && r.trimColour) addCol(r.trimColour,'Trims & Doors',r.name,trimArea);
+      if(r.stairs&&r.stairColour) addCol(r.stairColour,'Stairs',r.name||'Room '+r.id,calcStairsSqft(r));
     });
     const entries=Object.values(colMap);
     if(entries.length===0){
@@ -1554,7 +1829,7 @@ function recalcAll(){
       entries.forEach(e=>{
         const c=COLOURS.find(x=>x.n===e.colour);
         const dot=c?`<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${c.h};border:1px solid rgba(0,0,0,.15);margin-right:6px;vertical-align:middle"></span>`:'';
-        colourTbody.innerHTML+=`<tr><td>${dot}${e.colour}</td><td>${e.surface}</td><td style="font-size:11px;color:var(--ink3)">${e.rooms.join(', ')}</td><td class="num">${fmtN(e.area)}</td></tr>`;
+        colourTbody.innerHTML+=`<tr><td>${dot}${e.colour}</td><td>${e.surface}</td><td style="font-size:11px;color:var(--ink)">${e.rooms.join(', ')}</td><td class="num">${fmtN(e.area)}</td></tr>`;
       });
     }
   }
@@ -1568,8 +1843,11 @@ function recalcAll(){
   // Collect paint usage per product per colour
   // Each product is stored by name — the name determines if it's a pail, gallon, or primer
   const paintMap={};
-  function addPaint(product, colour, area){
-    if(!product) return;
+  // addPaint: area = raw sqft, coats = number of coats
+  // Paint stored as area*coats so qty formula gives correct gallons/pails
+  // Primer always 1 coat
+  function addPaint(product, colour, area, coats){
+    if(!product||!area) return;
     const key=product+'||'+(colour||'');
     if(!paintMap[key]){
       const nameLower=product.toLowerCase();
@@ -1578,20 +1856,40 @@ function recalcAll(){
       const pObj=PAINTS.find(p=>p.n===product)||PRIMERS.find(p=>p.n===product);
       paintMap[key]={product,colour:colour||'',type:isPrimer?'primer':(isPail?'pail':'gallon'),area:0,price:pObj?pObj.p:null};
     }
-    paintMap[key].area+=area||0;
+    // Multiply area by coats so quantity formula reflects total coverage needed
+    paintMap[key].area+=(area||0)*(coats||1);
   }
 
   rooms.forEach(r=>{
     const wArea=r.walls?calcWalls(r):0;
     const cArea=r.ceiling?calcCeil(r):0;
     const trimArea=(r.baseboards?r.baseLF:0)+(r.crown?r.crownLF:0)+(r.doorFrames?r.dfLF:0)+(r.windows?r.winLF:0);
-    const doorArea=r.doors?r.doorCount*21:0;
-    if(r.wallPaint && wArea) addPaint(r.wallPaint,r.wallColour,wArea);
-    if(r.ceilPaint && cArea) addPaint(r.ceilPaint,r.ceilColour,cArea);
-    if(r.trimPaint && (trimArea+doorArea)) addPaint(r.trimPaint,r.trimColour,trimArea+doorArea);
-    if(r.wallPrimer && wArea) addPaint(r.wallPrimer,'',wArea);
-    if(r.ceilPrimer && cArea) addPaint(r.ceilPrimer,'',cArea);
-    if(r.trimPrimer && (trimArea+doorArea)) addPaint(r.trimPrimer,'',(trimArea+doorArea));
+    const doorSqft=r.doors?calcTotalDoorCount(r)*21:0;
+    const tArea=trimArea+doorSqft;
+    const wallCoats=r.wallCoats||2;
+    const ceilCoats=r.ceilCoats||2;
+    const trimCoats=r.doorCoats||2;
+    // When 3 coats: 2 coats = paint, 1 coat = primer. Otherwise use actual coat count.
+    const wallPaintCoats = wallCoats===3 ? 2 : wallCoats;
+    const ceilPaintCoats = ceilCoats===3 ? 2 : ceilCoats;
+    const trimPaintCoats = trimCoats===3 ? 2 : trimCoats;
+    if(r.wallPaint && wArea) addPaint(r.wallPaint,r.wallColour,wArea,wallPaintCoats);
+    if(r.ceilPaint && cArea) addPaint(r.ceilPaint,r.ceilColour,cArea,ceilPaintCoats);
+    if(r.trimPaint && tArea) addPaint(r.trimPaint,r.trimColour,tArea,trimPaintCoats);
+    // Primers: always 1 coat, only included when surface is 3 coats
+    if(r.wallCoats===3 && r.wallPrimer && wArea) addPaint(r.wallPrimer,'',wArea,1);
+    if(r.ceilCoats===3 && r.ceilPrimer && cArea) addPaint(r.ceilPrimer,'',cArea,1);
+    if(r.doorCoats===3 && r.trimPrimer && tArea) addPaint(r.trimPrimer,'',tArea,1);
+    // Stairs paint: use sqft from treads+risers+landings (show even if 0 sqft)
+    if(r.stairs && r.stairPaint){
+      const sSqft=calcStairsSqft(r);
+      const sPaintCoats=(r.stairCoats||2)===3?2:(r.stairCoats||2);
+      addPaint(r.stairPaint,r.stairColour,Math.max(sSqft,1),sPaintCoats);
+    }
+    if(r.stairs && r.stairCoats===3 && r.stairPrimer){
+      const sSqft=calcStairsSqft(r);
+      addPaint(r.stairPrimer,'',Math.max(sSqft,1),1);
+    }
   });
 
   // Pail qty: FLOOR(area / 1900, 1)
@@ -1599,42 +1897,77 @@ function recalcAll(){
   // Gallon qty: CEILING(area / 350, 1) minus 5 gallons for every whole pail already counted
   function calcGallonQty(area){
     const pails=calcPailQty(area);
-    const raw=Math.ceil(area/350);
-    return Math.max(0, raw - pails*5);
+    const remainingArea=Math.max(0, area - pails*1900);
+    return Math.max(0, Math.round(remainingArea/350));
   }
   // Primer qty: CEILING(area / 350, 1)
   function calcPrimerQty(area){ return Math.max(1, Math.ceil(area/350)); }
+  // Editable qty overrides: key = product+'||'+unit
+  const qtyOverrides={};
+  function setQtyOverride(key,val){ qtyOverrides[key]=val; recalcBreakdown(); }
+  function recalcBreakdown(){
+    renderPaintTableCombined('bd-paint-tbody');
+    renderPrimerTable();
+  }
 
-  function renderPaintTable(tbodyId, typeFilter){
+  function renderPaintTableCombined(tbodyId){
     const tbody=sel(tbodyId);
     if(!tbody) return;
     tbody.innerHTML='';
-    const entries=Object.values(paintMap).filter(e=>e.type===typeFilter);
+    const entries=Object.values(paintMap).filter(e=>e.type!=='primer');
     if(entries.length===0){
-      tbody.innerHTML=`<tr><td colspan="6" style="color:var(--ink3);text-align:center;padding:16px">No ${typeFilter}s selected in rooms yet</td></tr>`;
+      tbody.innerHTML=`<tr><td colspan="7" style="color:var(--ink3);text-align:center;padding:16px">No paints selected in rooms yet</td></tr>`;
       return;
     }
     let grandTotal=0;
+    let hasRows=false;
     entries.forEach(e=>{
-      const qty = typeFilter==='pail' ? calcPailQty(e.area) : calcGallonQty(e.area);
-      const lineTotal=e.price&&qty>0 ? qty*e.price : null;
-      if(lineTotal) grandTotal+=lineTotal;
+      const pailQty=calcPailQty(e.area);
+      const galQty=calcGallonQty(e.area);
       const c=COLOURS.find(x=>x.n===e.colour);
       const dot=c?`<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${c.h};border:1px solid rgba(0,0,0,.15);margin-right:5px;vertical-align:middle"></span>`:'';
-      const qtyDisplay = qty===0
-        ? `<span style="color:var(--ink4);font-style:italic">covered by pails</span>`
-        : qty;
-      tbody.innerHTML+=`<tr>
-        <td style="font-size:12px">${e.product}</td>
-        <td>${dot}${e.colour||'<span style="color:var(--ink4)">—</span>'}</td>
-        <td class="num">${fmtN(e.area)}</td>
-        <td class="num">${qtyDisplay}</td>
-        <td class="num">${e.price?'$'+e.price:'—'}</td>
-        <td class="num">${lineTotal?fmt(lineTotal):'—'}</td>
-      </tr>`;
+      if(pailQty>0){
+        const pailName=e.product.replace(/\bGallon\b/gi,'Pail');
+        const pailObj=[...PAINTS,...PRIMERS,...CEILING_PAINTS].find(p=>p.n===pailName);
+        const pailLabel=pailObj?pailObj.n:pailName;
+        const pailPrice=pailObj?pailObj.p:null;
+        const pailQtyEff=qtyOverrides[pailKey]!==undefined?qtyOverrides[pailKey]:pailQty;
+        const pailTotal=pailPrice?pailQtyEff*pailPrice:null;
+        if(pailTotal) grandTotal+=pailTotal;
+        hasRows=true;
+        tbody.innerHTML+=`<tr>
+          <td style="font-size:12px">${stripUnit(pailLabel)}</td>
+          <td>${dot}${e.colour||'<span style="color:var(--ink4)">—</span>'}</td>
+          <td class="num">${fmtN(e.area)}</td>
+          <td class="num" style="color:var(--ink);font-size:11px">Pail</td>
+          <td class="num"><input type="number" min="0" step="1" value="${qtyOverrides[pailKey]!==undefined?qtyOverrides[pailKey]:pailQty}" oninput="setQtyOverride('${pailKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td>
+          <td class="num">${pailPrice?'$'+pailPrice:'—'}</td>
+          <td class="num">${pailTotal?fmt(pailTotal):'—'}</td>
+        </tr>`;
+      }
+      if(galQty>0){
+        const galKey=e.product+'||Gallon';
+        const galQtyEff=qtyOverrides[galKey]!==undefined?qtyOverrides[galKey]:galQty;
+        const galTotal=e.price?galQtyEff*e.price:null;
+        if(galTotal) grandTotal+=galTotal;
+        hasRows=true;
+        tbody.innerHTML+=`<tr>
+          <td style="font-size:12px">${stripUnit(e.product)}</td>
+          <td>${dot}${e.colour||'<span style="color:var(--ink4)">—</span>'}</td>
+          <td class="num">${fmtN(e.area)}</td>
+          <td class="num" style="color:var(--ink);font-size:11px">Gallon</td>
+          <td class="num"><input type="number" min="0" step="1" value="${galQtyEff}" oninput="setQtyOverride('${galKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td>
+          <td class="num">${e.price?'$'+e.price:'—'}</td>
+          <td class="num">${galTotal?fmt(galTotal):'—'}</td>
+        </tr>`;
+      }
     });
+    if(!hasRows){
+      tbody.innerHTML=`<tr><td colspan="7" style="color:var(--ink3);text-align:center;padding:16px">No paints needed at current quantities</td></tr>`;
+      return;
+    }
     if(grandTotal>0){
-      tbody.innerHTML+=`<tr class="grand-row"><td colspan="5">Total</td><td class="num">${fmt(grandTotal)}</td></tr>`;
+      tbody.innerHTML+=`<tr style="background:var(--cream2);font-weight:500"><td colspan="6" style="text-align:right;padding-right:12px;font-size:12px">Paint total</td><td class="num">${fmt(grandTotal)}</td></tr>`;
     }
   }
 
@@ -1644,49 +1977,221 @@ function recalcAll(){
     tbody.innerHTML='';
     const entries=Object.values(paintMap).filter(e=>e.type==='primer');
     if(entries.length===0){
-      tbody.innerHTML='<tr><td colspan="5" style="color:var(--ink3);text-align:center;padding:16px">No primers selected in rooms yet</td></tr>';
+      tbody.innerHTML='<tr><td colspan="7" style="color:var(--ink3);text-align:center;padding:16px">No primers selected in rooms yet</td></tr>';
       return;
     }
     let grandTotal=0;
-    const roomsByPrimer={};
-    rooms.forEach(r=>{
-      [{f:'wallPrimer',lbl:'Wall'},{f:'ceilPrimer',lbl:'Ceil'},{f:'trimPrimer',lbl:'Trim'}].forEach(({f,lbl})=>{
-        if(r[f]){ if(!roomsByPrimer[r[f]]) roomsByPrimer[r[f]]=[]; roomsByPrimer[r[f]].push(r.name+' ('+lbl+')'); }
-      });
-    });
     entries.forEach(e=>{
-      const qty=calcPrimerQty(e.area);
-      const lineTotal=e.price?(qty*e.price):null;
+      // Primers always 1 coat (gallon only — no pail threshold for primer)
+      const galQty=calcGallonQty(e.area);
+      const pailQty=calcPailQty(e.area);
+      const lineTotal=e.price&&galQty>0?galQty*e.price:null;
       if(lineTotal) grandTotal+=lineTotal;
-      const rNames=(roomsByPrimer[e.product]||[]).join(', ');
+      const primerKey=e.product+'||Primer';
+      const galQtyEff=qtyOverrides[primerKey]!==undefined?qtyOverrides[primerKey]:galQty;
+      const lineTotalEff=e.price&&galQtyEff>0?galQtyEff*e.price:null;
+      if(lineTotalEff) grandTotal+=lineTotalEff-(lineTotal||0); // adjust grandTotal
       tbody.innerHTML+=`<tr>
-        <td style="font-size:12px">${e.product}</td>
-        <td style="font-size:11px;color:var(--ink3)">${rNames}</td>
-        <td class="num">${qty}</td>
+        <td style="font-size:12px">${stripUnit(e.product)}</td>
+        <td style="font-size:12px;color:var(--ink3)">—</td>
+        <td class="num">${fmtN(e.area)}</td>
+        <td class="num" style="color:var(--ink);font-size:11px">Gallon</td>
+        <td class="num"><input type="number" min="0" step="1" value="${galQtyEff}" oninput="setQtyOverride('${primerKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td>
         <td class="num">${e.price?'$'+e.price:'—'}</td>
-        <td class="num">${lineTotal?fmt(lineTotal):'—'}</td>
+        <td class="num">${lineTotalEff?fmt(lineTotalEff):'—'}</td>
       </tr>`;
     });
     if(grandTotal>0){
-      tbody.innerHTML+=`<tr class="grand-row"><td colspan="4">Total</td><td class="num">${fmt(grandTotal)}</td></tr>`;
+      tbody.innerHTML+=`<tr style="background:var(--cream2);font-weight:500"><td colspan="6" style="text-align:right;padding-right:12px;font-size:12px">Primer total</td><td class="num">${fmt(grandTotal)}</td></tr>`;
     }
   }
 
-  renderPaintTable('bd-gallons-tbody','gallon');
-  renderPaintTable('bd-pails-tbody','pail');
+  renderPaintTableCombined('bd-paint-tbody');
   renderPrimerTable();
 
-  // Quote
-  if(sel('q-labour'))sel('q-labour').textContent=fmt(labourAmt);
-  if(sel('q-disc-row'))sel('q-disc-row').style.display=discOn?'flex':'none';
-  if(sel('q-disc-label'))sel('q-disc-label').textContent='Discount ('+Math.round(discPct*100)+'%)';
-  if(sel('q-disc-val'))sel('q-disc-val').textContent='−'+fmt(discAmt);
-  if(sel('q-subtotal'))sel('q-subtotal').textContent=fmt(subtotal);
-  if(sel('q-tax'))sel('q-tax').textContent=fmt(tax);
-  if(sel('q-total'))sel('q-total').textContent=fmt(total);
-  if(sel('q-pay1'))sel('q-pay1').textContent=fmt(dep);
-  if(sel('q-pay2'))sel('q-pay2').textContent=fmt(bal45);
-  if(sel('q-pay3'))sel('q-pay3').textContent=fmt(fin);
+  // Quote line items table
+  (function buildQuoteLines(){
+    const tbody=sel('q-line-tbody');
+    if(!tbody) return;
+    tbody.innerHTML='';
+
+    // ── Labour row ──
+    const prepLabels={furniture:'Move furniture',plastic:'Cover furniture with plastic',outlets:'Remove outlets',drywall:'Drywall repairs (plastering & sanding)',caulking:'Caulking',cleanup:'Daily site clean up'};
+    const allPrep=new Set();
+    const customPreps=[];
+    rooms.forEach(r=>{
+      if(!r.prep) return;
+      Object.keys(prepLabels).forEach(k=>{ if(r.prep[k]) allPrep.add(prepLabels[k]); });
+      if(r.prep.custom&&r.prep.custom.trim()){r.prep.custom.split(',').forEach(s=>{const t=s.trim();if(t)customPreps.push(t);});}
+    });
+
+    // Build per-room surface rows with sqft/lft/units in qty column
+    // Each surface becomes a sub-row; rooms are separated by a blank spacer
+    const surfDefs=[
+      {key:'walls',    label:'Walls',          coatsKey:'wallCoats',  areaFn:(r)=>calcWalls(r),          unit:'sqft'},
+      {key:'ceiling',  label:'Ceiling',        coatsKey:'ceilCoats',  areaFn:(r)=>calcCeil(r),           unit:'sqft'},
+      {key:'baseboards',label:'Baseboards',    coatsKey:'baseCoats',  areaFn:(r)=>r.baseLF||0,           unit:'lin ft'},
+      {key:'crown',    label:'Crown Moulding', coatsKey:'crownCoats', areaFn:(r)=>r.crownLF||0,          unit:'lin ft'},
+      {key:'doorFrames',label:'Door Frames',   coatsKey:'dfCoats',    areaFn:(r)=>r.dfLF||0,             unit:'lin ft'},
+      {key:'windows',  label:'Windows',        coatsKey:'winCoats',   areaFn:(r)=>r.winLF||0,            unit:'lin ft'},
+      {key:'doors',    label:'Doors',          coatsKey:'doorCoats',  areaFn:(r)=>r,                     unit:'', isDoors:true, isDoorTypes:true},
+      {key:'stairs',   label:'Stairs',         coatsKey:null,         areaFn:(r)=>r,                     unit:'', isStairs:true},
+    ];
+
+    // ── PREPARATIONS header + items ──
+    const prepItems=[...allPrep,...customPreps];
+    let labourDescHtml='';
+    let labourQtyHtml='';
+
+    if(prepItems.length){
+      labourDescHtml+=`<div style="font-size:10px;font-weight:600;letter-spacing:.08em;color:var(--ink);text-transform:uppercase;margin-bottom:4px">Preparations</div>`;
+      labourQtyHtml+=`<div>&nbsp;</div>`;
+      prepItems.forEach(p=>{
+        labourDescHtml+=`<div style="padding-left:10px;color:var(--ink)">• ${p}</div>`;
+        labourQtyHtml+=`<div>&nbsp;</div>`;
+      });
+    }
+
+    // ── AREAS BEING SERVICED header + per-room surfaces ──
+    const hasRoomSurfs=rooms.some(r=>surfDefs.some(s=>r[s.key]&&s.areaFn(r)>0));
+    if(hasRoomSurfs){
+      const topMargin=prepItems.length?'10px':'0';
+      labourDescHtml+=`<div style="font-size:10px;font-weight:600;letter-spacing:.08em;color:var(--ink);text-transform:uppercase;margin-top:${topMargin};margin-bottom:4px">Areas Being Serviced</div>`;
+      labourQtyHtml+=`<div style="margin-top:${topMargin}">&nbsp;</div>`;
+      rooms.forEach((r,ri)=>{
+        const roomSurfs=surfDefs.filter(s=>s.isDoorTypes?(r.doors&&calcDoorsCost(r)>0):s.isStairs?(r.stairs&&calcStairsCost(r)>0):(r[s.key]&&s.areaFn(r)>0));
+        if(!roomSurfs.length) return;
+        labourDescHtml+=`<div style="font-weight:500;margin-top:${ri>0?'6px':'0'}">${r.name}</div>`;
+        labourQtyHtml+=`<div style="margin-top:${ri>0?'6px':'0'}">&nbsp;</div>`;
+        roomSurfs.forEach(s=>{
+          const area=s.areaFn(r);
+          const coats=s.coatsKey?r[s.coatsKey]||2:null;
+          if(s.isDoorTypes){
+            const dr=area;
+            const dtParts=[];
+            DOOR_TYPES.forEach(t=>{ if(dr.doorTypes&&dr.doorTypes[t.key]) dtParts.push((dr.doorTypes[t.key])+' '+t.label+(dr.doorTypes[t.key]>1?'s':'')); });
+            labourDescHtml+=`<div style="padding-left:12px;color:var(--ink)">${s.label}${dtParts.length?' ('+dtParts.join(', ')+')':''}</div>`;
+          } else if(s.isStairs){
+            const sr=area;
+            const stairParts=[];
+            if(sr.stairTreads)stairParts.push('Treads');
+            if(sr.stairRisers)stairParts.push('Risers');
+            if(sr.stairLanding)stairParts.push('Landing');
+            if(sr.stairStringer)stairParts.push('Stringer');
+            labourDescHtml+=`<div style="padding-left:12px;color:var(--ink)">${s.label}${stairParts.length?' ('+stairParts.join(', ')+')':''}</div>`;
+          } else {
+            labourDescHtml+=`<div style="padding-left:12px;color:var(--ink)">${s.label}${s.isFlat?'':' ('+coats+' coat'+(coats>1?'s':'')+')'}</div>`;
+          }
+          const unitLabel=s.isDoors?(area===1?'door':'doors'):s.unit;
+          if(s.isDoorTypes){
+            const dr=area;
+            const total=calcTotalDoorCount(dr);
+            labourQtyHtml+=`<div style="text-align:right">${total} ${total===1?'door':'doors'}</div>`;
+          } else
+          if(s.isDoorTypes){
+            const dr=area;
+            const dtParts=[];
+            DOOR_TYPES.forEach(t=>{ if(dr.doorTypes&&dr.doorTypes[t.key]) dtParts.push((dr.doorTypes[t.key])+' '+t.label+(dr.doorTypes[t.key]>1?'s':'')); });
+            labourDescHtml+=`<div style="padding-left:12px;color:var(--ink)">${s.label}${dtParts.length?' ('+dtParts.join(', ')+')':''}</div>`;
+          } else if(s.isStairs){
+            const sr=area;
+            const stairQtyParts=[];
+            if(sr.stairTreads)stairQtyParts.push(sr.stairTreads+' tread'+(sr.stairTreads>1?'s':''));
+            if(sr.stairRisers)stairQtyParts.push(sr.stairRisers+' riser'+(sr.stairRisers>1?'s':''));
+            if(sr.stairLanding)stairQtyParts.push(sr.stairLanding+' landing'+(sr.stairLanding>1?'s':''));
+            if(sr.stairStringer)stairQtyParts.push(sr.stairStringer+' stringer'+(sr.stairStringer>1?'s':''));
+            labourQtyHtml+=`<div style="text-align:right">${stairQtyParts.join(', ')||'—'}</div>`;
+          } else if(s.isFlat){
+            labourQtyHtml+=`<div style="text-align:right">${fmt(area)}</div>`;
+          } else {
+            labourQtyHtml+=`<div style="text-align:right">${fmtN(area)} ${unitLabel}</div>`;
+          }
+        });
+      });
+    }
+
+    tbody.innerHTML+=`<tr>
+      <td style="font-size:12px;font-weight:500;vertical-align:top;white-space:nowrap">Labour</td>
+      <td style="font-size:12px;vertical-align:top">${labourDescHtml||'—'}</td>
+      <td class="right" style="font-size:12px;vertical-align:top;white-space:nowrap;color:var(--ink)">${labourQtyHtml}</td>
+      <td class="right" style="font-size:12px;vertical-align:top;font-weight:500">${fmt(labourAmt)}</td>
+    </tr>`;
+
+    // ── Materials row (from paintMap) ──
+    const matEntries=Object.values(paintMap).filter(e=>e.type!=='primer');
+    if(matEntries.length){
+      const matLines=[];
+      let matTotal=0;
+      matEntries.forEach(e=>{
+        const pailQty=calcPailQty(e.area);
+        const galQty=calcGallonQty(e.area);
+        const c=COLOURS.find(x=>x.n===e.colour);
+        const dot=c?'<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+c.h+';border:1px solid rgba(0,0,0,.15);margin-right:4px;vertical-align:middle"></span>':'';
+        if(pailQty>0){
+          const pailName=e.product.replace(/\bGallon\b/gi,'Pail');
+          const pailObj=[...PAINTS,...PRIMERS,...CEILING_PAINTS].find(p=>p.n===pailName);
+          const pailPrice=pailObj?pailObj.p:null;
+          const pailLine=fmt(pailPrice?pailQty*pailPrice:0);
+          if(pailPrice) matTotal+=pailQty*pailPrice;
+          matLines.push({product:stripUnit(e.product),colour:e.colour,dot,unit:'Pail',qty:pailQty,price:pailPrice,area:e.area});
+        }
+        if(galQty>0){
+          if(e.price) matTotal+=galQty*e.price;
+          matLines.push({product:stripUnit(e.product),colour:e.colour,dot,unit:'Gallon',qty:galQty,price:e.price,area:e.area});
+        }
+      });
+      // Also add primers
+      Object.values(paintMap).filter(e=>e.type==='primer').forEach(e=>{
+        const qty=calcGallonQty(e.area)||1;
+        if(e.price) matTotal+=qty*e.price;
+        matLines.push({product:stripUnit(e.product),colour:'',dot:'',unit:'Gallon',qty,price:e.price,area:e.area});
+      });
+      const matDescRows=matLines.map(m=>`${m.dot}${m.product}${m.colour?' · '+m.colour:''} <span style="color:var(--ink)">${m.unit}</span>`).join('<br>');
+      const matQtyRows=matLines.map(m=>`${m.qty}`).join('<br>');
+      const matUnitRows=matLines.map(m=>`<span style="color:var(--ink)">${m.unit}</span>`).join('<br>');
+      tbody.innerHTML+=`<tr>
+        <td style="font-size:12px;font-weight:500;vertical-align:top;white-space:nowrap">Materials</td>
+        <td style="font-size:12px;vertical-align:top;color:var(--ink)">${matDescRows}</td>
+        <td class="right" style="font-size:12px;vertical-align:top;color:var(--ink)">${matQtyRows}</td>
+        <td class="right" style="font-size:12px;vertical-align:top;font-weight:500">${fmt(matTotal)}</td>
+      </tr>`;
+    }
+
+    // Compute materials total from paintMap (all paints + primers)
+    let matGrandTotal=0;
+    Object.values(paintMap).forEach(e=>{
+      const pailQty=calcPailQty(e.area);
+      const galQty=calcGallonQty(e.area);
+      if(e.type==='primer'){
+        if(e.price&&galQty>0) matGrandTotal+=galQty*e.price;
+      } else {
+        if(pailQty>0){
+          const pailName=e.product.replace(/\bGallon\b/gi,'Pail');
+          const pailObj=[...PAINTS,...PRIMERS,...CEILING_PAINTS].find(p=>p.n===pailName);
+          if(pailObj&&pailObj.p) matGrandTotal+=pailQty*pailObj.p;
+        }
+        if(galQty>0&&e.price) matGrandTotal+=galQty*e.price;
+      }
+    });
+    // Recalc totals including materials
+    const combinedSubtotal=(labourAmt+matGrandTotal)-discAmt;
+    const combinedTax=combinedSubtotal*0.13;
+    const combinedTotal=combinedSubtotal+combinedTax;
+    const combinedDep=combinedTotal*0.1;
+    const combinedBal45=combinedTotal*0.45;
+    const combinedFin=combinedTotal-combinedDep-combinedBal45;
+
+    // Discount + totals
+    if(sel('q-disc-row'))sel('q-disc-row').style.display=discOn?'table-row':'none';
+    if(sel('q-disc-label'))sel('q-disc-label').textContent='Discount ('+Math.round(discPct*100)+'%)';
+    if(sel('q-disc-val'))sel('q-disc-val').textContent='−'+fmt(discAmt);
+    if(sel('q-subtotal'))sel('q-subtotal').textContent=fmt(combinedSubtotal);
+    if(sel('q-tax'))sel('q-tax').textContent=fmt(combinedTax);
+    if(sel('q-total'))sel('q-total').textContent=fmt(combinedTotal);
+    if(sel('q-pay1'))sel('q-pay1').textContent=fmt(combinedDep);
+    if(sel('q-pay2'))sel('q-pay2').textContent=fmt(combinedBal45);
+    if(sel('q-pay3'))sel('q-pay3').textContent=fmt(combinedFin);
+  })();
 
   // Scope of work
   const saBody=sel('sow-areas-tbody');
@@ -1715,8 +2220,9 @@ function recalcAll(){
     rooms.forEach(r=>{
       if(r.walls&&r.wallColour) addSowCol(r.wallColour,'Walls',r.name,calcWalls(r));
       if(r.ceiling&&r.ceilColour) addSowCol(r.ceilColour,'Ceiling',r.name,calcCeil(r));
-      const trimArea=(r.baseboards?r.baseLF:0)+(r.crown?r.crownLF:0)+(r.doorFrames?r.dfLF:0)+(r.windows?r.winLF:0)+(r.doors?r.doorCount*21:0);
+      const trimArea=(r.baseboards?r.baseLF:0)+(r.crown?r.crownLF:0)+(r.doorFrames?r.dfLF:0)+(r.windows?r.winLF:0);
       if(trimArea&&r.trimColour) addSowCol(r.trimColour,'Trims & Doors',r.name,trimArea);
+      if(r.stairs&&r.stairColour) addSowCol(r.stairColour,'Stairs',r.name||'Room '+r.id,calcStairsSqft(r));
     });
     const sowEntries=Object.values(sowColMap);
     // Also collect paint products
@@ -1730,12 +2236,14 @@ function recalcAll(){
       if(r.ceilPrimer&&!seenPaints.has(r.ceilPrimer)){seenPaints.add(r.ceilPrimer);paintList.push({label:'Ceiling Primer',product:r.ceilPrimer});}
       if(r.trimPrimer&&!seenPaints.has(r.trimPrimer)){seenPaints.add(r.trimPrimer);paintList.push({label:'Trim Primer',product:r.trimPrimer});}
       if(r.misc&&!seenPaints.has(r.misc)){seenPaints.add(r.misc);paintList.push({label:'Misc.',product:r.misc});}
+      if(r.stairs&&r.stairPaint&&!seenPaints.has(r.stairPaint)){seenPaints.add(r.stairPaint);paintList.push({label:'Stairs Paint',product:r.stairPaint});}
+      if(r.stairs&&r.stairPrimer&&!seenPaints.has(r.stairPrimer)){seenPaints.add(r.stairPrimer);paintList.push({label:'Stairs Primer',product:r.stairPrimer});}
     });
     let html='';
     if(paintList.length){
       html+=`<table class="doc-table" style="width:100%;margin-bottom:12px">
         <thead><tr><th>Category</th><th>Product</th></tr></thead>
-        <tbody>${paintList.map(p=>`<tr><td style="font-size:12px;color:var(--ink3)">${p.label}</td><td style="font-size:12px">${p.product}</td></tr>`).join('')}</tbody>
+        <tbody>${paintList.map(p=>`<tr><td style="font-size:12px;color:var(--ink3)">${p.label}</td><td style="font-size:12px">${stripUnit(p.product)}</td></tr>`).join('')}</tbody>
       </table>`;
     }
     if(sowEntries.length){
@@ -1757,8 +2265,23 @@ function recalcAll(){
   // Invoice
   recalcInvoice();
 
-  // Contract
-  buildContract(total,dep,bal45,fin,totWalls,totCeil,totTrims,totDoors,days);
+  // Contract — compute materials total from paintMap then pass full combined total
+  (()=>{
+    let _mat=0;
+    Object.values(paintMap).forEach(e=>{
+      const pq=calcPailQty(e.area),gq=calcGallonQty(e.area);
+      if(e.type==='primer'){if(e.price&&gq>0)_mat+=gq*e.price;}
+      else{
+        if(pq>0){const pn=e.product.replace(/\bGallon\b/gi,'Pail');const po=[...PAINTS,...PRIMERS,...CEILING_PAINTS].find(p=>p.n===pn);if(po&&po.p)_mat+=pq*po.p;}
+        if(gq>0&&e.price)_mat+=gq*e.price;
+      }
+    });
+    const _sub=(labourAmt+_mat)-discAmt;
+    const _tax=_sub*0.13;
+    const _tot=_sub+_tax;
+    const _dep=_tot*0.1,_bal=_tot*0.45,_fin=_tot-_dep-_bal;
+    buildContract(_tot,_dep,_bal,_fin,totWalls,totCeil,totTrims,totDoors,days);
+  })();
 
   // Post project
   if(sel('pp-date'))sel('pp-date').textContent=today();
@@ -1774,7 +2297,8 @@ function recalcInvoice(){
   const discPct=(+(v('lr-disc-pct')||10))/100;
   let totHours=0;
   rooms.forEach(r=>totHours+=calcRoomHours(r));
-  const labourAmt=totHours*globalRate*(+v('lr-buffer')||1.25);
+  const _awInv=workers.filter(w=>w.active).length||1;
+  const labourAmt=totHours*globalRate*_awInv*(+v('lr-buffer')||1.25);
   const discAmt=discOn?labourAmt*discPct:0;
   const subtotal=labourAmt-discAmt;
   const tax=subtotal*0.13;
@@ -1816,7 +2340,14 @@ function buildContract(total,dep,bal45,fin,walls,ceil,trims,doors,days){
       <div><strong>David Truong</strong></div><div>25 Fieldview Crescent</div><div>Markham, ON L3R 3H6</div><div>(647) 449-6611</div><div>info@kingdompainting.ca</div></div>
   </div>
   <div class="doc-section-title" style="margin-top:16px">Scope of Work</div>
-  <p>The Contractor will be prepping and painting approximately ${fmtN(walls)} square feet of walls, ${fmtN(ceil)} square feet of ceilings, ${fmtN(trims)} linear feet of trims, and <strong>${doors}</strong> door(s) at ${addr}${addr2?', '+addr2:''}.</p>
+  <p>The Contractor will be providing painting services at ${addr}${addr2?', '+addr2:''}. The total area of surfaces being prepped and painted:</p>
+  <ul style="margin:8px 0 8px 20px;line-height:2">
+    ${walls>0?`<li><strong>${fmtN(walls)}</strong> square feet of walls</li>`:''}
+    ${ceil>0?`<li><strong>${fmtN(ceil)}</strong> square feet of ceilings</li>`:''}
+    ${trims>0?`<li><strong>${fmtN(trims)}</strong> linear feet of trims</li>`:''}
+    ${doors>0?`<li><strong>${doors}</strong> door${doors===1?'':'s'}</li>`:''}
+    ${(()=>{const sc=rooms.filter(r=>r.stairs&&calcStairsCost(r)>0);if(!sc.length)return '';const parts=[];sc.forEach(r=>{if(r.stairTreads)parts.push(r.stairTreads+' tread'+(r.stairTreads>1?'s':''));if(r.stairRisers)parts.push(r.stairRisers+' riser'+(r.stairRisers>1?'s':''));if(r.stairLanding)parts.push(r.stairLanding+' landing'+(r.stairLanding>1?'s':''));if(r.stairStringer)parts.push(r.stairStringer+' stringer'+(r.stairStringer>1?'s':''));});return parts.length?`<li><strong>Stairs</strong></li>`:''})()}
+  </ul>
   <div class="doc-section-title" style="margin-top:16px">Duration</div>
   <p>Work will commence on the agreed start date and is expected to be completed in approximately <strong>${days} day(s)</strong>, subject to unforeseen delays.</p>
   <div class="doc-section-title" style="margin-top:16px">Payment Terms</div>
@@ -1869,8 +2400,8 @@ function buildContract(total,dep,bal45,fin,walls,ceil,trims,doors,days){
   <p>This Agreement constitutes the entire understanding between the parties and supersedes all prior agreements, whether oral or written.</p>
   <p style="margin-top:12px">By signing below, the parties agree to the terms and conditions outlined in this Agreement.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:20px">
-    <div><div style="border-bottom:1px solid var(--ink);height:40px;margin-bottom:6px"></div><div style="font-size:12px;color:var(--ink3)">${name} &nbsp;·&nbsp; Date</div></div>
-    <div><div style="border-bottom:1px solid var(--ink);height:40px;margin-bottom:6px"></div><div style="font-size:12px;color:var(--ink3)">David Truong &nbsp;·&nbsp; Date</div></div>
+    <div><div style="border-bottom:1px solid var(--ink);height:40px;margin-bottom:6px"></div><div style="font-size:12px;color:var(--ink3)">${name} &nbsp;·&nbsp; ${today()}</div></div>
+    <div><div style="height:40px;margin-bottom:6px;display:flex;align-items:flex-end;padding-bottom:2px;border-bottom:1px solid var(--ink)"><span style="font-family:'Dancing Script',cursive;font-size:30px;color:var(--ink);line-height:1">David Truong</span></div><div style="font-size:12px;color:var(--ink3)">David Truong &nbsp;·&nbsp; ${today()}</div></div>
   </div>`;
   if(sel('contract-body'))sel('contract-body').innerHTML=html;
 }
@@ -2043,6 +2574,8 @@ function initPaintInputs(){
   initLabourRates();
   initPaintInputs();
   addRoom();
+  // Open first room by default
+  if(rooms.length>0){const firstBody=document.querySelector('.room-body');if(firstBody){firstBody.classList.add('open');const arr=sel('arr_'+rooms[0].id);if(arr)arr.classList.add('open');}}
 })();
 
 // ── PDF EXPORT ──
@@ -2064,6 +2597,113 @@ function exportPDF(pageIdOrArray){
   }, 120);
 }
 
+
+
+
+function updWin(id,idx,key,val){
+  const r=rooms.find(x=>x.id===id);
+  if(!r)return;
+  if(!r.winList)r.winList=[{l:0,w:0}];
+  r.winList[idx][key]=val;
+  r.winLF=calcWinLF(r);
+  recalcAll();
+}
+
+function addWin(id){
+  const r=rooms.find(x=>x.id===id);
+  if(!r)return;
+  if(!r.winList)r.winList=[{l:0,w:0}];
+  r.winList.push({l:0,w:0});
+  renderRooms();recalcAll();
+}
+
+function removeWin(id,idx){
+  const r=rooms.find(x=>x.id===id);
+  if(!r||!r.winList)return;
+  r.winList.splice(idx,1);
+  if(!r.winList.length)r.winList=[{l:0,w:0}];
+  r.winLF=calcWinLF(r);
+  renderRooms();recalcAll();
+}
+
+function renderWinList(r){
+  var wins=r.winList&&r.winList.length?r.winList:[{l:0,w:0}];
+  var sty="font-size:12px;padding:5px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);width:100%";
+  var out="<div style=\"margin:0 0 10px 18px;padding:10px;background:var(--cream2);border-radius:var(--r)\">";
+  out+="<div style=\"font-size:10px;color:var(--ink4);margin-bottom:8px\">Each window: LF = (L×2)+(W×2) &nbsp;&middot;&nbsp; Wall deduction = L×W</div>";
+  for(var i=0;i<wins.length;i++){
+    var w=wins[i];
+    out+="<div style=\"display:grid;grid-template-columns:50px 1fr 1fr 28px;gap:6px;align-items:end;margin-bottom:6px\">";
+    out+="<span style=\"font-size:11px;color:var(--ink3);padding-bottom:8px\">Win "+(i+1)+"</span>";
+    out+="<div class=\"field\"><label>Length (ft)</label><input type=\"number\" min=\"0\" step=\"0.5\" value=\""+(w.l||"")+"\" placeholder=\"0\" oninput=\"updWin("+r.id+","+i+",'l',+this.value)\" style=\""+sty+"\"></div>";
+    out+="<div class=\"field\"><label>Width (ft)</label><input type=\"number\" min=\"0\" step=\"0.5\" value=\""+(w.w||"")+"\" placeholder=\"0\" oninput=\"updWin("+r.id+","+i+",'w',+this.value)\" style=\""+sty+"\"></div>";
+    out+=i>0?"<button onclick=\"removeWin("+r.id+","+i+")\" style=\"background:none;border:none;cursor:pointer;color:var(--ink4);font-size:16px;line-height:1;padding-bottom:6px\">&#215;</button>":"<span></span>";
+    out+="</div>";
+  }
+  out+="<button onclick=\"addWin("+r.id+")\" style=\"font-size:11px;padding:5px 12px;border:1px dashed var(--ink4);border-radius:var(--r);background:transparent;color:var(--ink3);cursor:pointer;font-family:var(--sans);margin-top:2px\">+ Add window</button>";
+  out+="</div>";
+  return out;
+}
+
+function renderStairsPanel(r){
+  var sty="font-size:12px;padding:5px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);width:100%";
+  var out="<div style=\"margin:0 0 10px 18px;padding:10px;background:var(--cream2);border-radius:var(--r)\">";
+  out+="<div style=\"font-size:10px;color:var(--ink4);margin-bottom:8px\">Treads $25/ea &nbsp;&middot;&nbsp; Risers $25/ea &nbsp;&middot;&nbsp; Landing $50/ea &nbsp;&middot;&nbsp; Stringer $100/ea</div>";
+  out+="<div class=\"stairs-grid\" style=\"display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px\">";
+  var fields=[
+    {key:"stairTreads",label:"Treads",val:r.stairTreads||""},
+    {key:"stairRisers",label:"Risers",val:r.stairRisers||""},
+    {key:"stairLanding",label:"Landing",val:r.stairLanding||""},
+    {key:"stairStringer",label:"Stringer",val:r.stairStringer||""}
+  ];
+  for(var i=0;i<fields.length;i++){
+    var f=fields[i];
+    out+="<div class=\"field\"><label>"+f.label+"</label>";
+    out+="<input type=\"number\" min=\"0\" step=\"1\" value=\""+(f.val||"")+"\" placeholder=\"0\" oninput=\"upd("+r.id+",'"+f.key+"',+this.value)\" style=\""+sty+"\"></div>";
+  }
+  out+="</div></div>";
+  return out;
+}
+
+function updDoorType(id,key,val){
+  const r=rooms.find(x=>x.id===id);
+  if(!r)return;
+  if(!r.doorTypes)r.doorTypes={flat:0,panel6:0,glass:0,custom:0};
+  r.doorTypes[key]=val;
+  // update doorCount to total for backward compatibility
+  r.doorCount=calcTotalDoorCount(r);
+  const rws=sel('rws_'+id),rcs=sel('rcs_'+id),rlc=sel('rlc_'+id),rtrim=sel('rtrim_'+id);
+  const ws=calcWalls(r),cs=calcCeil(r),lc=calcRoomCost(r);
+  if(rws)rws.textContent=fmtN(ws);
+  if(rcs)rcs.textContent=fmtN(cs);
+  if(rtrim)rtrim.textContent=fmtN(calcTrims(r));
+  if(rlc)rlc.textContent=fmt(lc);
+  recalcAll();
+}
+
+function updPrep(id,key,val){
+  const r=rooms.find(x=>x.id===id);
+  if(!r)return;
+  if(!r.prep)r.prep={furniture:false,plastic:false,outlets:false,drywall:false,caulking:false,cleanup:false,custom:''};
+  r.prep[key]=val;
+  recalcAll();
+}
+
+function updIrreg(id,checked){
+  const r=rooms.find(x=>x.id===id);
+  if(!r)return;
+  r.irregular=checked;
+  if(!r.irreg)r.irreg=[0,0,0,0,0,0];
+  renderRooms();recalcAll();
+}
+
+function updIrregVal(id,idx,val){
+  const r=rooms.find(x=>x.id===id);
+  if(!r)return;
+  if(!r.irreg)r.irreg=[0,0,0,0,0,0];
+  r.irreg[idx]=val;
+  recalcAll();
+}
 
 // ── STANDARDS LIVE EDIT ──
 // doorSqft tracks the sqft per door (default 21), used in wall deduction + door labour
