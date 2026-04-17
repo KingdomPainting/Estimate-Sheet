@@ -1711,6 +1711,77 @@ function calcRoomCost(r){const buf=+v(‘lr-buffer’)||1.25;const aw=workers.fi
 
 // Persistent qty overrides for paint table — survives recalcAll() calls
 const qtyOverrides={};
+function renderPaintTableCombined(tbodyId){
+const tbody=sel(tbodyId);
+if(!tbody) return;
+tbody.innerHTML=’’;
+const entries=Object.values(paintMap).filter(e=>e.type!==‘primer’);
+if(entries.length===0){
+tbody.innerHTML=`<tr><td colspan="7" style="color:var(--ink3);text-align:center;padding:16px">No paints selected in rooms yet</td></tr>`;
+return;
+}
+let grandTotal=0;
+let hasRows=false;
+entries.forEach(e=>{
+const pailQty=calcPailQty(e.area);
+const galQty=calcGallonQty(e.area);
+const c=COLOURS.find(x=>x.n===e.colour);
+const dot=c?`<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${c.h};border:1px solid rgba(0,0,0,.15);margin-right:5px;vertical-align:middle"></span>`:’’;
+if(pailQty>0){
+const pailKey=e.product+’||Pail’;
+const pailName=e.product.replace(/\bGallon\b/gi,‘Pail’);
+const pailObj=[…PAINTS,…PRIMERS,…CEILING_PAINTS].find(p=>p.n===pailName);
+const pailLabel=pailObj?pailObj.n:pailName;
+const pailPrice=pailObj?pailObj.p:null;
+const pailQtyEff=qtyOverrides[pailKey]!==undefined?qtyOverrides[pailKey]:pailQty;
+const pailTotal=pailPrice?pailQtyEff*pailPrice:null;
+if(pailTotal) grandTotal+=pailTotal;
+hasRows=true;
+tbody.innerHTML+=`<tr> <td style="font-size:12px">${stripUnit(pailLabel)}</td> <td>${dot}${e.colour||'<span style="color:var(--ink4)">—</span>'}</td> <td class="num">${fmtN(e.area)}</td> <td class="num" style="color:var(--ink);font-size:11px">Pail</td> <td class="num"><input type="number" min="0" step="1" value="${qtyOverrides[pailKey]!==undefined?qtyOverrides[pailKey]:pailQty}" oninput="setQtyOverride('${pailKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td> <td class="num">${pailPrice?'$'+pailPrice:'—'}</td> <td class="num">${pailTotal?fmt(pailTotal):'—'}</td> </tr>`;
+}
+if(galQty>0){
+const galKey=e.product+’||Gallon’;
+const galQtyEff=qtyOverrides[galKey]!==undefined?qtyOverrides[galKey]:galQty;
+const galTotal=e.price?galQtyEff*e.price:null;
+if(galTotal) grandTotal+=galTotal;
+hasRows=true;
+tbody.innerHTML+=`<tr> <td style="font-size:12px">${stripUnit(e.product)}</td> <td>${dot}${e.colour||'<span style="color:var(--ink4)">—</span>'}</td> <td class="num">${fmtN(e.area)}</td> <td class="num" style="color:var(--ink);font-size:11px">Gallon</td> <td class="num"><input type="number" min="0" step="1" value="${galQtyEff}" oninput="setQtyOverride('${galKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td> <td class="num">${e.price?'$'+e.price:'—'}</td> <td class="num">${galTotal?fmt(galTotal):'—'}</td> </tr>`;
+}
+});
+if(!hasRows){
+tbody.innerHTML=`<tr><td colspan="7" style="color:var(--ink3);text-align:center;padding:16px">No paints needed at current quantities</td></tr>`;
+return;
+}
+if(grandTotal>0){
+tbody.innerHTML+=`<tr style="background:var(--cream2);font-weight:500"><td colspan="6" style="text-align:right;padding-right:12px;font-size:12px">Paint total</td><td class="num">${fmt(grandTotal)}</td></tr>`;
+}
+}
+
+function renderPrimerTable(){
+const tbody=sel(‘bd-primers-tbody’);
+if(!tbody) return;
+tbody.innerHTML=’’;
+const entries=Object.values(paintMap).filter(e=>e.type===‘primer’);
+if(entries.length===0){
+tbody.innerHTML=’<tr><td colspan="7" style="color:var(--ink3);text-align:center;padding:16px">No primers selected in rooms yet</td></tr>’;
+return;
+}
+let grandTotal=0;
+entries.forEach(e=>{
+// Primers always 1 coat (gallon only — no pail threshold for primer)
+const galQty=calcGallonQty(e.area);
+const pailQty=calcPailQty(e.area);
+const primerKey=e.product+’||Primer’;
+const galQtyEff=qtyOverrides[primerKey]!==undefined?qtyOverrides[primerKey]:galQty;
+const lineTotalEff=e.price&&galQtyEff>0?galQtyEff*e.price:null;
+if(lineTotalEff) grandTotal+=lineTotalEff;
+tbody.innerHTML+=`<tr> <td style="font-size:12px">${stripUnit(e.product)}</td> <td style="font-size:12px;color:var(--ink3)">—</td> <td class="num">${fmtN(e.area)}</td> <td class="num" style="color:var(--ink);font-size:11px">Gallon</td> <td class="num"><input type="number" min="0" step="1" value="${galQtyEff}" oninput="setQtyOverride('${primerKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td> <td class="num">${e.price?'$'+e.price:'—'}</td> <td class="num">${lineTotalEff?fmt(lineTotalEff):'—'}</td> </tr>`;
+});
+if(grandTotal>0){
+tbody.innerHTML+=`<tr style="background:var(--cream2);font-weight:500"><td colspan="6" style="text-align:right;padding-right:12px;font-size:12px">Primer total</td><td class="num">${fmt(grandTotal)}</td></tr>`;
+}
+}
+
 function setQtyOverride(key,val){
 qtyOverrides[key]=Math.max(0,val);
 // Re-render only the paint tables without wiping overrides
@@ -1744,6 +1815,7 @@ if(sel(‘lr-total-all-workers’))sel(‘lr-total-all-workers’).textContent=�
 recalcAll();
 }
 
+let paintMap={}; // global paint map, rebuilt each recalcAll
 function recalcAll(){
 const discOn=sel(‘lr-discount’)&&sel(‘lr-discount’).checked;
 const discPct=(+(v(‘lr-disc-pct’)||10))/100;
@@ -1873,8 +1945,7 @@ colourTbody.innerHTML+=`<tr><td>${dot}${e.colour}</td><td>${e.surface}</td><td s
 //   Primers: CEILING(area / 350, 1)           — gallons only, no pail offset
 
 // Collect paint usage per product per colour
-// Each product is stored by name — the name determines if it’s a pail, gallon, or primer
-const paintMap={};
+paintMap={};  // global, reset each recalcAll
 // addPaint: area = raw sqft, coats = number of coats
 // Paint stored as area*coats so qty formula gives correct gallons/pails
 // Primer always 1 coat
@@ -1936,76 +2007,9 @@ return Math.max(0, Math.round(remainingArea/350));
 function calcPrimerQty(area){ return Math.max(1, Math.ceil(area/350)); }
 // qtyOverrides is defined globally below recalcAll — persists between calls
 
-function renderPaintTableCombined(tbodyId){
-const tbody=sel(tbodyId);
-if(!tbody) return;
-tbody.innerHTML=’’;
-const entries=Object.values(paintMap).filter(e=>e.type!==‘primer’);
-if(entries.length===0){
-tbody.innerHTML=`<tr><td colspan="7" style="color:var(--ink3);text-align:center;padding:16px">No paints selected in rooms yet</td></tr>`;
-return;
-}
-let grandTotal=0;
-let hasRows=false;
-entries.forEach(e=>{
-const pailQty=calcPailQty(e.area);
-const galQty=calcGallonQty(e.area);
-const c=COLOURS.find(x=>x.n===e.colour);
-const dot=c?`<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${c.h};border:1px solid rgba(0,0,0,.15);margin-right:5px;vertical-align:middle"></span>`:’’;
-if(pailQty>0){
-const pailKey=e.product+’||Pail’;
-const pailName=e.product.replace(/\bGallon\b/gi,‘Pail’);
-const pailObj=[…PAINTS,…PRIMERS,…CEILING_PAINTS].find(p=>p.n===pailName);
-const pailLabel=pailObj?pailObj.n:pailName;
-const pailPrice=pailObj?pailObj.p:null;
-const pailQtyEff=qtyOverrides[pailKey]!==undefined?qtyOverrides[pailKey]:pailQty;
-const pailTotal=pailPrice?pailQtyEff*pailPrice:null;
-if(pailTotal) grandTotal+=pailTotal;
-hasRows=true;
-tbody.innerHTML+=`<tr> <td style="font-size:12px">${stripUnit(pailLabel)}</td> <td>${dot}${e.colour||'<span style="color:var(--ink4)">—</span>'}</td> <td class="num">${fmtN(e.area)}</td> <td class="num" style="color:var(--ink);font-size:11px">Pail</td> <td class="num"><input type="number" min="0" step="1" value="${qtyOverrides[pailKey]!==undefined?qtyOverrides[pailKey]:pailQty}" oninput="setQtyOverride('${pailKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td> <td class="num">${pailPrice?'$'+pailPrice:'—'}</td> <td class="num">${pailTotal?fmt(pailTotal):'—'}</td> </tr>`;
-}
-if(galQty>0){
-const galKey=e.product+’||Gallon’;
-const galQtyEff=qtyOverrides[galKey]!==undefined?qtyOverrides[galKey]:galQty;
-const galTotal=e.price?galQtyEff*e.price:null;
-if(galTotal) grandTotal+=galTotal;
-hasRows=true;
-tbody.innerHTML+=`<tr> <td style="font-size:12px">${stripUnit(e.product)}</td> <td>${dot}${e.colour||'<span style="color:var(--ink4)">—</span>'}</td> <td class="num">${fmtN(e.area)}</td> <td class="num" style="color:var(--ink);font-size:11px">Gallon</td> <td class="num"><input type="number" min="0" step="1" value="${galQtyEff}" oninput="setQtyOverride('${galKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td> <td class="num">${e.price?'$'+e.price:'—'}</td> <td class="num">${galTotal?fmt(galTotal):'—'}</td> </tr>`;
-}
-});
-if(!hasRows){
-tbody.innerHTML=`<tr><td colspan="7" style="color:var(--ink3);text-align:center;padding:16px">No paints needed at current quantities</td></tr>`;
-return;
-}
-if(grandTotal>0){
-tbody.innerHTML+=`<tr style="background:var(--cream2);font-weight:500"><td colspan="6" style="text-align:right;padding-right:12px;font-size:12px">Paint total</td><td class="num">${fmt(grandTotal)}</td></tr>`;
-}
-}
+// renderPaintTableCombined moved to global scope
 
-function renderPrimerTable(){
-const tbody=sel(‘bd-primers-tbody’);
-if(!tbody) return;
-tbody.innerHTML=’’;
-const entries=Object.values(paintMap).filter(e=>e.type===‘primer’);
-if(entries.length===0){
-tbody.innerHTML=’<tr><td colspan="7" style="color:var(--ink3);text-align:center;padding:16px">No primers selected in rooms yet</td></tr>’;
-return;
-}
-let grandTotal=0;
-entries.forEach(e=>{
-// Primers always 1 coat (gallon only — no pail threshold for primer)
-const galQty=calcGallonQty(e.area);
-const pailQty=calcPailQty(e.area);
-const primerKey=e.product+’||Primer’;
-const galQtyEff=qtyOverrides[primerKey]!==undefined?qtyOverrides[primerKey]:galQty;
-const lineTotalEff=e.price&&galQtyEff>0?galQtyEff*e.price:null;
-if(lineTotalEff) grandTotal+=lineTotalEff;
-tbody.innerHTML+=`<tr> <td style="font-size:12px">${stripUnit(e.product)}</td> <td style="font-size:12px;color:var(--ink3)">—</td> <td class="num">${fmtN(e.area)}</td> <td class="num" style="color:var(--ink);font-size:11px">Gallon</td> <td class="num"><input type="number" min="0" step="1" value="${galQtyEff}" oninput="setQtyOverride('${primerKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td> <td class="num">${e.price?'$'+e.price:'—'}</td> <td class="num">${lineTotalEff?fmt(lineTotalEff):'—'}</td> </tr>`;
-});
-if(grandTotal>0){
-tbody.innerHTML+=`<tr style="background:var(--cream2);font-weight:500"><td colspan="6" style="text-align:right;padding-right:12px;font-size:12px">Primer total</td><td class="num">${fmt(grandTotal)}</td></tr>`;
-}
-}
+// renderPrimerTable moved to global scope
 
 renderPaintTableCombined(‘bd-paint-tbody’);
 renderPrimerTable();
