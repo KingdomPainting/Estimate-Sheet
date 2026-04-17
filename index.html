@@ -1953,6 +1953,7 @@ const galQty=calcGallonQty(e.area);
 const c=COLOURS.find(x=>x.n===e.colour);
 const dot=c?`<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${c.h};border:1px solid rgba(0,0,0,.15);margin-right:5px;vertical-align:middle"></span>`:’’;
 if(pailQty>0){
+const pailKey=e.product+’||Pail’;
 const pailName=e.product.replace(/\bGallon\b/gi,‘Pail’);
 const pailObj=[…PAINTS,…PRIMERS,…CEILING_PAINTS].find(p=>p.n===pailName);
 const pailLabel=pailObj?pailObj.n:pailName;
@@ -2295,7 +2296,7 @@ const labourAmt=totHours*globalRate*_awInv*(+v(‘lr-buffer’)||1.25);
 const _flatInv=rooms.reduce((s,r)=>s+calcStairsCost(r)+calcDoorsCost(r),0);
 const labourTotalInv=labourAmt+_flatInv;
 const discAmt=discOn?labourTotalInv*discPct:0;
-const subtotal=labourTotal-discAmt;
+const subtotal=labourTotalInv-discAmt;
 const tax=subtotal*0.13;
 const quoteTotal=subtotal+tax;
 const coSub=changeItems.reduce((s,i)=>s+(+i.amount||0),0);
