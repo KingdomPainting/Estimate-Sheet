@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -195,7 +194,6 @@ async function saveToDrive(){
 
 
 </script>
-
 <script>
 
 // ── PDF → DRIVE ──
@@ -316,7 +314,6 @@ async function gdSavePDFsToDrive(){
 
 
 </script>
-
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -603,7 +600,6 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
   @page{margin:12mm 14mm;size:A4}
 }
 </style>
-
 </head>
 <body>
 <div class="shell">
@@ -626,7 +622,6 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
 </div>
 
 <!-- Google Drive Settings Panel -->
-
 <div class="gd-panel" id="gd-panel">
   <!-- Step 1: Choose method -->
   <div id="gd-method-view">
@@ -708,7 +703,6 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
 <div class="main">
 
 <!-- ════════════════ COVER ════════════════ -->
-
 <div class="page active" id="page-cover">
   <button class="export-btn" onclick="exportPDF(['page-cover','page-quote','page-contract'])"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12v2h12v-2M8 2v8m0 0l-3-3m3 3l3-3"/></svg> Export Package PDF</button>
   <div class="card print-card cover-print-card" style="text-align:center;padding:48px 32px;">
@@ -733,7 +727,6 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
 </div>
 
 <!-- ════════════════ ROOMS ════════════════ -->
-
 <div class="page" id="page-rooms">
   <div class="card" style="padding:14px 18px;margin-bottom:12px">
     <div style="display:flex;align-items:center;justify-content:space-between">
@@ -749,7 +742,6 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
 </div>
 
 <!-- ════════════════ BREAKDOWN ════════════════ -->
-
 <div class="page" id="page-breakdown">
   <div class="stats" id="breakdown-stats">
     <div class="stat"><div class="lbl">Total walls sqft</div><div class="val" id="bd-walls">0</div></div>
@@ -817,7 +809,6 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
 </div>
 
 <!-- ════════════════ QUOTE ════════════════ -->
-
 <div class="page" id="page-quote">
   <button class="export-btn" onclick="exportPDF('page-quote')"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12v2h12v-2M8 2v8m0 0l-3-3m3 3l3-3"/></svg> Export PDF</button>
   <div class="card print-card">
@@ -837,41 +828,37 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
       </div>
     </div>
 
-```
-<!-- Quote summary at top -->
-<table class="doc-table" style="margin-bottom:16px">
-  <thead><tr><th>ITEM</th><th>Description</th><th class="right">Qty</th><th class="right">Amount</th></tr></thead>
-  <tbody id="q-line-tbody"></tbody>
-  <tfoot>
-    <tr id="q-disc-row" style="display:none"><td colspan="3" style="text-align:right"><span id="q-disc-label">Discount</span></td><td class="right"><span id="q-disc-val">−$0.00</span></td></tr>
-    <tr><td colspan="3" style="text-align:right;font-size:12px;color:var(--ink3)">Subtotal</td><td class="right" id="q-subtotal">$0.00</td></tr>
-    <tr><td colspan="3" style="text-align:right;font-size:12px;color:var(--ink3)">HST (13%)</td><td class="right" id="q-tax">$0.00</td></tr>
-    <tr><td colspan="3" style="text-align:right;font-size:13px;font-weight:500;color:var(--ink)">TOTAL</td><td class="right" id="q-total" style="font-size:15px;font-weight:600;color:var(--ink)">$0.00</td></tr>
-  </tfoot>
-</table>
+    <!-- Quote summary at top -->
+    <table class="doc-table" style="margin-bottom:16px">
+      <thead><tr><th>ITEM</th><th>Description</th><th class="right">Amount</th></tr></thead>
+      <tbody id="q-line-tbody"></tbody>
+      <tfoot>
+        <tr id="q-disc-row" style="display:none"><td colspan="2" style="text-align:right"><span id="q-disc-label">Discount</span></td><td class="right"><span id="q-disc-val">−$0.00</span></td></tr>
+        <tr><td colspan="2" style="text-align:right;font-size:12px;color:var(--ink3)">Subtotal</td><td class="right" id="q-subtotal">$0.00</td></tr>
+        <tr><td colspan="2" style="text-align:right;font-size:12px;color:var(--ink3)">HST (13%)</td><td class="right" id="q-tax">$0.00</td></tr>
+        <tr><td colspan="2" style="text-align:right;font-size:13px;font-weight:500;color:var(--ink)">TOTAL</td><td class="right" id="q-total" style="font-size:15px;font-weight:600;color:var(--ink)">$0.00</td></tr>
+      </tfoot>
+    </table>
 
 
 
-<div class="doc-section">
-  <div class="doc-section-title">Payment terms</div>
-  <div style="font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:12px">An initial deposit of 10% will be required on the first day of the scheduled appointment, followed by a payment of 45% of the total midway through the project and the final balance paid upon completion.</div>
-  <div class="pay-grid">
-    <div class="pay-card"><div class="pay-step">Step 1 · Deposit</div><div class="pay-amount" id="q-pay1">$0.00</div><div class="pay-desc">10% due on first day</div></div>
-    <div class="pay-card"><div class="pay-step">Step 2 · Midway</div><div class="pay-amount" id="q-pay2">$0.00</div><div class="pay-desc">45% due midway</div></div>
-    <div class="pay-card"><div class="pay-step">Step 3 · Completion</div><div class="pay-amount" id="q-pay3">$0.00</div><div class="pay-desc">Balance on completion</div></div>
-  </div>
-</div>
+    <div class="doc-section">
+      <div class="doc-section-title">Payment terms</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:12px">An initial deposit of 10% will be required on the first day of the scheduled appointment, followed by a payment of 45% of the total midway through the project and the final balance paid upon completion.</div>
+      <div class="pay-grid">
+        <div class="pay-card"><div class="pay-step">Step 1 · Deposit</div><div class="pay-amount" id="q-pay1">$0.00</div><div class="pay-desc">10% due on first day</div></div>
+        <div class="pay-card"><div class="pay-step">Step 2 · Midway</div><div class="pay-amount" id="q-pay2">$0.00</div><div class="pay-desc">45% due midway</div></div>
+        <div class="pay-card"><div class="pay-step">Step 3 · Completion</div><div class="pay-amount" id="q-pay3">$0.00</div><div class="pay-desc">Balance on completion</div></div>
+      </div>
+    </div>
 
-<div style="margin-top:16px;padding:12px;background:var(--cream2);border-radius:var(--r);font-size:12px;color:var(--ink2);line-height:1.7">
-  Thank you for your business! E-transfer payments can be sent to <strong>info@kingdompainting.ca</strong>
-</div>
-```
-
+    <div style="margin-top:16px;padding:12px;background:var(--cream2);border-radius:var(--r);font-size:12px;color:var(--ink2);line-height:1.7">
+      Thank you for your business! E-transfer payments can be sent to <strong>info@kingdompainting.ca</strong>
+    </div>
   </div>
 </div>
 
 <!-- ════════════════ CONTRACT ════════════════ -->
-
 <div class="page" id="page-contract">
   <button class="export-btn" onclick="exportPDF('page-contract')"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12v2h12v-2M8 2v8m0 0l-3-3m3 3l3-3"/></svg> Export PDF</button>
   <div class="card print-card">
@@ -884,7 +871,6 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
 </div>
 
 <!-- ════════════════ CHANGE ORDER ════════════════ -->
-
 <div class="page" id="page-changeorder">
   <button class="export-btn" onclick="exportPDF('page-changeorder')"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12v2h12v-2M8 2v8m0 0l-3-3m3 3l3-3"/></svg> Export PDF</button>
   <div class="card print-card">
@@ -906,7 +892,6 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
 </div>
 
 <!-- ════════════════ INVOICE ════════════════ -->
-
 <div class="page" id="page-invoice">
   <button class="export-btn" onclick="exportPDF('page-invoice')"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12v2h12v-2M8 2v8m0 0l-3-3m3 3l3-3"/></svg> Export PDF</button>
   <div class="card print-card">
@@ -952,7 +937,6 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
 </div>
 
 <!-- ════════════════ LABOUR RATES ════════════════ -->
-
 <div class="page" id="page-labourrates">
   <div class="grid2">
     <div class="card">
@@ -1003,7 +987,6 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
 </div>
 
 <!-- ════════════════ PAINT INPUTS ════════════════ -->
-
 <div class="page" id="page-paintinputs">
   <div class="grid2">
     <div class="card" id="pi-paints-card">
@@ -1026,7 +1009,6 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
 </div>
 
 <!-- ════════════════ STANDARDS ════════════════ -->
-
 <div class="page" id="page-standards">
   <div style="font-size:12px;color:var(--ink3);margin-bottom:14px;padding:10px 14px;background:var(--cream2);border-radius:var(--r);border-left:3px solid var(--gold)">
     All values are editable and update labour calculations across the entire app in real time.
@@ -1085,7 +1067,6 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
 </div>
 
 <!-- ════════════════ POST PROJECT ════════════════ -->
-
 <div class="page" id="page-postproject">
   <div class="card">
     <div class="card-title">Post-project financials</div>
@@ -1514,65 +1495,62 @@ function renderRooms(){
         </div>
         ${colourChips(r)}
         <div class="field" style="margin-top:10px"><label>Notes</label><textarea oninput="upd(${r.id},'notes',this.value)">${r.notes||''}</textarea></div>
-
-```
-    <div class="room-stat-bar" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--cream2)">
-      <div class="stat" style="margin:0"><div class="lbl">Walls sqft</div><div class="val" id="rws_${r.id}">${fmtN(wsqft)}</div></div>
-      <div class="stat" style="margin:0"><div class="lbl">Ceiling sqft</div><div class="val" id="rcs_${r.id}">${fmtN(csqft)}</div></div>
-      <div class="stat" style="margin:0"><div class="lbl">Trims lin ft</div><div class="val" id="rtrim_${r.id}">${fmtN(calcTrims(r))}</div></div>
-      <div class="stat" style="margin:0"><div class="lbl"># of doors</div><div class="val" id="rdoors_${r.id}">${calcTotalDoorCount(r)||0}</div></div>
-      <div class="stat" style="margin:0"><div class="lbl">Labour cost</div><div class="val gold" id="rlc_${r.id}">${fmt(calcRoomCost(r))}</div></div>
-    </div>
-  </div>
-</div>`;
-c.appendChild(div);
-```
-
-});
-sel(‘rooms-count-badge’).textContent=rooms.length+’ room’+(rooms.length!==1?‘s’:’’);
-sel(‘addRoomBtn’).style.display=rooms.length>=10?‘none’:‘block’;
+        <div class="room-stat-bar" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--cream2)">
+          <div class="stat" style="margin:0"><div class="lbl">Walls sqft</div><div class="val" id="rws_${r.id}">${fmtN(wsqft)}</div></div>
+          <div class="stat" style="margin:0"><div class="lbl">Ceiling sqft</div><div class="val" id="rcs_${r.id}">${fmtN(csqft)}</div></div>
+          <div class="stat" style="margin:0"><div class="lbl">Trims lin ft</div><div class="val" id="rtrim_${r.id}">${fmtN(calcTrims(r))}</div></div>
+          <div class="stat" style="margin:0"><div class="lbl"># of doors</div><div class="val" id="rdoors_${r.id}">${calcTotalDoorCount(r)||0}</div></div>
+          <div class="stat" style="margin:0"><div class="lbl">Labour cost</div><div class="val gold" id="rlc_${r.id}">${fmt(calcRoomCost(r))}</div></div>
+        </div>
+      </div>
+    </div>`;
+    c.appendChild(div);
+  });
+  sel('rooms-count-badge').textContent=rooms.length+' room'+(rooms.length!==1?'s':'');
+  sel('addRoomBtn').style.display=rooms.length>=10?'none':'block';
 }
 
 function colourChips(r){
-const chips=[];
-if(r.wallColour){const c=COLOURS.find(x=>x.n===r.wallColour);chips.push(`<span class="colour-chip"><span class="chip-dot" style="background:${c?c.h:'#ccc'}"></span>Wall: ${r.wallColour}${r.wallSheen?' · '+r.wallSheen:''}</span>`);}
-if(r.ceilColour){const c=COLOURS.find(x=>x.n===r.ceilColour);chips.push(`<span class="colour-chip"><span class="chip-dot" style="background:${c?c.h:'#ccc'}"></span>Ceil: ${r.ceilColour}${r.ceilSheen?' · '+r.ceilSheen:''}</span>`);}
-if(r.trimColour){const c=COLOURS.find(x=>x.n===r.trimColour);chips.push(`<span class="colour-chip"><span class="chip-dot" style="background:${c?c.h:'#ccc'}"></span>Trim: ${r.trimColour}${r.trimSheen?' · '+r.trimSheen:''}</span>`);}
-if(r.stairColour){const c=COLOURS.find(x=>x.n===r.stairColour);chips.push(`<span class="colour-chip"><span class="chip-dot" style="background:${c?c.h:'#ccc'}"></span>Stairs: ${r.stairColour}${r.stairSheen?' · '+r.stairSheen:''}</span>`);}
-return chips.length?`<div class="paint-chips">${chips.join('')}</div>`:’’;
+  const chips=[];
+  if(r.wallColour){const c=COLOURS.find(x=>x.n===r.wallColour);chips.push(`<span class="colour-chip"><span class="chip-dot" style="background:${c?c.h:'#ccc'}"></span>Wall: ${r.wallColour}${r.wallSheen?' · '+r.wallSheen:''}</span>`);}
+  if(r.ceilColour){const c=COLOURS.find(x=>x.n===r.ceilColour);chips.push(`<span class="colour-chip"><span class="chip-dot" style="background:${c?c.h:'#ccc'}"></span>Ceil: ${r.ceilColour}${r.ceilSheen?' · '+r.ceilSheen:''}</span>`);}
+  if(r.trimColour){const c=COLOURS.find(x=>x.n===r.trimColour);chips.push(`<span class="colour-chip"><span class="chip-dot" style="background:${c?c.h:'#ccc'}"></span>Trim: ${r.trimColour}${r.trimSheen?' · '+r.trimSheen:''}</span>`);}
+  if(r.stairColour){const c=COLOURS.find(x=>x.n===r.stairColour);chips.push(`<span class="colour-chip"><span class="chip-dot" style="background:${c?c.h:'#ccc'}"></span>Stairs: ${r.stairColour}${r.stairSheen?' · '+r.stairSheen:''}</span>`);}
+  return chips.length?`<div class="paint-chips">${chips.join('')}</div>`:'';
 }
 
 function surfRow(rid,key,en,coats,label,coatsKey,lfKey,lfVal,autoVal){
-// autoVal: if provided, the LF is auto-computed (read-only when checked, empty when unchecked)
-let lf=’<span></span>’;
-if(lfKey){
-if(autoVal!==undefined){
-// Auto-computed: show calculated value read-only when enabled, empty when disabled
-const displayVal = en ? autoVal : ‘’;
-const hint = en ? autoVal+’ lin ft (auto)’ : ‘enable to auto-fill’;
-lf = `<span class="lf-auto" style="font-size:12px;padding:5px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream2);color:${en?'var(--ink2)':'var(--ink4)'};min-width:80px;display:inline-flex;align-items:center;font-style:${en?'normal':'italic'}">${hint}</span>`;
-} else {
-lf = `<input class="lf-input" type="number" min="0" step="1" value="${lfVal||''}" placeholder="lin ft" oninput="upd(${rid},'${lfKey}',+this.value)">`;
-}
-}
-return `<div class="surf-grid">
-<label class="surf-label"><input type=“checkbox” ${en?‘checked’:’’} onchange=“upd(${rid},’${key}’,this.checked)”> ${label}</label>
-<select class="coats-sel" onchange="upd(${rid},'${coatsKey}',+this.value)">
-<option value=“1” ${coats==1?‘selected’:’’}>1 coat</option>
-<option value=“2” ${coats==2?‘selected’:’’}>2 coats</option>
-<option value=“3” ${coats==3?‘selected’:’’}>3 coats</option>
-</select>
-${lf}<span></span>
-
+  // autoVal: if provided, the LF is auto-computed (read-only when checked, empty when unchecked)
+  let lf='<span></span>';
+  if(lfKey){
+    if(autoVal!==undefined){
+      // Auto-computed: show calculated value read-only when enabled, empty when disabled
+      const displayVal = en ? autoVal : '';
+      const hint = en ? autoVal+' lin ft (auto)' : 'enable to auto-fill';
+      lf = `<span class="lf-auto" style="font-size:12px;padding:5px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream2);color:${en?'var(--ink2)':'var(--ink4)'};min-width:80px;display:inline-flex;align-items:center;font-style:${en?'normal':'italic'}">${hint}</span>`;
+    } else {
+      lf = `<input class="lf-input" type="number" min="0" step="1" value="${lfVal||''}" placeholder="lin ft" oninput="upd(${rid},'${lfKey}',+this.value)">`;
+    }
+  }
+  return `<div class="surf-grid">
+    <label class="surf-label"><input type="checkbox" ${en?'checked':''} onchange="upd(${rid},'${key}',this.checked)"> ${label}</label>
+    <select class="coats-sel" onchange="upd(${rid},'${coatsKey}',+this.value)">
+      <option value="1" ${coats==1?'selected':''}>1 coat</option>
+      <option value="2" ${coats==2?'selected':''}>2 coats</option>
+      <option value="3" ${coats==3?'selected':''}>3 coats</option>
+    </select>
+    ${lf}<span></span>
   </div>`;
 }
 
 function doorRow(rid,en,coats,count){
-const r=rooms.find(x=>x.id===rid);
-const dt=r&&r.doorTypes?r.doorTypes:{flat:0,panel6:0,glass:0,custom:0};
-const panelHtml=en?`<div style="margin:0 0 10px 18px;padding:10px;background:var(--cream2);border-radius:var(--r)"> <div style="font-size:10px;color:var(--ink4);margin-bottom:8px">Flat $50 &nbsp;&middot;&nbsp; 6 Panel $75 &nbsp;&middot;&nbsp; Glass Panel $100 &nbsp;&middot;&nbsp; Custom $100</div> <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px" class="stairs-grid"> ${DOOR_TYPES.map(t=>`<div class="field"><label>${t.label}</label><input type="number" min="0" step="1" value="${dt[t.key]||''}" placeholder="0" oninput="updDoorType(${rid},'${t.key}',+this.value)" style="font-size:12px;padding:5px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);width:100%"></div>`).join(’’)}
-</div>
-
+  const r=rooms.find(x=>x.id===rid);
+  const dt=r&&r.doorTypes?r.doorTypes:{flat:0,panel6:0,glass:0,custom:0};
+  const panelHtml=en?`<div style="margin:0 0 10px 18px;padding:10px;background:var(--cream2);border-radius:var(--r)">
+    <div style="font-size:10px;color:var(--ink4);margin-bottom:8px">Flat $50 &nbsp;&middot;&nbsp; 6 Panel $75 &nbsp;&middot;&nbsp; Glass Panel $100 &nbsp;&middot;&nbsp; Custom $100</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px" class="stairs-grid">
+      ${DOOR_TYPES.map(t=>`<div class="field"><label>${t.label}</label><input type="number" min="0" step="1" value="${dt[t.key]||''}" placeholder="0" oninput="updDoorType(${rid},'${t.key}',+this.value)" style="font-size:12px;padding:5px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);width:100%"></div>`).join('')}
+    </div>
   </div>`:'';
   return `<div class="surf-grid" style="margin-bottom:${en?'4px':'6px'}">
     <label class="surf-label"><input type="checkbox" ${en?'checked':''} onchange="upd(${rid},'doors',this.checked)"> Doors</label>
@@ -1587,752 +1565,780 @@ const panelHtml=en?`<div style="margin:0 0 10px 18px;padding:10px;background:var
 }
 
 function toggleRoom(id){
-const body=document.querySelector(`.room-body[data-id="${id}"]`);
-const arr=sel(‘arr_’+id);
-if(!body)return;
-const open=body.classList.toggle(‘open’);
-if(arr)arr.classList.toggle(‘open’,open);
-if(open){
-const nameEl=sel(‘room-name-’+id);
-if(nameEl){setTimeout(()=>{nameEl.focus();nameEl.select();},50);}
-}
+  const body=document.querySelector(`.room-body[data-id="${id}"]`);
+  const arr=sel('arr_'+id);
+  if(!body)return;
+  const open=body.classList.toggle('open');
+  if(arr)arr.classList.toggle('open',open);
+  if(open){
+    const nameEl=sel('room-name-'+id);
+    if(nameEl){setTimeout(()=>{nameEl.focus();nameEl.select();},50);}
+  }
 }
 
 function upd(id,key,val){
-const r=rooms.find(x=>x.id===id);
-if(!r)return;
-r[key]=val;
-autoFillTrimLF(r);
-// Keys that change the room template structure need a full re-render
-const rerenderKeys=[‘windows’,‘irregular’,‘wallCoats’,‘ceilCoats’,‘doorCoats’,‘doors’,‘stairs’];
-if(rerenderKeys.includes(key)){renderRooms();recalcAll();return;}
-const ws=calcWalls(r),cs=calcCeil(r),lc=calcRoomCost(r);
-const rws=sel(‘rws_’+id),rcs=sel(‘rcs_’+id),rlc=sel(‘rlc_’+id),rtrim=sel(‘rtrim_’+id),rdoors=sel(‘rdoors_’+id);
-if(rws)rws.textContent=fmtN(ws);
-if(rcs)rcs.textContent=fmtN(cs);
-if(rtrim)rtrim.textContent=fmtN(calcTrims(r));
-if(rdoors)rdoors.textContent=calcTotalDoorCount(r)||0;
-if(rlc)rlc.textContent=fmt(lc);
-const badge=sel(‘badge_’+id);
-if(badge)badge.textContent=ws>0?fmtN(ws)+’ sqft walls’:’—’;
-recalcAll();
+  const r=rooms.find(x=>x.id===id);
+  if(!r)return;
+  r[key]=val;
+  autoFillTrimLF(r);
+  // Keys that change the room template structure need a full re-render
+  const rerenderKeys=['windows','irregular','wallCoats','ceilCoats','doorCoats','doors','stairs'];
+  if(rerenderKeys.includes(key)){renderRooms();recalcAll();return;}
+  const ws=calcWalls(r),cs=calcCeil(r),lc=calcRoomCost(r);
+  const rws=sel('rws_'+id),rcs=sel('rcs_'+id),rlc=sel('rlc_'+id),rtrim=sel('rtrim_'+id),rdoors=sel('rdoors_'+id);
+  if(rws)rws.textContent=fmtN(ws);
+  if(rcs)rcs.textContent=fmtN(cs);
+  if(rtrim)rtrim.textContent=fmtN(calcTrims(r));
+  if(rdoors)rdoors.textContent=calcTotalDoorCount(r)||0;
+  if(rlc)rlc.textContent=fmt(lc);
+  const badge=sel('badge_'+id);
+  if(badge)badge.textContent=ws>0?fmtN(ws)+' sqft walls':'—';
+  recalcAll();
 }
 
 function calcPerimeter(r){
-return Math.round(2*(r.length+r.width));
+  return Math.round(2*(r.length+r.width));
 }
 
 function calcDoorFramesLF(r){
-return (r.doorCount||0)*17;
+  return (r.doorCount||0)*17;
 }
 
 function autoFillTrimLF(r){
-if(r.winList) r.winLF=calcWinLF(r);
-const perim=calcPerimeter(r);
-const dfLF=calcDoorFramesLF(r);
-if(r.baseboards) r.baseLF=perim;
-else r.baseLF=0;
-if(r.crown) r.crownLF=perim;
-else r.crownLF=0;
-if(r.doorFrames) r.dfLF=dfLF;
-else r.dfLF=0;
+  if(r.winList) r.winLF=calcWinLF(r);
+  const perim=calcPerimeter(r);
+  const dfLF=calcDoorFramesLF(r);
+  if(r.baseboards) r.baseLF=perim;
+  else r.baseLF=0;
+  if(r.crown) r.crownLF=perim;
+  else r.crownLF=0;
+  if(r.doorFrames) r.dfLF=dfLF;
+  else r.dfLF=0;
 }
 
 // ════════════════════════════════════════════════
 // CALCULATIONS
 // ════════════════════════════════════════════════
 function calcWalls(r){
-if(!r.walls)return 0;
-const h=r.height||0;
-let sqft;
-if(r.irregular){
-sqft = r.irreg ? r.irreg.reduce((s,v)=>s+(+v||0)*h,0) : 0;
-} else {
-sqft = 2*(r.length+r.width)*h;
-}
-// Deduct door openings: each door = 21 sqft from walls
-if(r.doors){const dc=calcTotalDoorCount(r);if(dc>0)sqft-=dc*21;}
-// Subtract window openings (L×W per window)
-if(r.windows&&r.winList){
-r.winList.forEach(w=>{ sqft-=(+w.l||0)*(+w.w||0); });
-}
-return Math.max(0,sqft);
+  if(!r.walls)return 0;
+  const h=r.height||0;
+  let sqft;
+  if(r.irregular){
+    sqft = r.irreg ? r.irreg.reduce((s,v)=>s+(+v||0)*h,0) : 0;
+  } else {
+    sqft = 2*(r.length+r.width)*h;
+  }
+  // Deduct door openings: each door = 21 sqft from walls
+  if(r.doors){const dc=calcTotalDoorCount(r);if(dc>0)sqft-=dc*21;}
+  // Subtract window openings (L×W per window)
+  if(r.windows&&r.winList){
+    r.winList.forEach(w=>{ sqft-=(+w.l||0)*(+w.w||0); });
+  }
+  return Math.max(0,sqft);
 }
 function calcWinLF(r){
-if(!r.winList) return r.winLF||0;
-return r.winList.reduce((s,w)=>s+((+w.l||0)*2+(+w.w||0)*2),0);
+  if(!r.winList) return r.winLF||0;
+  return r.winList.reduce((s,w)=>s+((+w.l||0)*2+(+w.w||0)*2),0);
 }
 
 function calcCeil(r){
-if(!r.ceiling) return 0;
-if(r.irregular){
-const row1=(+r.length||0)*(+r.width||0);
-const row2=(+r.ceilLength||0)*(+r.ceilWidth||0);
-return row1+row2;
-}
-return r.length*r.width;
+  if(!r.ceiling) return 0;
+  if(r.irregular){
+    const row1=(+r.length||0)*(+r.width||0);
+    const row2=(+r.ceilLength||0)*(+r.ceilWidth||0);
+    return row1+row2;
+  }
+  return r.length*r.width;
 }
 function calcTrims(r){return(r.baseboards?r.baseLF:0)+(r.crown?r.crownLF:0)+(r.doorFrames?r.dfLF:0)+(r.windows?r.winLF:0);}
 
 function calcDoorsCost(r){
-if(!r.doors) return 0;
-if(!r.doorTypes) return (r.doorCount||0)*50; // fallback
-return DOOR_TYPES.reduce((s,t)=>s+((r.doorTypes[t.key]||0)*t.price),0);
+  if(!r.doors) return 0;
+  if(!r.doorTypes) return (r.doorCount||0)*50; // fallback
+  return DOOR_TYPES.reduce((s,t)=>s+((r.doorTypes[t.key]||0)*t.price),0);
 }
 
 function calcTotalDoorCount(r){
-if(!r.doorTypes) return r.doorCount||0;
-return DOOR_TYPES.reduce((s,t)=>s+(+r.doorTypes[t.key]||0),0);
+  if(!r.doorTypes) return r.doorCount||0;
+  return DOOR_TYPES.reduce((s,t)=>s+(+r.doorTypes[t.key]||0),0);
 }
 
 function calcStairsSqft(r){
-if(!r.stairs) return 0;
-return (r.stairTreads||0)*(3*1.15) + (r.stairRisers||0)*(3*0.65) + (r.stairLanding||0)*(6*3.5);
+  if(!r.stairs) return 0;
+  return (r.stairTreads||0)*(3*1.15) + (r.stairRisers||0)*(3*0.65) + (r.stairLanding||0)*(6*3.5);
 }
 function calcStairsCost(r){
-if(!r.stairs) return 0;
-return (r.stairTreads||0)*25 + (r.stairRisers||0)*25 + (r.stairLanding||0)*50 + (r.stairStringer||0)*100;
+  if(!r.stairs) return 0;
+  return (r.stairTreads||0)*25 + (r.stairRisers||0)*25 + (r.stairLanding||0)*50 + (r.stairStringer||0)*100;
 }
 function calcRoomHours(r){
-let h=0;
-const ws=calcWalls(r),cs=calcCeil(r);
-if(r.walls&&ws>0)h+=ws/STANDARDS.walls[r.wallCoats];
-if(r.ceiling&&cs>0)h+=cs/STANDARDS.ceiling[r.ceilCoats];
-if(r.baseboards&&r.baseLF>0)h+=r.baseLF/STANDARDS.baseboards[r.baseCoats];
-if(r.crown&&r.crownLF>0)h+=r.crownLF/STANDARDS.crown[r.crownCoats];
-if(r.doorFrames&&r.dfLF>0)h+=r.dfLF/STANDARDS.doorFrames[r.dfCoats];
-if(r.windows&&r.winLF>0)h+=r.winLF/STANDARDS.windows[r.winCoats];
-// Doors: hours based on sqft (# doors × 21) / STANDARDS.doors[coats]
-if(r.doors){const dc=calcTotalDoorCount(r);if(dc>0)h+=(dc*21)/STANDARDS.doors[r.doorCoats];}
-h+=r.prepHrs||0;
-return h;
+  let h=0;
+  const ws=calcWalls(r),cs=calcCeil(r);
+  if(r.walls&&ws>0)h+=ws/STANDARDS.walls[r.wallCoats];
+  if(r.ceiling&&cs>0)h+=cs/STANDARDS.ceiling[r.ceilCoats];
+  if(r.baseboards&&r.baseLF>0)h+=r.baseLF/STANDARDS.baseboards[r.baseCoats];
+  if(r.crown&&r.crownLF>0)h+=r.crownLF/STANDARDS.crown[r.crownCoats];
+  if(r.doorFrames&&r.dfLF>0)h+=r.dfLF/STANDARDS.doorFrames[r.dfCoats];
+  if(r.windows&&r.winLF>0)h+=r.winLF/STANDARDS.windows[r.winCoats];
+  // Doors: hours based on sqft (# doors × 21) / STANDARDS.doors[coats]
+  if(r.doors){const dc=calcTotalDoorCount(r);if(dc>0)h+=(dc*21)/STANDARDS.doors[r.doorCoats];}
+  h+=r.prepHrs||0;
+  return h;
 }
-function calcRoomCost(r){const buf=+v(‘lr-buffer’)||1.25;const aw=workers.filter(w=>w.active).length||1;return calcRoomHours(r)*globalRate*aw*buf+calcStairsCost(r)+calcDoorsCost(r);}
+function calcRoomCost(r){const buf=+v('lr-buffer')||1.25;const aw=workers.filter(w=>w.active).length||1;return calcRoomHours(r)*globalRate*aw*buf+calcStairsCost(r)+calcDoorsCost(r);}
 
 // Persistent qty overrides for paint table — survives recalcAll() calls
 const qtyOverrides={};
 function renderPaintTableCombined(tbodyId){
-const tbody=sel(tbodyId);
-if(!tbody) return;
-tbody.innerHTML=’’;
-const entries=Object.values(paintMap).filter(e=>e.type!==‘primer’);
-if(entries.length===0){
-tbody.innerHTML=`<tr><td colspan="7" style="color:var(--ink3);text-align:center;padding:16px">No paints selected in rooms yet</td></tr>`;
-return;
-}
-let grandTotal=0;
-let hasRows=false;
-entries.forEach(e=>{
-const pailQty=calcPailQty(e.area);
-const galQty=calcGallonQty(e.area);
-const c=COLOURS.find(x=>x.n===e.colour);
-const dot=c?`<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${c.h};border:1px solid rgba(0,0,0,.15);margin-right:5px;vertical-align:middle"></span>`:’’;
-if(pailQty>0){
-const pailKey=e.product+’||Pail’;
-const pailName=e.product.replace(/\bGallon\b/gi,‘Pail’);
-const pailObj=[…PAINTS,…PRIMERS,…CEILING_PAINTS].find(p=>p.n===pailName);
-const pailLabel=pailObj?pailObj.n:pailName;
-const pailPrice=pailObj?pailObj.p:null;
-const pailQtyEff=qtyOverrides[pailKey]!==undefined?qtyOverrides[pailKey]:pailQty;
-const pailTotal=pailPrice?pailQtyEff*pailPrice:null;
-if(pailTotal) grandTotal+=pailTotal;
-hasRows=true;
-tbody.innerHTML+=`<tr> <td style="font-size:12px">${stripUnit(pailLabel)}</td> <td>${dot}${e.colour||'<span style="color:var(--ink4)">—</span>'}</td> <td class="num">${fmtN(e.area)}</td> <td class="num" style="color:var(--ink);font-size:11px">Pail</td> <td class="num"><input type="number" min="0" step="1" value="${qtyOverrides[pailKey]!==undefined?qtyOverrides[pailKey]:pailQty}" oninput="setQtyOverride('${pailKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td> <td class="num">${pailPrice?'$'+pailPrice:'—'}</td> <td class="num">${pailTotal?fmt(pailTotal):'—'}</td> </tr>`;
-}
-if(galQty>0){
-const galKey=e.product+’||Gallon’;
-const galQtyEff=qtyOverrides[galKey]!==undefined?qtyOverrides[galKey]:galQty;
-const galTotal=e.price?galQtyEff*e.price:null;
-if(galTotal) grandTotal+=galTotal;
-hasRows=true;
-tbody.innerHTML+=`<tr> <td style="font-size:12px">${stripUnit(e.product)}</td> <td>${dot}${e.colour||'<span style="color:var(--ink4)">—</span>'}</td> <td class="num">${fmtN(e.area)}</td> <td class="num" style="color:var(--ink);font-size:11px">Gallon</td> <td class="num"><input type="number" min="0" step="1" value="${galQtyEff}" oninput="setQtyOverride('${galKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td> <td class="num">${e.price?'$'+e.price:'—'}</td> <td class="num">${galTotal?fmt(galTotal):'—'}</td> </tr>`;
-}
-});
-if(!hasRows){
-tbody.innerHTML=`<tr><td colspan="7" style="color:var(--ink3);text-align:center;padding:16px">No paints needed at current quantities</td></tr>`;
-return;
-}
-if(grandTotal>0){
-tbody.innerHTML+=`<tr style="background:var(--cream2);font-weight:500"><td colspan="6" style="text-align:right;padding-right:12px;font-size:12px">Paint total</td><td class="num">${fmt(grandTotal)}</td></tr>`;
-}
+  const tbody=sel(tbodyId);
+  if(!tbody) return;
+  tbody.innerHTML='';
+  const entries=Object.values(paintMap).filter(e=>e.type!=='primer');
+  if(entries.length===0){
+    tbody.innerHTML=`<tr><td colspan="7" style="color:var(--ink3);text-align:center;padding:16px">No paints selected in rooms yet</td></tr>`;
+    return;
+  }
+  let grandTotal=0;
+  let hasRows=false;
+  entries.forEach(e=>{
+    const pailQty=calcPailQty(e.area);
+    const galQty=calcGallonQty(e.area);
+    const c=COLOURS.find(x=>x.n===e.colour);
+    const dot=c?`<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${c.h};border:1px solid rgba(0,0,0,.15);margin-right:5px;vertical-align:middle"></span>`:'';
+    if(pailQty>0){
+      const pailKey=e.product+'||Pail';
+      const pailName=e.product.replace(/\bGallon\b/gi,'Pail');
+      const pailObj=[...PAINTS,...PRIMERS,...CEILING_PAINTS].find(p=>p.n===pailName);
+      const pailLabel=pailObj?pailObj.n:pailName;
+      const pailPrice=pailObj?pailObj.p:null;
+      const pailQtyEff=qtyOverrides[pailKey]!==undefined?qtyOverrides[pailKey]:pailQty;
+      const pailTotal=pailPrice?pailQtyEff*pailPrice:null;
+      if(pailTotal) grandTotal+=pailTotal;
+      hasRows=true;
+      tbody.innerHTML+=`<tr>
+        <td style="font-size:12px">${stripUnit(pailLabel)}</td>
+        <td>${dot}${e.colour||'<span style="color:var(--ink4)">—</span>'}</td>
+        <td class="num">${fmtN(e.area)}</td>
+        <td class="num" style="color:var(--ink);font-size:11px">Pail</td>
+        <td class="num"><input type="number" min="0" step="1" value="${qtyOverrides[pailKey]!==undefined?qtyOverrides[pailKey]:pailQty}" oninput="setQtyOverride('${pailKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td>
+        <td class="num">${pailPrice?'$'+pailPrice:'—'}</td>
+        <td class="num">${pailTotal?fmt(pailTotal):'—'}</td>
+      </tr>`;
+    }
+    if(galQty>0){
+      const galKey=e.product+'||Gallon';
+      const galQtyEff=qtyOverrides[galKey]!==undefined?qtyOverrides[galKey]:galQty;
+      const galTotal=e.price?galQtyEff*e.price:null;
+      if(galTotal) grandTotal+=galTotal;
+      hasRows=true;
+      tbody.innerHTML+=`<tr>
+        <td style="font-size:12px">${stripUnit(e.product)}</td>
+        <td>${dot}${e.colour||'<span style="color:var(--ink4)">—</span>'}</td>
+        <td class="num">${fmtN(e.area)}</td>
+        <td class="num" style="color:var(--ink);font-size:11px">Gallon</td>
+        <td class="num"><input type="number" min="0" step="1" value="${galQtyEff}" oninput="setQtyOverride('${galKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td>
+        <td class="num">${e.price?'$'+e.price:'—'}</td>
+        <td class="num">${galTotal?fmt(galTotal):'—'}</td>
+      </tr>`;
+    }
+  });
+  if(!hasRows){
+    tbody.innerHTML=`<tr><td colspan="7" style="color:var(--ink3);text-align:center;padding:16px">No paints needed at current quantities</td></tr>`;
+    return;
+  }
+  if(grandTotal>0){
+    tbody.innerHTML+=`<tr style="background:var(--cream2);font-weight:500"><td colspan="6" style="text-align:right;padding-right:12px;font-size:12px">Paint total</td><td class="num">${fmt(grandTotal)}</td></tr>`;
+  }
 }
 
 function renderPrimerTable(){
-const tbody=sel(‘bd-primers-tbody’);
-if(!tbody) return;
-tbody.innerHTML=’’;
-const entries=Object.values(paintMap).filter(e=>e.type===‘primer’);
-if(entries.length===0){
-tbody.innerHTML=’<tr><td colspan="7" style="color:var(--ink3);text-align:center;padding:16px">No primers selected in rooms yet</td></tr>’;
-return;
-}
-let grandTotal=0;
-entries.forEach(e=>{
-// Primers always 1 coat (gallon only — no pail threshold for primer)
-const galQty=calcGallonQty(e.area);
-const pailQty=calcPailQty(e.area);
-const primerKey=e.product+’||Primer’;
-const galQtyEff=qtyOverrides[primerKey]!==undefined?qtyOverrides[primerKey]:galQty;
-const lineTotalEff=e.price&&galQtyEff>0?galQtyEff*e.price:null;
-if(lineTotalEff) grandTotal+=lineTotalEff;
-tbody.innerHTML+=`<tr> <td style="font-size:12px">${stripUnit(e.product)}</td> <td style="font-size:12px;color:var(--ink3)">—</td> <td class="num">${fmtN(e.area)}</td> <td class="num" style="color:var(--ink);font-size:11px">Gallon</td> <td class="num"><input type="number" min="0" step="1" value="${galQtyEff}" oninput="setQtyOverride('${primerKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td> <td class="num">${e.price?'$'+e.price:'—'}</td> <td class="num">${lineTotalEff?fmt(lineTotalEff):'—'}</td> </tr>`;
-});
-if(grandTotal>0){
-tbody.innerHTML+=`<tr style="background:var(--cream2);font-weight:500"><td colspan="6" style="text-align:right;padding-right:12px;font-size:12px">Primer total</td><td class="num">${fmt(grandTotal)}</td></tr>`;
-}
+  const tbody=sel('bd-primers-tbody');
+  if(!tbody) return;
+  tbody.innerHTML='';
+  const entries=Object.values(paintMap).filter(e=>e.type==='primer');
+  if(entries.length===0){
+    tbody.innerHTML='<tr><td colspan="7" style="color:var(--ink3);text-align:center;padding:16px">No primers selected in rooms yet</td></tr>';
+    return;
+  }
+  let grandTotal=0;
+  entries.forEach(e=>{
+    // Primers always 1 coat (gallon only — no pail threshold for primer)
+    const galQty=calcGallonQty(e.area);
+    const pailQty=calcPailQty(e.area);
+    const primerKey=e.product+'||Primer';
+    const galQtyEff=qtyOverrides[primerKey]!==undefined?qtyOverrides[primerKey]:galQty;
+    const lineTotalEff=e.price&&galQtyEff>0?galQtyEff*e.price:null;
+    if(lineTotalEff) grandTotal+=lineTotalEff;
+    tbody.innerHTML+=`<tr>
+      <td style="font-size:12px">${stripUnit(e.product)}</td>
+      <td style="font-size:12px;color:var(--ink3)">—</td>
+      <td class="num">${fmtN(e.area)}</td>
+      <td class="num" style="color:var(--ink);font-size:11px">Gallon</td>
+      <td class="num"><input type="number" min="0" step="1" value="${galQtyEff}" oninput="setQtyOverride('${primerKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td>
+      <td class="num">${e.price?'$'+e.price:'—'}</td>
+      <td class="num">${lineTotalEff?fmt(lineTotalEff):'—'}</td>
+    </tr>`;
+  });
+  if(grandTotal>0){
+    tbody.innerHTML+=`<tr style="background:var(--cream2);font-weight:500"><td colspan="6" style="text-align:right;padding-right:12px;font-size:12px">Primer total</td><td class="num">${fmt(grandTotal)}</td></tr>`;
+  }
 }
 
 function setQtyOverride(key,val){
-qtyOverrides[key]=Math.max(0,val);
-// Re-render only the paint tables without wiping overrides
-if(typeof renderPaintTableCombined===‘function’) renderPaintTableCombined(‘bd-paint-tbody’);
-if(typeof renderPrimerTable===‘function’) renderPrimerTable();
+  qtyOverrides[key]=Math.max(0,val);
+  // Re-render only the paint tables without wiping overrides
+  if(typeof renderPaintTableCombined==='function') renderPaintTableCombined('bd-paint-tbody');
+  if(typeof renderPrimerTable==='function') renderPrimerTable();
 }
 
 function recalcRates(){
-const billable=+v(‘lr-billable’)||1700;
-const buffer=+v(‘lr-buffer’)||1.25;
-const taxes=sel(‘lr-taxes’)&&sel(‘lr-taxes’).checked;
-const discOn=sel(‘lr-discount’)&&sel(‘lr-discount’).checked;
-const discPct=(+v(‘lr-disc-pct’)||10)/100;
-const numWorkers=workers.filter(w=>w.active).length||1;
-const totalOH=overheadItems.reduce((s,i)=>s+(i.v||0),0);
-const ohPerHr=totalOH/(numWorkers*billable);
-const activeWage=workers.filter(w=>w.active).reduce((s,w)=>s+w.r,0)/Math.max(1,workers.filter(w=>w.active).length);
-const fieldWage=taxes?activeWage*1.3:activeWage;
-const profit=5000/(numWorkers*billable);
-const totalHr=ohPerHr+fieldWage+profit;
-globalRate=totalHr;
-if(sel(‘lr-oh-hr’))sel(‘lr-oh-hr’).textContent=’$’+ohPerHr.toFixed(2);
-if(sel(‘lr-wage’))sel(‘lr-wage’).textContent=’$’+fieldWage.toFixed(2)+’/hr’;
-if(sel(‘lr-profit’))sel(‘lr-profit’).textContent=’$’+profit.toFixed(2)+’/hr’;
-if(sel(‘lr-total-hr’))sel(‘lr-total-hr’).textContent=’$’+totalHr.toFixed(2)+’/hr’;
-const totalAllWorkers=totalHr*numWorkers;
-if(sel(‘lr-total-all’))sel(‘lr-total-all’).textContent=’$’+totalAllWorkers.toFixed(2)+’/hr’;
-if(sel(‘lr-oh-sum’))sel(‘lr-oh-sum’).textContent=fmt(totalOH);
-if(sel(‘lr-active-count’))sel(‘lr-active-count’).textContent=numWorkers;
-if(sel(‘lr-total-all-workers’))sel(‘lr-total-all-workers’).textContent=’$’+totalAllWorkers.toFixed(2);
-recalcAll();
+  const billable=+v('lr-billable')||1700;
+  const buffer=+v('lr-buffer')||1.25;
+  const taxes=sel('lr-taxes')&&sel('lr-taxes').checked;
+  const discOn=sel('lr-discount')&&sel('lr-discount').checked;
+  const discPct=(+v('lr-disc-pct')||10)/100;
+  const numWorkers=workers.filter(w=>w.active).length||1;
+  const totalOH=overheadItems.reduce((s,i)=>s+(i.v||0),0);
+  const ohPerHr=totalOH/(numWorkers*billable);
+  const activeWage=workers.filter(w=>w.active).reduce((s,w)=>s+w.r,0)/Math.max(1,workers.filter(w=>w.active).length);
+  const fieldWage=taxes?activeWage*1.3:activeWage;
+  const profit=5000/(numWorkers*billable);
+  const totalHr=ohPerHr+fieldWage+profit;
+  globalRate=totalHr;
+  if(sel('lr-oh-hr'))sel('lr-oh-hr').textContent='$'+ohPerHr.toFixed(2);
+  if(sel('lr-wage'))sel('lr-wage').textContent='$'+fieldWage.toFixed(2)+'/hr';
+  if(sel('lr-profit'))sel('lr-profit').textContent='$'+profit.toFixed(2)+'/hr';
+  if(sel('lr-total-hr'))sel('lr-total-hr').textContent='$'+totalHr.toFixed(2)+'/hr';
+  const totalAllWorkers=totalHr*numWorkers;
+  if(sel('lr-total-all'))sel('lr-total-all').textContent='$'+totalAllWorkers.toFixed(2)+'/hr';
+  if(sel('lr-oh-sum'))sel('lr-oh-sum').textContent=fmt(totalOH);
+  if(sel('lr-active-count'))sel('lr-active-count').textContent=numWorkers;
+  if(sel('lr-total-all-workers'))sel('lr-total-all-workers').textContent='$'+totalAllWorkers.toFixed(2);
+  recalcAll();
 }
 
 let paintMap={}; // global paint map, rebuilt each recalcAll
 function recalcAll(){
-const discOn=sel(‘lr-discount’)&&sel(‘lr-discount’).checked;
-const discPct=(+(v(‘lr-disc-pct’)||10))/100;
-let totWalls=0,totCeil=0,totTrims=0,totDoors=0,totHours=0;
-rooms.forEach(r=>{
-totWalls+=calcWalls(r);
-totCeil+=calcCeil(r);
-totTrims+=calcTrims(r);
-totDoors+=r.doors?(r.doorCount||0):0;
-totHours+=calcRoomHours(r);
-});
-const activeWorkerCount=workers.filter(w=>w.active).length||1;
-const labourAmt=totHours*globalRate*activeWorkerCount*(+v(‘lr-buffer’)||1.25);
-const flatCosts=rooms.reduce((s,r)=>s+calcStairsCost(r)+calcDoorsCost(r),0);
-const labourTotal=labourAmt+flatCosts;
-const discAmt=discOn?labourTotal*discPct:0;
-const subtotal=labourTotal-discAmt;
-const tax=subtotal*0.13;
-const total=subtotal+tax;
-const dep=total*0.1,bal45=total*0.45,fin=total-dep-bal45;
-const days=Math.ceil(totHours/6);
-
-// Breakdown
-if(sel(‘bd-walls’))sel(‘bd-walls’).textContent=fmtN(totWalls);
-if(sel(‘bd-ceil’))sel(‘bd-ceil’).textContent=fmtN(totCeil);
-if(sel(‘bd-trims’))sel(‘bd-trims’).textContent=fmtN(totTrims);
-if(sel(‘bd-doors’))sel(‘bd-doors’).textContent=totDoors;
-if(sel(‘bd-hours’))sel(‘bd-hours’).textContent=(totHours/activeWorkerCount).toFixed(1);
-if(sel(‘bd-days’))sel(‘bd-days’).textContent=days;
-if(sel(‘bd-labour’))sel(‘bd-labour’).textContent=fmt(labourTotal);
-if(sel(‘bd-rooms’))sel(‘bd-rooms’).textContent=rooms.length;
-
-// Breakdown table
-const tbody=sel(‘bd-tbody’);
-if(tbody){
-tbody.innerHTML=’’;
-const SURF=[
-{key:‘walls’,label:‘Walls’,get:(r)=>({en:r.walls,coats:r.wallCoats,area:calcWalls(r),std:‘walls’})},
-{key:‘ceil’,label:‘Ceiling’,get:(r)=>({en:r.ceiling,coats:r.ceilCoats,area:calcCeil(r),std:‘ceiling’})},
-{key:‘bb’,label:‘Baseboards’,get:(r)=>({en:r.baseboards,coats:r.baseCoats,area:r.baseLF,std:‘baseboards’})},
-{key:‘cr’,label:‘Crown’,get:(r)=>({en:r.crown,coats:r.crownCoats,area:r.crownLF,std:‘crown’})},
-{key:‘df’,label:‘Door Frames’,get:(r)=>({en:r.doorFrames,coats:r.dfCoats,area:r.dfLF,std:‘doorFrames’})},
-{key:‘win’,label:‘Windows’,get:(r)=>({en:r.windows,coats:r.winCoats,area:r.winLF,std:‘windows’})},
-{key:‘dr’,label:‘Doors’,get:(r)=>({en:r.doors&&calcTotalDoorCount(r)>0,coats:r.doorCoats,area:calcTotalDoorCount(r)*21,std:‘doors’,doorRate:(()=>{const dt=r.doorTypes||{};const total=calcTotalDoorCount(r)||1;const cost=calcDoorsCost(r);return’$’+(cost/total).toFixed(0)+’/door’;})()})},
-{key:‘prep’,label:‘Prep’,get:(r)=>({en:r.prepHrs>0,coats:1,area:r.prepHrs,std:null})},
-{key:‘stairs’,label:‘Stairs’,get:(r)=>({en:r.stairs&&calcStairsCost(r)>0,coats:r.stairCoats||2,area:calcStairsSqft(r),stairsCost:calcStairsCost(r),std:null,fixedHrs:6})}
-];
-rooms.forEach(r=>{
-let roomTotal=0;
-SURF.forEach(s=>{
-const d=s.get(r);
-if(!d.en||!d.area)return;
-const rate=d.std?STANDARDS[d.std][d.coats]:1;
-const hrs=d.fixedHrs!==undefined?d.fixedHrs:(d.flat?0:(d.std?(d.area/rate):(d.area)));
-const cost=d.stairsCost!==undefined?d.stairsCost:(d.flat?d.area:(hrs*globalRate*activeWorkerCount*(+v(‘lr-buffer’)||1.25)));
-roomTotal+=cost;
-const showHrs=d.fixedHrs!==undefined?true:!d.flat;
-const rateDisplay=d.doorRate?d.doorRate:(d.stairsCost!==undefined?‘Flat $’:(d.flat?‘Flat $’:(d.std?rate:’—’)));
-const hideArea=d.flat&&d.stairsCost===undefined;
-const rDisplayName=r.name||’Room ’+r.id;
-if(!roomTotal) tbody.innerHTML+=`<tr style="background:var(--cream2)"><td colspan="6" style="font-weight:500;font-size:12px;padding:6px 12px">${rDisplayName}</td></tr>`;tbody.innerHTML+=`<tr><td style="padding-left:20px;font-size:12px;color:var(--ink2)">${s.label}</td><td class="num">${hideArea?'—':fmtN(d.area)}</td><td class="num">${hideArea?'—':d.coats}</td><td class="num">${rateDisplay}</td><td class="num">${showHrs?hrs.toFixed(1):'—'}</td><td class="num">${fmt(cost)}</td></tr>`;
-});
-tbody.innerHTML+=`<tr class="subtotal-row"><td colspan="5" style="text-align:right;padding-right:12px">${r.name||'Room '+r.id} subtotal</td><td class="num">${fmt(roomTotal)}</td></tr>`;
-});
-const _aw=workers.filter(w=>w.active).length||1;tbody.innerHTML+=`<tr class="grand-row"><td colspan="5" style="text-align:right;padding-right:12px">Grand total</td><td class="num">${fmt(labourTotal)}</td></tr>`;
-}
-
-// Surface summary
-const stbody=sel(‘bd-surface-tbody’);
-if(stbody){
-stbody.innerHTML=’’;
-const surfTotals={Walls:{area:0,hrs:0},Ceiling:{area:0,hrs:0},‘Trims & Doors’:{area:0,hrs:0},Prep:{area:0,hrs:0}};
-rooms.forEach(r=>{
-const wArea=calcWalls(r);if(r.walls&&wArea){surfTotals.Walls.area+=wArea;surfTotals.Walls.hrs+=wArea/STANDARDS.walls[r.wallCoats];}
-const cArea=calcCeil(r);if(r.ceiling&&cArea){surfTotals.Ceiling.area+=cArea;surfTotals.Ceiling.hrs+=cArea/STANDARDS.ceiling[r.ceilCoats];}
-let tArea=0,tHrs=0;
-if(r.baseboards&&r.baseLF){tArea+=r.baseLF;tHrs+=r.baseLF/STANDARDS.baseboards[r.baseCoats];}
-if(r.crown&&r.crownLF){tArea+=r.crownLF;tHrs+=r.crownLF/STANDARDS.crown[r.crownCoats];}
-if(r.doorFrames&&r.dfLF){tArea+=r.dfLF;tHrs+=r.dfLF/STANDARDS.doorFrames[r.dfCoats];}
-if(r.windows&&r.winLF){tArea+=r.winLF;tHrs+=r.winLF/STANDARDS.windows[r.winCoats];}
-if(r.doors){const dc=calcTotalDoorCount(r);if(dc>0){tArea+=dc*21;tHrs+=(dc*21)/STANDARDS.doors[r.doorCoats];}}
-surfTotals[‘Trims & Doors’].area+=tArea;surfTotals[‘Trims & Doors’].hrs+=tHrs;
-if(r.prepHrs){surfTotals.Prep.area+=r.prepHrs;surfTotals.Prep.hrs+=r.prepHrs;}
-});
-Object.entries(surfTotals).forEach(([name,d])=>{
-if(!d.hrs)return;
-const _buf=+v(‘lr-buffer’)||1.25;const _aw2=workers.filter(w=>w.active).length||1;stbody.innerHTML+=`<tr><td>${name}</td><td class="num">${fmtN(d.area)}</td><td class="num">${d.hrs.toFixed(1)}</td><td class="num">${(d.hrs/6).toFixed(1)}</td><td class="num">${fmt(d.hrs*globalRate*_aw2*_buf)}</td></tr>`;
-});
-}
-
-// ── COLOUR SUMMARY ──
-const colourTbody = sel(‘bd-colour-tbody’);
-if(colourTbody){
-colourTbody.innerHTML=’’;
-// Collect: {colourName+surface: {colour, surface, rooms:[], area:0}}
-const colMap={};
-function addCol(colour, surface, roomName, area){
-if(!colour) return;
-const key=colour+’||’+surface;
-if(!colMap[key]) colMap[key]={colour,surface,rooms:[],area:0};
-if(!colMap[key].rooms.includes(roomName)) colMap[key].rooms.push(roomName);
-colMap[key].area+=area||0;
-}
-rooms.forEach(r=>{
-if(r.walls && r.wallColour) addCol(r.wallColour,‘Walls’,r.name,calcWalls(r));
-if(r.ceiling && r.ceilColour) addCol(r.ceilColour,‘Ceiling’,r.name,calcCeil(r));
-const trimArea=(r.baseboards?r.baseLF:0)+(r.crown?r.crownLF:0)+(r.doorFrames?r.dfLF:0)+(r.windows?r.winLF:0);
-if(trimArea && r.trimColour) addCol(r.trimColour,‘Trims & Doors’,r.name,trimArea);
-if(r.stairs&&r.stairColour) addCol(r.stairColour,‘Stairs’,r.name||‘Room ‘+r.id,calcStairsSqft(r));
-});
-const entries=Object.values(colMap);
-if(entries.length===0){
-colourTbody.innerHTML=’<tr><td colspan="4" style="color:var(--ink3);text-align:center;padding:16px">No colours selected in rooms yet</td></tr>’;
-} else {
-entries.forEach(e=>{
-const c=COLOURS.find(x=>x.n===e.colour);
-const dot=c?`<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${c.h};border:1px solid rgba(0,0,0,.15);margin-right:6px;vertical-align:middle"></span>`:’’;
-colourTbody.innerHTML+=`<tr><td>${dot}${e.colour}</td><td>${e.surface}</td><td style="font-size:11px;color:var(--ink)">${e.rooms.join(', ')}</td><td class="num">${fmtN(e.area)}</td></tr>`;
-});
-}
-}
-
-// ── PAINT GALLONS / PAILS / PRIMERS ──
-// Spreadsheet formulas:
-//   Pails:   FLOOR(area / 1900, 1)          — whole pails only
-//   Gallons: CEILING(area / 350, 1) - pails*5 — remaining after pails (1 pail = 5 gal)
-//   Primers: CEILING(area / 350, 1)           — gallons only, no pail offset
-
-// Collect paint usage per product per colour
-paintMap={};  // global, reset each recalcAll
-// addPaint: area = raw sqft, coats = number of coats
-// Paint stored as area*coats so qty formula gives correct gallons/pails
-// Primer always 1 coat
-function addPaint(product, colour, area, coats){
-if(!product||!area) return;
-const key=product+’||’+(colour||’’);
-if(!paintMap[key]){
-const nameLower=product.toLowerCase();
-const isPail=nameLower.includes(‘pail’);
-const isPrimer=PRIMERS.some(p=>p.n===product);
-const pObj=PAINTS.find(p=>p.n===product)||PRIMERS.find(p=>p.n===product);
-paintMap[key]={product,colour:colour||’’,type:isPrimer?‘primer’:(isPail?‘pail’:‘gallon’),area:0,price:pObj?pObj.p:null};
-}
-// Multiply area by coats so quantity formula reflects total coverage needed
-paintMap[key].area+=(area||0)*(coats||1);
-}
-
-rooms.forEach(r=>{
-const wArea=r.walls?calcWalls(r):0;
-const cArea=r.ceiling?calcCeil(r):0;
-const trimArea=(r.baseboards?r.baseLF:0)+(r.crown?r.crownLF:0)+(r.doorFrames?r.dfLF:0)+(r.windows?r.winLF:0);
-const doorSqft=r.doors?calcTotalDoorCount(r)*21:0;
-const tArea=trimArea+doorSqft;
-const wallCoats=r.wallCoats||2;
-const ceilCoats=r.ceilCoats||2;
-const trimCoats=r.doorCoats||2;
-// When 3 coats: 2 coats = paint, 1 coat = primer. Otherwise use actual coat count.
-const wallPaintCoats = wallCoats===3 ? 2 : wallCoats;
-const ceilPaintCoats = ceilCoats===3 ? 2 : ceilCoats;
-const trimPaintCoats = trimCoats===3 ? 2 : trimCoats;
-if(r.wallPaint && wArea) addPaint(r.wallPaint,r.wallColour,wArea,wallPaintCoats);
-if(r.ceilPaint && cArea) addPaint(r.ceilPaint,r.ceilColour,cArea,ceilPaintCoats);
-if(r.trimPaint && tArea) addPaint(r.trimPaint,r.trimColour,tArea,trimPaintCoats);
-// Primers: always 1 coat, only included when surface is 3 coats
-if(r.wallCoats===3 && r.wallPrimer && wArea) addPaint(r.wallPrimer,’’,wArea,1);
-if(r.ceilCoats===3 && r.ceilPrimer && cArea) addPaint(r.ceilPrimer,’’,cArea,1);
-if(r.doorCoats===3 && r.trimPrimer && tArea) addPaint(r.trimPrimer,’’,tArea,1);
-// Stairs paint: use sqft from treads+risers+landings (show even if 0 sqft)
-if(r.stairs && r.stairPaint){
-const sSqft=calcStairsSqft(r);
-const sPaintCoats=(r.stairCoats||2)===3?2:(r.stairCoats||2);
-addPaint(r.stairPaint,r.stairColour,Math.max(sSqft,1),sPaintCoats);
-}
-if(r.stairs && r.stairCoats===3 && r.stairPrimer){
-const sSqft=calcStairsSqft(r);
-addPaint(r.stairPrimer,’’,Math.max(sSqft,1),1);
-}
-});
-
-// Pail qty: FLOOR(area / 1900, 1)
-function calcPailQty(area){ return Math.max(0, Math.floor(area/1900)); }
-// Gallon qty: CEILING(area / 350, 1) minus 5 gallons for every whole pail already counted
-function calcGallonQty(area){
-const pails=calcPailQty(area);
-const remainingArea=Math.max(0, area - pails*1900);
-return Math.max(0, Math.round(remainingArea/350));
-}
-// Primer qty: CEILING(area / 350, 1)
-function calcPrimerQty(area){ return Math.max(1, Math.ceil(area/350)); }
-// qtyOverrides is defined globally below recalcAll — persists between calls
-
-// renderPaintTableCombined moved to global scope
-
-// renderPrimerTable moved to global scope
-
-renderPaintTableCombined(‘bd-paint-tbody’);
-renderPrimerTable();
-
-// Quote line items table
-(function buildQuoteLines(){
-const tbody=sel(‘q-line-tbody’);
-if(!tbody) return;
-tbody.innerHTML=’’;
-
-```
-// ── Labour row ──
-const prepLabels={furniture:'Move furniture',plastic:'Cover furniture with plastic',outlets:'Remove outlets',drywall:'Drywall repairs (plastering & sanding)',caulking:'Caulking',cleanup:'Daily site clean up'};
-const allPrep=new Set();
-const customPreps=[];
-rooms.forEach(r=>{
-  if(!r.prep) return;
-  Object.keys(prepLabels).forEach(k=>{ if(r.prep[k]) allPrep.add(prepLabels[k]); });
-  if(r.prep.custom&&r.prep.custom.trim()){r.prep.custom.split(',').forEach(s=>{const t=s.trim();if(t)customPreps.push(t);});}
-});
-
-// Build per-room surface rows with sqft/lft/units in qty column
-// Each surface becomes a sub-row; rooms are separated by a blank spacer
-const surfDefs=[
-  {key:'walls',    label:'Walls',          coatsKey:'wallCoats',  areaFn:(r)=>calcWalls(r),          unit:'sqft'},
-  {key:'ceiling',  label:'Ceiling',        coatsKey:'ceilCoats',  areaFn:(r)=>calcCeil(r),           unit:'sqft'},
-  {key:'baseboards',label:'Baseboards',    coatsKey:'baseCoats',  areaFn:(r)=>r.baseLF||0,           unit:'lin ft'},
-  {key:'crown',    label:'Crown Moulding', coatsKey:'crownCoats', areaFn:(r)=>r.crownLF||0,          unit:'lin ft'},
-  {key:'doorFrames',label:'Door Frames',   coatsKey:'dfCoats',    areaFn:(r)=>r.dfLF||0,             unit:'lin ft'},
-  {key:'windows',  label:'Windows',        coatsKey:'winCoats',   areaFn:(r)=>r.winLF||0,            unit:'lin ft'},
-  {key:'doors',    label:'Doors',          coatsKey:'doorCoats',  areaFn:(r)=>r,                     unit:'', isDoors:true, isDoorTypes:true},
-  {key:'stairs',   label:'Stairs',         coatsKey:null,         areaFn:(r)=>r,                     unit:'', isStairs:true},
-];
-
-// ── PREPARATIONS header + items ──
-const prepItems=[...allPrep,...customPreps];
-let labourDescHtml='';
-let labourQtyHtml='';
-
-if(prepItems.length){
-  labourDescHtml+=`<div style="font-size:10px;font-weight:600;letter-spacing:.08em;color:var(--ink);text-transform:uppercase;margin-bottom:4px">Preparations</div>`;
-  labourQtyHtml+=`<div>&nbsp;</div>`;
-  prepItems.forEach(p=>{
-    labourDescHtml+=`<div style="padding-left:10px;color:var(--ink)">• ${p}</div>`;
-    labourQtyHtml+=`<div>&nbsp;</div>`;
+  const discOn=sel('lr-discount')&&sel('lr-discount').checked;
+  const discPct=(+(v('lr-disc-pct')||10))/100;
+  let totWalls=0,totCeil=0,totTrims=0,totDoors=0,totHours=0;
+  rooms.forEach(r=>{
+    totWalls+=calcWalls(r);
+    totCeil+=calcCeil(r);
+    totTrims+=calcTrims(r);
+    totDoors+=r.doors?(r.doorCount||0):0;
+    totHours+=calcRoomHours(r);
   });
-}
+  const activeWorkerCount=workers.filter(w=>w.active).length||1;
+  const labourAmt=totHours*globalRate*activeWorkerCount*(+v('lr-buffer')||1.25);
+  const flatCosts=rooms.reduce((s,r)=>s+calcStairsCost(r)+calcDoorsCost(r),0);
+  const labourTotal=labourAmt+flatCosts;
+  const discAmt=discOn?labourTotal*discPct:0;
+  const subtotal=labourTotal-discAmt;
+  const tax=subtotal*0.13;
+  const total=subtotal+tax;
+  const dep=total*0.1,bal45=total*0.45,fin=total-dep-bal45;
+  const days=Math.ceil(totHours/6);
 
-// ── AREAS BEING SERVICED header + per-room surfaces ──
-const hasRoomSurfs=rooms.some(r=>surfDefs.some(s=>r[s.key]&&s.areaFn(r)>0));
-if(hasRoomSurfs){
-  const topMargin=prepItems.length?'10px':'0';
-  labourDescHtml+=`<div style="font-size:10px;font-weight:600;letter-spacing:.08em;color:var(--ink);text-transform:uppercase;margin-top:${topMargin};margin-bottom:4px">Areas Being Serviced</div>`;
-  labourQtyHtml+=`<div style="margin-top:${topMargin}">&nbsp;</div>`;
-  rooms.forEach((r,ri)=>{
-    const roomSurfs=surfDefs.filter(s=>s.isDoorTypes?(r.doors&&calcDoorsCost(r)>0):s.isStairs?(r.stairs&&calcStairsCost(r)>0):(r[s.key]&&s.areaFn(r)>0));
-    if(!roomSurfs.length) return;
-    labourDescHtml+=`<div style="font-weight:500;margin-top:${ri>0?'6px':'0'}">${r.name}</div>`;
-    labourQtyHtml+=`<div style="margin-top:${ri>0?'6px':'0'}">&nbsp;</div>`;
-    roomSurfs.forEach(s=>{
-      const area=s.areaFn(r);
-      const coats=s.coatsKey?r[s.coatsKey]||2:null;
-      if(s.isDoorTypes){
-        const dr=area;
-        const dtParts=[];
-        DOOR_TYPES.forEach(t=>{ if(dr.doorTypes&&dr.doorTypes[t.key]) dtParts.push((dr.doorTypes[t.key])+' '+t.label+(dr.doorTypes[t.key]>1?'s':'')); });
-        labourDescHtml+=`<div style="padding-left:12px;color:var(--ink)">${s.label}${dtParts.length?' ('+dtParts.join(', ')+')':''}</div>`;
-      } else if(s.isStairs){
-        const sr=area;
-        const stairParts=[];
-        if(sr.stairTreads)stairParts.push('Treads');
-        if(sr.stairRisers)stairParts.push('Risers');
-        if(sr.stairLanding)stairParts.push('Landing');
-        if(sr.stairStringer)stairParts.push('Stringer');
-        labourDescHtml+=`<div style="padding-left:12px;color:var(--ink)">${s.label}${stairParts.length?' ('+stairParts.join(', ')+')':''}</div>`;
+  // Breakdown
+  if(sel('bd-walls'))sel('bd-walls').textContent=fmtN(totWalls);
+  if(sel('bd-ceil'))sel('bd-ceil').textContent=fmtN(totCeil);
+  if(sel('bd-trims'))sel('bd-trims').textContent=fmtN(totTrims);
+  if(sel('bd-doors'))sel('bd-doors').textContent=totDoors;
+  if(sel('bd-hours'))sel('bd-hours').textContent=(totHours/activeWorkerCount).toFixed(1);
+  if(sel('bd-days'))sel('bd-days').textContent=days;
+  if(sel('bd-labour'))sel('bd-labour').textContent=fmt(labourTotal);
+  if(sel('bd-rooms'))sel('bd-rooms').textContent=rooms.length;
+
+  // Breakdown table
+  const tbody=sel('bd-tbody');
+  if(tbody){
+    tbody.innerHTML='';
+    const SURF=[
+      {key:'walls',label:'Walls',get:(r)=>({en:r.walls,coats:r.wallCoats,area:calcWalls(r),std:'walls'})},
+      {key:'ceil',label:'Ceiling',get:(r)=>({en:r.ceiling,coats:r.ceilCoats,area:calcCeil(r),std:'ceiling'})},
+      {key:'bb',label:'Baseboards',get:(r)=>({en:r.baseboards,coats:r.baseCoats,area:r.baseLF,std:'baseboards'})},
+      {key:'cr',label:'Crown',get:(r)=>({en:r.crown,coats:r.crownCoats,area:r.crownLF,std:'crown'})},
+      {key:'df',label:'Door Frames',get:(r)=>({en:r.doorFrames,coats:r.dfCoats,area:r.dfLF,std:'doorFrames'})},
+      {key:'win',label:'Windows',get:(r)=>({en:r.windows,coats:r.winCoats,area:r.winLF,std:'windows'})},
+      {key:'dr',label:'Doors',get:(r)=>({en:r.doors&&calcTotalDoorCount(r)>0,coats:r.doorCoats,area:calcTotalDoorCount(r)*21,std:'doors',doorRate:(()=>{const dt=r.doorTypes||{};const total=calcTotalDoorCount(r)||1;const cost=calcDoorsCost(r);return'$'+(cost/total).toFixed(0)+'/door';})()})},
+      {key:'prep',label:'Prep',get:(r)=>({en:r.prepHrs>0,coats:1,area:r.prepHrs,std:null})},
+      {key:'stairs',label:'Stairs',get:(r)=>({en:r.stairs&&calcStairsCost(r)>0,coats:r.stairCoats||2,area:calcStairsSqft(r),stairsCost:calcStairsCost(r),std:null,fixedHrs:6})}
+    ];
+    rooms.forEach(r=>{
+      let roomTotal=0;
+      SURF.forEach(s=>{
+        const d=s.get(r);
+        if(!d.en||!d.area)return;
+        const rate=d.std?STANDARDS[d.std][d.coats]:1;
+        const hrs=d.fixedHrs!==undefined?d.fixedHrs:(d.flat?0:(d.std?(d.area/rate):(d.area)));
+        const cost=d.stairsCost!==undefined?d.stairsCost:(d.flat?d.area:(hrs*globalRate*activeWorkerCount*(+v('lr-buffer')||1.25)));
+        roomTotal+=cost;
+        const showHrs=d.fixedHrs!==undefined?true:!d.flat;
+        const rateDisplay=d.doorRate?d.doorRate:(d.stairsCost!==undefined?'Flat $':(d.flat?'Flat $':(d.std?rate:'—')));
+        const hideArea=d.flat&&d.stairsCost===undefined;
+        const rDisplayName=r.name||'Room '+r.id;
+        if(!roomTotal) tbody.innerHTML+=`<tr style="background:var(--cream2)"><td colspan="6" style="font-weight:500;font-size:12px;padding:6px 12px">${rDisplayName}</td></tr>`;tbody.innerHTML+=`<tr><td style="padding-left:20px;font-size:12px;color:var(--ink2)">${s.label}</td><td class="num">${hideArea?'—':fmtN(d.area)}</td><td class="num">${hideArea?'—':d.coats}</td><td class="num">${rateDisplay}</td><td class="num">${showHrs?hrs.toFixed(1):'—'}</td><td class="num">${fmt(cost)}</td></tr>`;
+      });
+      tbody.innerHTML+=`<tr class="subtotal-row"><td colspan="5" style="text-align:right;padding-right:12px">${r.name||'Room '+r.id} subtotal</td><td class="num">${fmt(roomTotal)}</td></tr>`;
+    });
+    const _aw=workers.filter(w=>w.active).length||1;tbody.innerHTML+=`<tr class="grand-row"><td colspan="5" style="text-align:right;padding-right:12px">Grand total</td><td class="num">${fmt(labourTotal)}</td></tr>`;
+  }
+
+  // Surface summary
+  const stbody=sel('bd-surface-tbody');
+  if(stbody){
+    stbody.innerHTML='';
+    const surfTotals={Walls:{area:0,hrs:0},Ceiling:{area:0,hrs:0},'Trims & Doors':{area:0,hrs:0},Prep:{area:0,hrs:0}};
+    rooms.forEach(r=>{
+      const wArea=calcWalls(r);if(r.walls&&wArea){surfTotals.Walls.area+=wArea;surfTotals.Walls.hrs+=wArea/STANDARDS.walls[r.wallCoats];}
+      const cArea=calcCeil(r);if(r.ceiling&&cArea){surfTotals.Ceiling.area+=cArea;surfTotals.Ceiling.hrs+=cArea/STANDARDS.ceiling[r.ceilCoats];}
+      let tArea=0,tHrs=0;
+      if(r.baseboards&&r.baseLF){tArea+=r.baseLF;tHrs+=r.baseLF/STANDARDS.baseboards[r.baseCoats];}
+      if(r.crown&&r.crownLF){tArea+=r.crownLF;tHrs+=r.crownLF/STANDARDS.crown[r.crownCoats];}
+      if(r.doorFrames&&r.dfLF){tArea+=r.dfLF;tHrs+=r.dfLF/STANDARDS.doorFrames[r.dfCoats];}
+      if(r.windows&&r.winLF){tArea+=r.winLF;tHrs+=r.winLF/STANDARDS.windows[r.winCoats];}
+      if(r.doors){const dc=calcTotalDoorCount(r);if(dc>0){tArea+=dc*21;tHrs+=(dc*21)/STANDARDS.doors[r.doorCoats];}}
+      surfTotals['Trims & Doors'].area+=tArea;surfTotals['Trims & Doors'].hrs+=tHrs;
+      if(r.prepHrs){surfTotals.Prep.area+=r.prepHrs;surfTotals.Prep.hrs+=r.prepHrs;}
+    });
+    Object.entries(surfTotals).forEach(([name,d])=>{
+      if(!d.hrs)return;
+      const _buf=+v('lr-buffer')||1.25;const _aw2=workers.filter(w=>w.active).length||1;stbody.innerHTML+=`<tr><td>${name}</td><td class="num">${fmtN(d.area)}</td><td class="num">${d.hrs.toFixed(1)}</td><td class="num">${(d.hrs/6).toFixed(1)}</td><td class="num">${fmt(d.hrs*globalRate*_aw2*_buf)}</td></tr>`;
+    });
+  }
+
+  // ── COLOUR SUMMARY ──
+  const colourTbody = sel('bd-colour-tbody');
+  if(colourTbody){
+    colourTbody.innerHTML='';
+    // Collect: {colourName+surface: {colour, surface, rooms:[], area:0}}
+    const colMap={};
+    function addCol(colour, surface, roomName, area){
+      if(!colour) return;
+      const key=colour+'||'+surface;
+      if(!colMap[key]) colMap[key]={colour,surface,rooms:[],area:0};
+      if(!colMap[key].rooms.includes(roomName)) colMap[key].rooms.push(roomName);
+      colMap[key].area+=area||0;
+    }
+    rooms.forEach(r=>{
+      if(r.walls && r.wallColour) addCol(r.wallColour,'Walls',r.name,calcWalls(r));
+      if(r.ceiling && r.ceilColour) addCol(r.ceilColour,'Ceiling',r.name,calcCeil(r));
+      const trimArea=(r.baseboards?r.baseLF:0)+(r.crown?r.crownLF:0)+(r.doorFrames?r.dfLF:0)+(r.windows?r.winLF:0);
+      if(trimArea && r.trimColour) addCol(r.trimColour,'Trims & Doors',r.name,trimArea);
+      if(r.stairs&&r.stairColour) addCol(r.stairColour,'Stairs',r.name||'Room '+r.id,calcStairsSqft(r));
+    });
+    const entries=Object.values(colMap);
+    if(entries.length===0){
+      colourTbody.innerHTML='<tr><td colspan="4" style="color:var(--ink3);text-align:center;padding:16px">No colours selected in rooms yet</td></tr>';
+    } else {
+      entries.forEach(e=>{
+        const c=COLOURS.find(x=>x.n===e.colour);
+        const dot=c?`<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${c.h};border:1px solid rgba(0,0,0,.15);margin-right:6px;vertical-align:middle"></span>`:'';
+        colourTbody.innerHTML+=`<tr><td>${dot}${e.colour}</td><td>${e.surface}</td><td style="font-size:11px;color:var(--ink)">${e.rooms.join(', ')}</td><td class="num">${fmtN(e.area)}</td></tr>`;
+      });
+    }
+  }
+
+  // ── PAINT GALLONS / PAILS / PRIMERS ──
+  // Spreadsheet formulas:
+  //   Pails:   FLOOR(area / 1900, 1)          — whole pails only
+  //   Gallons: CEILING(area / 350, 1) - pails*5 — remaining after pails (1 pail = 5 gal)
+  //   Primers: CEILING(area / 350, 1)           — gallons only, no pail offset
+
+  // Collect paint usage per product per colour
+  paintMap={};  // global, reset each recalcAll
+  // addPaint: area = raw sqft, coats = number of coats
+  // Paint stored as area*coats so qty formula gives correct gallons/pails
+  // Primer always 1 coat
+  function addPaint(product, colour, area, coats){
+    if(!product||!area) return;
+    const key=product+'||'+(colour||'');
+    if(!paintMap[key]){
+      const nameLower=product.toLowerCase();
+      const isPail=nameLower.includes('pail');
+      const isPrimer=PRIMERS.some(p=>p.n===product);
+      const pObj=PAINTS.find(p=>p.n===product)||PRIMERS.find(p=>p.n===product);
+      paintMap[key]={product,colour:colour||'',type:isPrimer?'primer':(isPail?'pail':'gallon'),area:0,price:pObj?pObj.p:null};
+    }
+    // Multiply area by coats so quantity formula reflects total coverage needed
+    paintMap[key].area+=(area||0)*(coats||1);
+  }
+
+  rooms.forEach(r=>{
+    const wArea=r.walls?calcWalls(r):0;
+    const cArea=r.ceiling?calcCeil(r):0;
+    const trimArea=(r.baseboards?r.baseLF:0)+(r.crown?r.crownLF:0)+(r.doorFrames?r.dfLF:0)+(r.windows?r.winLF:0);
+    const doorSqft=r.doors?calcTotalDoorCount(r)*21:0;
+    const tArea=trimArea+doorSqft;
+    const wallCoats=r.wallCoats||2;
+    const ceilCoats=r.ceilCoats||2;
+    const trimCoats=r.doorCoats||2;
+    // When 3 coats: 2 coats = paint, 1 coat = primer. Otherwise use actual coat count.
+    const wallPaintCoats = wallCoats===3 ? 2 : wallCoats;
+    const ceilPaintCoats = ceilCoats===3 ? 2 : ceilCoats;
+    const trimPaintCoats = trimCoats===3 ? 2 : trimCoats;
+    if(r.wallPaint && wArea) addPaint(r.wallPaint,r.wallColour,wArea,wallPaintCoats);
+    if(r.ceilPaint && cArea) addPaint(r.ceilPaint,r.ceilColour,cArea,ceilPaintCoats);
+    if(r.trimPaint && tArea) addPaint(r.trimPaint,r.trimColour,tArea,trimPaintCoats);
+    // Primers: always 1 coat, only included when surface is 3 coats
+    if(r.wallCoats===3 && r.wallPrimer && wArea) addPaint(r.wallPrimer,'',wArea,1);
+    if(r.ceilCoats===3 && r.ceilPrimer && cArea) addPaint(r.ceilPrimer,'',cArea,1);
+    if(r.doorCoats===3 && r.trimPrimer && tArea) addPaint(r.trimPrimer,'',tArea,1);
+    // Stairs paint: use sqft from treads+risers+landings (show even if 0 sqft)
+    if(r.stairs && r.stairPaint){
+      const sSqft=calcStairsSqft(r);
+      const sPaintCoats=(r.stairCoats||2)===3?2:(r.stairCoats||2);
+      addPaint(r.stairPaint,r.stairColour,Math.max(sSqft,1),sPaintCoats);
+    }
+    if(r.stairs && r.stairCoats===3 && r.stairPrimer){
+      const sSqft=calcStairsSqft(r);
+      addPaint(r.stairPrimer,'',Math.max(sSqft,1),1);
+    }
+  });
+
+  // Pail qty: FLOOR(area / 1900, 1)
+  function calcPailQty(area){ return Math.max(0, Math.floor(area/1900)); }
+  // Gallon qty: CEILING(area / 350, 1) minus 5 gallons for every whole pail already counted
+  function calcGallonQty(area){
+    const pails=calcPailQty(area);
+    const remainingArea=Math.max(0, area - pails*1900);
+    return Math.max(0, Math.round(remainingArea/350));
+  }
+  // Primer qty: CEILING(area / 350, 1)
+  function calcPrimerQty(area){ return Math.max(1, Math.ceil(area/350)); }
+  // qtyOverrides is defined globally below recalcAll — persists between calls
+
+  // renderPaintTableCombined moved to global scope
+
+  // renderPrimerTable moved to global scope
+
+  renderPaintTableCombined('bd-paint-tbody');
+  renderPrimerTable();
+
+  // Quote line items table
+  (function buildQuoteLines(){
+    const tbody=sel('q-line-tbody');
+    if(!tbody) return;
+    tbody.innerHTML='';
+
+    // ── Labour row ──
+    const prepLabels={furniture:'Move furniture',plastic:'Cover furniture with plastic',outlets:'Remove outlets',drywall:'Drywall repairs (plastering & sanding)',caulking:'Caulking',cleanup:'Daily site clean up'};
+    const allPrep=new Set();
+    const customPreps=[];
+    rooms.forEach(r=>{
+      if(!r.prep) return;
+      Object.keys(prepLabels).forEach(k=>{ if(r.prep[k]) allPrep.add(prepLabels[k]); });
+      if(r.prep.custom&&r.prep.custom.trim()){r.prep.custom.split(',').forEach(s=>{const t=s.trim();if(t)customPreps.push(t);});}
+    });
+
+    // Build per-room surface rows with sqft/lft/units in qty column
+    // Each surface becomes a sub-row; rooms are separated by a blank spacer
+    const surfDefs=[
+      {key:'walls',    label:'Walls',          coatsKey:'wallCoats',  areaFn:(r)=>calcWalls(r),          unit:'sqft'},
+      {key:'ceiling',  label:'Ceiling',        coatsKey:'ceilCoats',  areaFn:(r)=>calcCeil(r),           unit:'sqft'},
+      {key:'baseboards',label:'Baseboards',    coatsKey:'baseCoats',  areaFn:(r)=>r.baseLF||0,           unit:'lin ft'},
+      {key:'crown',    label:'Crown Moulding', coatsKey:'crownCoats', areaFn:(r)=>r.crownLF||0,          unit:'lin ft'},
+      {key:'doorFrames',label:'Door Frames',   coatsKey:'dfCoats',    areaFn:(r)=>r.dfLF||0,             unit:'lin ft'},
+      {key:'windows',  label:'Windows',        coatsKey:'winCoats',   areaFn:(r)=>r.winLF||0,            unit:'lin ft'},
+      {key:'doors',    label:'Doors',          coatsKey:'doorCoats',  areaFn:(r)=>r,                     unit:'', isDoors:true, isDoorTypes:true},
+      {key:'stairs',   label:'Stairs',         coatsKey:null,         areaFn:(r)=>r,                     unit:'', isStairs:true},
+    ];
+
+    // ── PREPARATIONS header + items ──
+    const prepItems=[...allPrep,...customPreps];
+    let labourDescHtml='';
+    let labourQtyHtml='';
+
+    if(prepItems.length){
+      labourDescHtml+=`<div style="font-size:10px;font-weight:600;letter-spacing:.08em;color:var(--ink);text-transform:uppercase;margin-bottom:4px">Preparations</div>`;
+      labourQtyHtml+=`<div>&nbsp;</div>`;
+      prepItems.forEach(p=>{
+        labourDescHtml+=`<div style="padding-left:10px;color:var(--ink)">• ${p}</div>`;
+        labourQtyHtml+=`<div>&nbsp;</div>`;
+      });
+    }
+
+    // ── AREAS BEING SERVICED header + per-room surfaces ──
+    const hasRoomSurfs=rooms.some(r=>surfDefs.some(s=>r[s.key]&&s.areaFn(r)>0));
+    if(hasRoomSurfs){
+      const topMargin=prepItems.length?'10px':'0';
+      labourDescHtml+=`<div style="font-size:10px;font-weight:600;letter-spacing:.08em;color:var(--ink);text-transform:uppercase;margin-top:${topMargin};margin-bottom:4px">Areas Being Serviced</div>`;
+      labourQtyHtml+=`<div style="margin-top:${topMargin}">&nbsp;</div>`;
+      rooms.forEach((r,ri)=>{
+        const roomSurfs=surfDefs.filter(s=>s.isDoorTypes?(r.doors&&calcDoorsCost(r)>0):s.isStairs?(r.stairs&&calcStairsCost(r)>0):(r[s.key]&&s.areaFn(r)>0));
+        if(!roomSurfs.length) return;
+        labourDescHtml+=`<div style="font-weight:500;margin-top:${ri>0?'6px':'0'}">${r.name}</div>`;
+        labourQtyHtml+=`<div style="margin-top:${ri>0?'6px':'0'}">&nbsp;</div>`;
+        roomSurfs.forEach(s=>{
+          const area=s.areaFn(r);
+          const coats=s.coatsKey?r[s.coatsKey]||2:null;
+          if(s.isDoorTypes){
+            const dr=area;
+            const dtParts=[];
+            DOOR_TYPES.forEach(t=>{ if(dr.doorTypes&&dr.doorTypes[t.key]) dtParts.push((dr.doorTypes[t.key])+' '+t.label+(dr.doorTypes[t.key]>1?'s':'')); });
+            labourDescHtml+=`<div style="padding-left:12px;color:var(--ink)">${s.label}${dtParts.length?' ('+dtParts.join(', ')+')':''}</div>`;
+          } else if(s.isStairs){
+            const sr=area;
+            const stairParts=[];
+            if(sr.stairTreads)stairParts.push('Treads');
+            if(sr.stairRisers)stairParts.push('Risers');
+            if(sr.stairLanding)stairParts.push('Landing');
+            if(sr.stairStringer)stairParts.push('Stringer');
+            labourDescHtml+=`<div style="padding-left:12px;color:var(--ink)">${s.label}${stairParts.length?' ('+stairParts.join(', ')+')':''}</div>`;
+          } else {
+            labourDescHtml+=`<div style="padding-left:12px;color:var(--ink)">${s.label}${s.isFlat?'':' ('+coats+' coat'+(coats>1?'s':'')+')'}</div>`;
+          }
+          const unitLabel=s.isDoors?(area===1?'door':'doors'):s.unit;
+          if(s.isDoorTypes){
+            const dr=area;
+            const total=calcTotalDoorCount(dr);
+            labourQtyHtml+=`<div style="text-align:right">${total} ${total===1?'door':'doors'}</div>`;
+          } else
+          if(s.isDoorTypes){
+            const dr=area;
+            const dtParts=[];
+            DOOR_TYPES.forEach(t=>{ if(dr.doorTypes&&dr.doorTypes[t.key]) dtParts.push((dr.doorTypes[t.key])+' '+t.label+(dr.doorTypes[t.key]>1?'s':'')); });
+            labourDescHtml+=`<div style="padding-left:12px;color:var(--ink)">${s.label}${dtParts.length?' ('+dtParts.join(', ')+')':''}</div>`;
+          } else if(s.isStairs){
+            const sr=area;
+            const stairQtyParts=[];
+            if(sr.stairTreads)stairQtyParts.push(sr.stairTreads+' tread'+(sr.stairTreads>1?'s':''));
+            if(sr.stairRisers)stairQtyParts.push(sr.stairRisers+' riser'+(sr.stairRisers>1?'s':''));
+            if(sr.stairLanding)stairQtyParts.push(sr.stairLanding+' landing'+(sr.stairLanding>1?'s':''));
+            if(sr.stairStringer)stairQtyParts.push(sr.stairStringer+' stringer'+(sr.stairStringer>1?'s':''));
+            labourQtyHtml+=`<div style="text-align:right">${stairQtyParts.join(', ')||'—'}</div>`;
+          } else if(s.isFlat){
+            labourQtyHtml+=`<div style="text-align:right">${fmt(area)}</div>`;
+          } else {
+            labourQtyHtml+=`<div style="text-align:right">${fmtN(area)} ${unitLabel}</div>`;
+          }
+        });
+      });
+    }
+
+    tbody.innerHTML+=`<tr>
+      <td style="font-size:12px;font-weight:500;vertical-align:top;white-space:nowrap">Labour</td>
+      <td style="font-size:12px;vertical-align:top">${labourDescHtml||'—'}</td>
+      <td class="right" style="font-size:12px;vertical-align:top;font-weight:500">${fmt(labourTotal)}</td>
+    </tr>`;
+
+    // ── Materials row (from paintMap) ──
+    const matEntries=Object.values(paintMap).filter(e=>e.type!=='primer');
+    if(matEntries.length){
+      const matLines=[];
+      let matTotal=0;
+      matEntries.forEach(e=>{
+        const pailQty=calcPailQty(e.area);
+        const galQty=calcGallonQty(e.area);
+        const c=COLOURS.find(x=>x.n===e.colour);
+        const dot=c?'<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+c.h+';border:1px solid rgba(0,0,0,.15);margin-right:4px;vertical-align:middle"></span>':'';
+        if(pailQty>0){
+          const pailName=e.product.replace(/\bGallon\b/gi,'Pail');
+          const pailObj=[...PAINTS,...PRIMERS,...CEILING_PAINTS].find(p=>p.n===pailName);
+          const pailPrice=pailObj?pailObj.p:null;
+          const pailLine=fmt(pailPrice?pailQty*pailPrice:0);
+          if(pailPrice) matTotal+=pailQty*pailPrice;
+          matLines.push({product:stripUnit(e.product),colour:e.colour,dot,unit:'Pail',qty:pailQty,price:pailPrice,area:e.area});
+        }
+        if(galQty>0){
+          if(e.price) matTotal+=galQty*e.price;
+          matLines.push({product:stripUnit(e.product),colour:e.colour,dot,unit:'Gallon',qty:galQty,price:e.price,area:e.area});
+        }
+      });
+      // Also add primers
+      Object.values(paintMap).filter(e=>e.type==='primer').forEach(e=>{
+        const qty=calcGallonQty(e.area)||1;
+        if(e.price) matTotal+=qty*e.price;
+        matLines.push({product:stripUnit(e.product),colour:'',dot:'',unit:'Gallon',qty,price:e.price,area:e.area});
+      });
+      const matDescRows=matLines.map(m=>`${m.dot}${m.product}${m.colour?' · '+m.colour:''} <span style="color:var(--ink)">${m.unit}</span>`).join('<br>');
+      const matQtyRows=matLines.map(m=>`${m.qty}`).join('<br>');
+      const matUnitRows=matLines.map(m=>`<span style="color:var(--ink)">${m.unit}</span>`).join('<br>');
+      tbody.innerHTML+=`<tr>
+        <td style="font-size:12px;font-weight:500;vertical-align:top;white-space:nowrap">Materials</td>
+        <td style="font-size:12px;vertical-align:top;color:var(--ink)">${matDescRows}</td>
+        <td class="right" style="font-size:12px;vertical-align:top;font-weight:500">${fmt(matTotal)}</td>
+      </tr>`;
+    }
+
+    // Compute materials total from paintMap (all paints + primers)
+    let matGrandTotal=0;
+    Object.values(paintMap).forEach(e=>{
+      const pailQty=calcPailQty(e.area);
+      const galQty=calcGallonQty(e.area);
+      if(e.type==='primer'){
+        if(e.price&&galQty>0) matGrandTotal+=galQty*e.price;
       } else {
-        labourDescHtml+=`<div style="padding-left:12px;color:var(--ink)">${s.label}${s.isFlat?'':' ('+coats+' coat'+(coats>1?'s':'')+')'}</div>`;
-      }
-      const unitLabel=s.isDoors?(area===1?'door':'doors'):s.unit;
-      if(s.isDoorTypes){
-        const dr=area;
-        const total=calcTotalDoorCount(dr);
-        labourQtyHtml+=`<div style="text-align:right">${total} ${total===1?'door':'doors'}</div>`;
-      } else
-      if(s.isDoorTypes){
-        const dr=area;
-        const dtParts=[];
-        DOOR_TYPES.forEach(t=>{ if(dr.doorTypes&&dr.doorTypes[t.key]) dtParts.push((dr.doorTypes[t.key])+' '+t.label+(dr.doorTypes[t.key]>1?'s':'')); });
-        labourDescHtml+=`<div style="padding-left:12px;color:var(--ink)">${s.label}${dtParts.length?' ('+dtParts.join(', ')+')':''}</div>`;
-      } else if(s.isStairs){
-        const sr=area;
-        const stairQtyParts=[];
-        if(sr.stairTreads)stairQtyParts.push(sr.stairTreads+' tread'+(sr.stairTreads>1?'s':''));
-        if(sr.stairRisers)stairQtyParts.push(sr.stairRisers+' riser'+(sr.stairRisers>1?'s':''));
-        if(sr.stairLanding)stairQtyParts.push(sr.stairLanding+' landing'+(sr.stairLanding>1?'s':''));
-        if(sr.stairStringer)stairQtyParts.push(sr.stairStringer+' stringer'+(sr.stairStringer>1?'s':''));
-        labourQtyHtml+=`<div style="text-align:right">${stairQtyParts.join(', ')||'—'}</div>`;
-      } else if(s.isFlat){
-        labourQtyHtml+=`<div style="text-align:right">${fmt(area)}</div>`;
-      } else {
-        labourQtyHtml+=`<div style="text-align:right">${fmtN(area)} ${unitLabel}</div>`;
+        if(pailQty>0){
+          const pailName=e.product.replace(/\bGallon\b/gi,'Pail');
+          const pailObj=[...PAINTS,...PRIMERS,...CEILING_PAINTS].find(p=>p.n===pailName);
+          if(pailObj&&pailObj.p) matGrandTotal+=pailQty*pailObj.p;
+        }
+        if(galQty>0&&e.price) matGrandTotal+=galQty*e.price;
       }
     });
-  });
-}
+    // Recalc totals including materials
+    const combinedSubtotal=(labourTotal+matGrandTotal)-discAmt;
+    const combinedTax=combinedSubtotal*0.13;
+    const combinedTotal=combinedSubtotal+combinedTax;
+    const combinedDep=combinedTotal*0.1;
+    const combinedBal45=combinedTotal*0.45;
+    const combinedFin=combinedTotal-combinedDep-combinedBal45;
 
-tbody.innerHTML+=`<tr>
-  <td style="font-size:12px;font-weight:500;vertical-align:top;white-space:nowrap">Labour</td>
-  <td style="font-size:12px;vertical-align:top">${labourDescHtml||'—'}</td>
-  <td class="right" style="font-size:12px;vertical-align:top;white-space:nowrap;color:var(--ink)">${labourQtyHtml}</td>
-  <td class="right" style="font-size:12px;vertical-align:top;font-weight:500">${fmt(labourTotal)}</td>
-</tr>`;
+    // Discount + totals
+    if(sel('q-disc-row'))sel('q-disc-row').style.display=discOn?'table-row':'none';
+    if(sel('q-disc-label'))sel('q-disc-label').textContent='Discount ('+Math.round(discPct*100)+'%)';
+    if(sel('q-disc-val'))sel('q-disc-val').textContent='−'+fmt(discAmt);
+    if(sel('q-subtotal'))sel('q-subtotal').textContent=fmt(combinedSubtotal);
+    if(sel('q-tax'))sel('q-tax').textContent=fmt(combinedTax);
+    if(sel('q-total'))sel('q-total').textContent=fmt(combinedTotal);
+    if(sel('q-pay1'))sel('q-pay1').textContent=fmt(combinedDep);
+    if(sel('q-pay2'))sel('q-pay2').textContent=fmt(combinedBal45);
+    if(sel('q-pay3'))sel('q-pay3').textContent=fmt(combinedFin);
+  })();
 
-// ── Materials row (from paintMap) ──
-const matEntries=Object.values(paintMap).filter(e=>e.type!=='primer');
-if(matEntries.length){
-  const matLines=[];
-  let matTotal=0;
-  matEntries.forEach(e=>{
-    const pailQty=calcPailQty(e.area);
-    const galQty=calcGallonQty(e.area);
-    const c=COLOURS.find(x=>x.n===e.colour);
-    const dot=c?'<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+c.h+';border:1px solid rgba(0,0,0,.15);margin-right:4px;vertical-align:middle"></span>':'';
-    if(pailQty>0){
-      const pailName=e.product.replace(/\bGallon\b/gi,'Pail');
-      const pailObj=[...PAINTS,...PRIMERS,...CEILING_PAINTS].find(p=>p.n===pailName);
-      const pailPrice=pailObj?pailObj.p:null;
-      const pailLine=fmt(pailPrice?pailQty*pailPrice:0);
-      if(pailPrice) matTotal+=pailQty*pailPrice;
-      matLines.push({product:stripUnit(e.product),colour:e.colour,dot,unit:'Pail',qty:pailQty,price:pailPrice,area:e.area});
-    }
-    if(galQty>0){
-      if(e.price) matTotal+=galQty*e.price;
-      matLines.push({product:stripUnit(e.product),colour:e.colour,dot,unit:'Gallon',qty:galQty,price:e.price,area:e.area});
-    }
-  });
-  // Also add primers
-  Object.values(paintMap).filter(e=>e.type==='primer').forEach(e=>{
-    const qty=calcGallonQty(e.area)||1;
-    if(e.price) matTotal+=qty*e.price;
-    matLines.push({product:stripUnit(e.product),colour:'',dot:'',unit:'Gallon',qty,price:e.price,area:e.area});
-  });
-  const matDescRows=matLines.map(m=>`${m.dot}${m.product}${m.colour?' · '+m.colour:''} <span style="color:var(--ink)">${m.unit}</span>`).join('<br>');
-  const matQtyRows=matLines.map(m=>`${m.qty}`).join('<br>');
-  const matUnitRows=matLines.map(m=>`<span style="color:var(--ink)">${m.unit}</span>`).join('<br>');
-  tbody.innerHTML+=`<tr>
-    <td style="font-size:12px;font-weight:500;vertical-align:top;white-space:nowrap">Materials</td>
-    <td style="font-size:12px;vertical-align:top;color:var(--ink)">${matDescRows}</td>
-    <td class="right" style="font-size:12px;vertical-align:top;color:var(--ink)">${matQtyRows}</td>
-    <td class="right" style="font-size:12px;vertical-align:top;font-weight:500">${fmt(matTotal)}</td>
-  </tr>`;
-}
-
-// Compute materials total from paintMap (all paints + primers)
-let matGrandTotal=0;
-Object.values(paintMap).forEach(e=>{
-  const pailQty=calcPailQty(e.area);
-  const galQty=calcGallonQty(e.area);
-  if(e.type==='primer'){
-    if(e.price&&galQty>0) matGrandTotal+=galQty*e.price;
-  } else {
-    if(pailQty>0){
-      const pailName=e.product.replace(/\bGallon\b/gi,'Pail');
-      const pailObj=[...PAINTS,...PRIMERS,...CEILING_PAINTS].find(p=>p.n===pailName);
-      if(pailObj&&pailObj.p) matGrandTotal+=pailQty*pailObj.p;
-    }
-    if(galQty>0&&e.price) matGrandTotal+=galQty*e.price;
+  // Scope of work
+  const saBody=sel('sow-areas-tbody');
+  if(saBody){
+    saBody.innerHTML='';
+    rooms.forEach(r=>{
+      const ws=calcWalls(r),cs=calcCeil(r),tr=calcTrims(r),dr=r.doors?r.doorCount:0;
+      if(!ws&&!cs&&!tr&&!dr)return;
+      saBody.innerHTML+=`<tr><td>${r.name}</td><td class="right">${fmtN(ws)}</td><td class="right">${fmtN(cs)}</td><td class="right">${fmtN(tr)}</td><td class="right">${dr}</td></tr>`;
+    });
+    const totalRow=`<tr style="font-weight:500;background:var(--cream2)"><td>Totals</td><td class="right">${fmtN(totWalls)}</td><td class="right">${fmtN(totCeil)}</td><td class="right">${fmtN(totTrims)}</td><td class="right">${totDoors}</td></tr>`;
+    saBody.innerHTML+=totalRow;
   }
-});
-// Recalc totals including materials
-const combinedSubtotal=(labourTotal+matGrandTotal)-discAmt;
-const combinedTax=combinedSubtotal*0.13;
-const combinedTotal=combinedSubtotal+combinedTax;
-const combinedDep=combinedTotal*0.1;
-const combinedBal45=combinedTotal*0.45;
-const combinedFin=combinedTotal-combinedDep-combinedBal45;
+  // SOW paints — full colour summary (mirrors breakdown colour table)
+  const sowPaints=sel('sow-paints');
+  if(sowPaints){
+    // Build colour map same as breakdown
+    const sowColMap={};
+    function addSowCol(colour,surface,roomName,area){
+      if(!colour) return;
+      const key=colour+'||'+surface;
+      if(!sowColMap[key]) sowColMap[key]={colour,surface,rooms:[],area:0};
+      if(!sowColMap[key].rooms.includes(roomName)) sowColMap[key].rooms.push(roomName);
+      sowColMap[key].area+=area||0;
+    }
+    rooms.forEach(r=>{
+      if(r.walls&&r.wallColour) addSowCol(r.wallColour,'Walls',r.name,calcWalls(r));
+      if(r.ceiling&&r.ceilColour) addSowCol(r.ceilColour,'Ceiling',r.name,calcCeil(r));
+      const trimArea=(r.baseboards?r.baseLF:0)+(r.crown?r.crownLF:0)+(r.doorFrames?r.dfLF:0)+(r.windows?r.winLF:0);
+      if(trimArea&&r.trimColour) addSowCol(r.trimColour,'Trims & Doors',r.name,trimArea);
+      if(r.stairs&&r.stairColour) addSowCol(r.stairColour,'Stairs',r.name||'Room '+r.id,calcStairsSqft(r));
+    });
+    const sowEntries=Object.values(sowColMap);
+    // Also collect paint products
+    const paintList=[];
+    const seenPaints=new Set();
+    rooms.forEach(r=>{
+      if(r.wallPaint&&!seenPaints.has(r.wallPaint)){seenPaints.add(r.wallPaint);paintList.push({label:'Wall Paint',product:r.wallPaint});}
+      if(r.ceilPaint&&!seenPaints.has(r.ceilPaint)){seenPaints.add(r.ceilPaint);paintList.push({label:'Ceiling Paint',product:r.ceilPaint});}
+      if(r.trimPaint&&!seenPaints.has(r.trimPaint)){seenPaints.add(r.trimPaint);paintList.push({label:'Trim Paint',product:r.trimPaint});}
+      if(r.wallPrimer&&!seenPaints.has(r.wallPrimer)){seenPaints.add(r.wallPrimer);paintList.push({label:'Wall Primer',product:r.wallPrimer});}
+      if(r.ceilPrimer&&!seenPaints.has(r.ceilPrimer)){seenPaints.add(r.ceilPrimer);paintList.push({label:'Ceiling Primer',product:r.ceilPrimer});}
+      if(r.trimPrimer&&!seenPaints.has(r.trimPrimer)){seenPaints.add(r.trimPrimer);paintList.push({label:'Trim Primer',product:r.trimPrimer});}
+      if(r.misc&&!seenPaints.has(r.misc)){seenPaints.add(r.misc);paintList.push({label:'Misc.',product:r.misc});}
+      if(r.stairs&&r.stairPaint&&!seenPaints.has(r.stairPaint)){seenPaints.add(r.stairPaint);paintList.push({label:'Stairs Paint',product:r.stairPaint});}
+      if(r.stairs&&r.stairPrimer&&!seenPaints.has(r.stairPrimer)){seenPaints.add(r.stairPrimer);paintList.push({label:'Stairs Primer',product:r.stairPrimer});}
+    });
+    let html='';
+    if(paintList.length){
+      html+=`<table class="doc-table" style="width:100%;margin-bottom:12px">
+        <thead><tr><th>Category</th><th>Product</th></tr></thead>
+        <tbody>${paintList.map(p=>`<tr><td style="font-size:12px;color:var(--ink3)">${p.label}</td><td style="font-size:12px">${stripUnit(p.product)}</td></tr>`).join('')}</tbody>
+      </table>`;
+    }
+    if(sowEntries.length){
+      html+=`<table class="doc-table" style="width:100%">
+        <thead><tr><th>Colour</th><th>Surface</th><th>Rooms</th><th class="right">Area</th></tr></thead>
+        <tbody>${sowEntries.map(e=>{
+          const c=COLOURS.find(x=>x.n===e.colour);
+          const dot=c?`<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${c.h};border:1px solid rgba(0,0,0,.15);margin-right:6px;vertical-align:middle"></span>`:'';
+          return `<tr><td style="font-size:12px">${dot}${e.colour}</td><td style="font-size:12px">${e.surface}</td><td style="font-size:11px;color:var(--ink3)">${e.rooms.join(', ')}</td><td class="right" style="font-size:12px">${fmtN(e.area)}</td></tr>`;
+        }).join('')}</tbody>
+      </table>`;
+    }
+    sowPaints.innerHTML=html||'<span style="color:var(--ink4);font-size:13px">No paints or colours selected</span>';
+  }
+  if(sel('sow-total'))sel('sow-total').textContent=fmt(total);
+  if(sel('sow-deposit'))sel('sow-deposit').textContent=fmt(dep);
+  if(sel('sow-bal45'))sel('sow-bal45').textContent=fmt(bal45);
 
-// Discount + totals
-if(sel('q-disc-row'))sel('q-disc-row').style.display=discOn?'table-row':'none';
-if(sel('q-disc-label'))sel('q-disc-label').textContent='Discount ('+Math.round(discPct*100)+'%)';
-if(sel('q-disc-val'))sel('q-disc-val').textContent='−'+fmt(discAmt);
-if(sel('q-subtotal'))sel('q-subtotal').textContent=fmt(combinedSubtotal);
-if(sel('q-tax'))sel('q-tax').textContent=fmt(combinedTax);
-if(sel('q-total'))sel('q-total').textContent=fmt(combinedTotal);
-if(sel('q-pay1'))sel('q-pay1').textContent=fmt(combinedDep);
-if(sel('q-pay2'))sel('q-pay2').textContent=fmt(combinedBal45);
-if(sel('q-pay3'))sel('q-pay3').textContent=fmt(combinedFin);
-```
+  // Invoice
+  recalcInvoice();
 
-})();
+  // Contract — compute materials total from paintMap then pass full combined total
+  (()=>{
+    let _mat=0;
+    Object.values(paintMap).forEach(e=>{
+      const pq=calcPailQty(e.area),gq=calcGallonQty(e.area);
+      if(e.type==='primer'){if(e.price&&gq>0)_mat+=gq*e.price;}
+      else{
+        if(pq>0){const pn=e.product.replace(/\bGallon\b/gi,'Pail');const po=[...PAINTS,...PRIMERS,...CEILING_PAINTS].find(p=>p.n===pn);if(po&&po.p)_mat+=pq*po.p;}
+        if(gq>0&&e.price)_mat+=gq*e.price;
+      }
+    });
+    const _sub=(labourTotal+_mat)-discAmt;
+    const _tax=_sub*0.13;
+    const _tot=_sub+_tax;
+    const _dep=_tot*0.1,_bal=_tot*0.45,_fin=_tot-_dep-_bal;
+    buildContract(_tot,_dep,_bal,_fin,days);
+  })();
 
-// Scope of work
-const saBody=sel(‘sow-areas-tbody’);
-if(saBody){
-saBody.innerHTML=’’;
-rooms.forEach(r=>{
-const ws=calcWalls(r),cs=calcCeil(r),tr=calcTrims(r),dr=r.doors?r.doorCount:0;
-if(!ws&&!cs&&!tr&&!dr)return;
-saBody.innerHTML+=`<tr><td>${r.name}</td><td class="right">${fmtN(ws)}</td><td class="right">${fmtN(cs)}</td><td class="right">${fmtN(tr)}</td><td class="right">${dr}</td></tr>`;
-});
-const totalRow=`<tr style="font-weight:500;background:var(--cream2)"><td>Totals</td><td class="right">${fmtN(totWalls)}</td><td class="right">${fmtN(totCeil)}</td><td class="right">${fmtN(totTrims)}</td><td class="right">${totDoors}</td></tr>`;
-saBody.innerHTML+=totalRow;
-}
-// SOW paints — full colour summary (mirrors breakdown colour table)
-const sowPaints=sel(‘sow-paints’);
-if(sowPaints){
-// Build colour map same as breakdown
-const sowColMap={};
-function addSowCol(colour,surface,roomName,area){
-if(!colour) return;
-const key=colour+’||’+surface;
-if(!sowColMap[key]) sowColMap[key]={colour,surface,rooms:[],area:0};
-if(!sowColMap[key].rooms.includes(roomName)) sowColMap[key].rooms.push(roomName);
-sowColMap[key].area+=area||0;
-}
-rooms.forEach(r=>{
-if(r.walls&&r.wallColour) addSowCol(r.wallColour,‘Walls’,r.name,calcWalls(r));
-if(r.ceiling&&r.ceilColour) addSowCol(r.ceilColour,‘Ceiling’,r.name,calcCeil(r));
-const trimArea=(r.baseboards?r.baseLF:0)+(r.crown?r.crownLF:0)+(r.doorFrames?r.dfLF:0)+(r.windows?r.winLF:0);
-if(trimArea&&r.trimColour) addSowCol(r.trimColour,‘Trims & Doors’,r.name,trimArea);
-if(r.stairs&&r.stairColour) addSowCol(r.stairColour,‘Stairs’,r.name||‘Room ‘+r.id,calcStairsSqft(r));
-});
-const sowEntries=Object.values(sowColMap);
-// Also collect paint products
-const paintList=[];
-const seenPaints=new Set();
-rooms.forEach(r=>{
-if(r.wallPaint&&!seenPaints.has(r.wallPaint)){seenPaints.add(r.wallPaint);paintList.push({label:‘Wall Paint’,product:r.wallPaint});}
-if(r.ceilPaint&&!seenPaints.has(r.ceilPaint)){seenPaints.add(r.ceilPaint);paintList.push({label:‘Ceiling Paint’,product:r.ceilPaint});}
-if(r.trimPaint&&!seenPaints.has(r.trimPaint)){seenPaints.add(r.trimPaint);paintList.push({label:‘Trim Paint’,product:r.trimPaint});}
-if(r.wallPrimer&&!seenPaints.has(r.wallPrimer)){seenPaints.add(r.wallPrimer);paintList.push({label:‘Wall Primer’,product:r.wallPrimer});}
-if(r.ceilPrimer&&!seenPaints.has(r.ceilPrimer)){seenPaints.add(r.ceilPrimer);paintList.push({label:‘Ceiling Primer’,product:r.ceilPrimer});}
-if(r.trimPrimer&&!seenPaints.has(r.trimPrimer)){seenPaints.add(r.trimPrimer);paintList.push({label:‘Trim Primer’,product:r.trimPrimer});}
-if(r.misc&&!seenPaints.has(r.misc)){seenPaints.add(r.misc);paintList.push({label:‘Misc.’,product:r.misc});}
-if(r.stairs&&r.stairPaint&&!seenPaints.has(r.stairPaint)){seenPaints.add(r.stairPaint);paintList.push({label:‘Stairs Paint’,product:r.stairPaint});}
-if(r.stairs&&r.stairPrimer&&!seenPaints.has(r.stairPrimer)){seenPaints.add(r.stairPrimer);paintList.push({label:‘Stairs Primer’,product:r.stairPrimer});}
-});
-let html=’’;
-if(paintList.length){
-html+=`<table class="doc-table" style="width:100%;margin-bottom:12px"> <thead><tr><th>Category</th><th>Product</th></tr></thead> <tbody>${paintList.map(p=>`<tr><td style="font-size:12px;color:var(--ink3)">${p.label}</td><td style="font-size:12px">${stripUnit(p.product)}</td></tr>`).join('')}</tbody> </table>`;
-}
-if(sowEntries.length){
-html+=`<table class="doc-table" style="width:100%"> <thead><tr><th>Colour</th><th>Surface</th><th>Rooms</th><th class="right">Area</th></tr></thead> <tbody>${sowEntries.map(e=>{ const c=COLOURS.find(x=>x.n===e.colour); const dot=c?`<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${c.h};border:1px solid rgba(0,0,0,.15);margin-right:6px;vertical-align:middle"></span>`:''; return `<tr><td style="font-size:12px">${dot}${e.colour}</td><td style="font-size:12px">${e.surface}</td><td style="font-size:11px;color:var(--ink3)">${e.rooms.join(’, ‘)}</td><td class="right" style="font-size:12px">${fmtN(e.area)}</td></tr>`; }).join('')}</tbody> </table>`;
-}
-sowPaints.innerHTML=html||’<span style="color:var(--ink4);font-size:13px">No paints or colours selected</span>’;
-}
-if(sel(‘sow-total’))sel(‘sow-total’).textContent=fmt(total);
-if(sel(‘sow-deposit’))sel(‘sow-deposit’).textContent=fmt(dep);
-if(sel(‘sow-bal45’))sel(‘sow-bal45’).textContent=fmt(bal45);
-
-// Invoice
-recalcInvoice();
-
-// Contract — compute materials total from paintMap then pass full combined total
-(()=>{
-let _mat=0;
-Object.values(paintMap).forEach(e=>{
-const pq=calcPailQty(e.area),gq=calcGallonQty(e.area);
-if(e.type===‘primer’){if(e.price&&gq>0)_mat+=gq*e.price;}
-else{
-if(pq>0){const pn=e.product.replace(/\bGallon\b/gi,‘Pail’);const po=[…PAINTS,…PRIMERS,…CEILING_PAINTS].find(p=>p.n===pn);if(po&&po.p)_mat+=pq*po.p;}
-if(gq>0&&e.price)_mat+=gq*e.price;
-}
-});
-const _sub=(labourTotal+_mat)-discAmt;
-const _tax=_sub*0.13;
-const _tot=_sub+_tax;
-const _dep=_tot*0.1,_bal=_tot*0.45,_fin=_tot-_dep-_bal;
-buildContract(_tot,_dep,_bal,_fin,totWalls,totCeil,totTrims,totDoors,days);
-})();
-
-// Post project
-if(sel(‘pp-date’))sel(‘pp-date’).textContent=today();
-if(sel(‘pp-client’))sel(‘pp-client’).textContent=v(‘ci-name’)||’—’;
-if(sel(‘pp-cost’))sel(‘pp-cost’).textContent=fmt(total);
-if(sel(‘pp-labour’))sel(‘pp-labour’).textContent=fmt(labourAmt);
-if(sel(‘pp-est’))sel(‘pp-est’).value=totHours.toFixed(1);
-recalcPost();
+  // Post project
+  if(sel('pp-date'))sel('pp-date').textContent=today();
+  if(sel('pp-client'))sel('pp-client').textContent=v('ci-name')||'—';
+  if(sel('pp-cost'))sel('pp-cost').textContent=fmt(total);
+  if(sel('pp-labour'))sel('pp-labour').textContent=fmt(labourAmt);
+  if(sel('pp-est'))sel('pp-est').value=totHours.toFixed(1);
+  recalcPost();
 }
 
 function recalcInvoice(){
-const discOn=sel(‘lr-discount’)&&sel(‘lr-discount’).checked;
-const discPct=(+(v(‘lr-disc-pct’)||10))/100;
-let totHours=0;
-rooms.forEach(r=>totHours+=calcRoomHours(r));
-const _awInv=workers.filter(w=>w.active).length||1;
-const labourAmt=totHours*globalRate*_awInv*(+v(‘lr-buffer’)||1.25);
-const _flatInv=rooms.reduce((s,r)=>s+calcStairsCost(r)+calcDoorsCost(r),0);
-const labourTotalInv=labourAmt+_flatInv;
-const discAmt=discOn?labourTotalInv*discPct:0;
-const subtotal=labourTotalInv-discAmt;
-const tax=subtotal*0.13;
-const quoteTotal=subtotal+tax;
-const coSub=changeItems.reduce((s,i)=>s+(+i.amount||0),0);
-const coTotal=coSub+coSub*0.13;
-const grandTotal=quoteTotal+coTotal;
-const dep=grandTotal*0.1,bal45=grandTotal*0.45,fin=grandTotal-dep-bal45;
-if(sel(‘inv-total-line’))sel(‘inv-total-line’).textContent=fmt(grandTotal);
-if(sel(‘inv-dep-amt’))sel(‘inv-dep-amt’).textContent=fmt(dep);
-if(sel(‘inv-bal-amt’))sel(‘inv-bal-amt’).textContent=fmt(bal45);
-if(sel(‘inv-fin-amt’))sel(‘inv-fin-amt’).textContent=fmt(fin);
-if(sel(‘inv-grand’))sel(‘inv-grand’).textContent=fmt(grandTotal);
-const depPaid=sel(‘inv-dep-paid’)&&sel(‘inv-dep-paid’).checked;
-const balPaid=sel(‘inv-bal-paid’)&&sel(‘inv-bal-paid’).checked;
-const finPaid=sel(‘inv-fin-paid’)&&sel(‘inv-fin-paid’).checked;
-const paid=(depPaid?dep:0)+(balPaid?bal45:0)+(finPaid?fin:0);
-const remaining=grandTotal-paid;
-if(sel(‘inv-remaining’))sel(‘inv-remaining’).textContent=remaining>0?`Outstanding: ${fmt(remaining)}`:‘✓ Fully paid’;
-if(sel(‘inv-dep-date’))sel(‘inv-dep-date’).textContent=depPaid?today():’’;
-if(sel(‘inv-bal-date’))sel(‘inv-bal-date’).textContent=balPaid?today():’’;
-if(sel(‘inv-fin-date’))sel(‘inv-fin-date’).textContent=finPaid?today():’’;
-if(sel(‘inv-client’))sel(‘inv-client’).textContent=v(‘ci-name’)||’—’;
-if(sel(‘inv-addr’))sel(‘inv-addr’).textContent=[v(‘ci-addr1’),v(‘ci-addr2’)].filter(Boolean).join(’, ‘)||’—’;
+  const discOn=sel('lr-discount')&&sel('lr-discount').checked;
+  const discPct=(+(v('lr-disc-pct')||10))/100;
+  let totHours=0;
+  rooms.forEach(r=>totHours+=calcRoomHours(r));
+  const _awInv=workers.filter(w=>w.active).length||1;
+  const labourAmt=totHours*globalRate*_awInv*(+v('lr-buffer')||1.25);
+  const _flatInv=rooms.reduce((s,r)=>s+calcStairsCost(r)+calcDoorsCost(r),0);
+  const labourTotalInv=labourAmt+_flatInv;
+  const discAmt=discOn?labourTotalInv*discPct:0;
+  const subtotal=labourTotalInv-discAmt;
+  const tax=subtotal*0.13;
+  const quoteTotal=subtotal+tax;
+  const coSub=changeItems.reduce((s,i)=>s+(+i.amount||0),0);
+  const coTotal=coSub+coSub*0.13;
+  const grandTotal=quoteTotal+coTotal;
+  const dep=grandTotal*0.1,bal45=grandTotal*0.45,fin=grandTotal-dep-bal45;
+  if(sel('inv-total-line'))sel('inv-total-line').textContent=fmt(grandTotal);
+  if(sel('inv-dep-amt'))sel('inv-dep-amt').textContent=fmt(dep);
+  if(sel('inv-bal-amt'))sel('inv-bal-amt').textContent=fmt(bal45);
+  if(sel('inv-fin-amt'))sel('inv-fin-amt').textContent=fmt(fin);
+  if(sel('inv-grand'))sel('inv-grand').textContent=fmt(grandTotal);
+  const depPaid=sel('inv-dep-paid')&&sel('inv-dep-paid').checked;
+  const balPaid=sel('inv-bal-paid')&&sel('inv-bal-paid').checked;
+  const finPaid=sel('inv-fin-paid')&&sel('inv-fin-paid').checked;
+  const paid=(depPaid?dep:0)+(balPaid?bal45:0)+(finPaid?fin:0);
+  const remaining=grandTotal-paid;
+  if(sel('inv-remaining'))sel('inv-remaining').textContent=remaining>0?`Outstanding: ${fmt(remaining)}`:'✓ Fully paid';
+  if(sel('inv-dep-date'))sel('inv-dep-date').textContent=depPaid?today():'';
+  if(sel('inv-bal-date'))sel('inv-bal-date').textContent=balPaid?today():'';
+  if(sel('inv-fin-date'))sel('inv-fin-date').textContent=finPaid?today():'';
+  if(sel('inv-client'))sel('inv-client').textContent=v('ci-name')||'—';
+  if(sel('inv-addr'))sel('inv-addr').textContent=[v('ci-addr1'),v('ci-addr2')].filter(Boolean).join(', ')||'—';
 }
 
-function buildContract(total,dep,bal45,fin,walls,ceil,trims,doors,days){
-const name=v(‘ci-name’)||’[Client Name]’;
-const addr=v(‘ci-addr1’)||’[Address]’;
-const addr2=v(‘ci-addr2’)||’’;
-const phone=v(‘ci-phone’)||’[Phone]’;
-const email=v(‘ci-email’)||’[Email]’;
-const html=`
-
+function buildContract(total,dep,bal45,fin,days){
+  const name=v('ci-name')||'[Client Name]';
+  const addr=v('ci-addr1')||'[Address]';
+  const addr2=v('ci-addr2')||'';
+  const phone=v('ci-phone')||'[Phone]';
+  const email=v('ci-email')||'[Email]';
+  const html=`
   <p>This Painting Service Agreement ("Agreement") is made and entered into on <strong>${today()}</strong> by and between:</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:16px 0;padding:16px;background:var(--cream2);border-radius:var(--r)">
     <div><div class="doc-section-title">Client</div>
@@ -2341,14 +2347,31 @@ const html=`
       <div><strong>David Truong</strong></div><div>25 Fieldview Crescent</div><div>Markham, ON L3R 3H6</div><div>(647) 449-6611</div><div>info@kingdompainting.ca</div></div>
   </div>
   <div class="doc-section-title" style="margin-top:16px">Scope of Work</div>
-  <p>The Contractor will be providing painting services at ${addr}${addr2?', '+addr2:''}. The total area of surfaces being prepped and painted:</p>
-  <ul style="margin:8px 0 8px 20px;line-height:2">
-    ${walls>0?`<li><strong>${fmtN(walls)}</strong> square feet of walls</li>`:''}
-    ${ceil>0?`<li><strong>${fmtN(ceil)}</strong> square feet of ceilings</li>`:''}
-    ${trims>0?`<li><strong>${fmtN(trims)}</strong> linear feet of trims</li>`:''}
-    ${doors>0?`<li><strong>${doors}</strong> door${doors===1?'':'s'}</li>`:''}
-    ${(()=>{const sc=rooms.filter(r=>r.stairs&&calcStairsCost(r)>0);if(!sc.length)return '';const parts=[];sc.forEach(r=>{if(r.stairTreads)parts.push(r.stairTreads+' tread'+(r.stairTreads>1?'s':''));if(r.stairRisers)parts.push(r.stairRisers+' riser'+(r.stairRisers>1?'s':''));if(r.stairLanding)parts.push(r.stairLanding+' landing'+(r.stairLanding>1?'s':''));if(r.stairStringer)parts.push(r.stairStringer+' stringer'+(r.stairStringer>1?'s':''));});return parts.length?`<li><strong>Stairs:</strong> ${parts.join(', ')}</li>`:''})()}
-  </ul>
+  <p>The Contractor will be providing painting services at ${addr}${addr2?', '+addr2:''}. The following rooms and areas are included:</p>
+  ${(()=>{
+    let rows='';
+    rooms.forEach(r=>{
+      const rName=r.name||'Room '+r.id;
+      const ws=calcWalls(r), cs=calcCeil(r), tr=calcTrims(r);
+      const dc=calcTotalDoorCount(r);
+      const stairParts=[];
+      if(r.stairs){
+        if(r.stairTreads) stairParts.push(r.stairTreads+' tread'+(r.stairTreads>1?'s':''));
+        if(r.stairRisers) stairParts.push(r.stairRisers+' riser'+(r.stairRisers>1?'s':''));
+        if(r.stairLanding) stairParts.push(r.stairLanding+' landing'+(r.stairLanding>1?'s':''));
+        if(r.stairStringer) stairParts.push(r.stairStringer+' stringer'+(r.stairStringer>1?'s':''));
+      }
+      const details=[];
+      if(ws>0) details.push('<strong>'+fmtN(ws)+'</strong> sqft walls');
+      if(cs>0) details.push('<strong>'+fmtN(cs)+'</strong> sqft ceiling');
+      if(tr>0) details.push('<strong>'+fmtN(tr)+'</strong> lin ft trims');
+      if(dc>0) details.push('<strong>'+dc+'</strong> door'+(dc>1?'s':''));
+      if(stairParts.length) details.push('Stairs: '+stairParts.join(', '));
+      if(details.length) rows+='<tr><td style="padding:6px 8px;font-weight:500;white-space:nowrap;border-bottom:1px solid var(--cream2)">'+rName+'</td><td style="padding:6px 8px;font-size:12px;color:var(--ink2);border-bottom:1px solid var(--cream2)">'+details.join(' &nbsp;·&nbsp; ')+'</td></tr>';
+    });
+    if(!rows) return '<p style="color:var(--ink3);font-size:12px">No rooms configured yet.</p>';
+    return '<table style="width:100%;border-collapse:collapse;font-size:13px;margin:8px 0"><tbody>'+rows+'</tbody></table>';
+  })()}
   <div class="doc-section-title" style="margin-top:16px">Duration</div>
   <p>Work will commence on the agreed start date and is expected to be completed in approximately <strong>${days} day(s)</strong>, subject to unforeseen delays.</p>
   <div class="doc-section-title" style="margin-top:16px">Payment Terms</div>
@@ -2411,275 +2434,299 @@ const html=`
 // CHANGE ORDER
 // ════════════════════════════════════════════════
 function addChangeItem(){
-changeCounter++;
-changeItems.push({id:changeCounter,desc:’’,amount:0});
-renderChangeItems();
+  changeCounter++;
+  changeItems.push({id:changeCounter,desc:'',amount:0});
+  renderChangeItems();
 }
 function renderChangeItems(){
-const c=sel(‘co-items’);
-if(!c)return;
-c.innerHTML=’’;
-changeItems.forEach(item=>{
-const div=document.createElement(‘div’);
-div.className=‘change-item’;
-div.innerHTML=` <input type="text" placeholder="Item #" style="font-size:13px;padding:7px 9px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"> <input type="text" value="${item.desc}" placeholder="Description of work" style="font-size:13px;padding:7px 9px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="changeItems.find(x=>x.id==${item.id}).desc=this.value"> <input type="number" value="${item.amount||''}" placeholder="Amount $" style="font-size:13px;padding:7px 9px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="changeItems.find(x=>x.id==${item.id}).amount=+this.value;recalcCO()">`;
-c.appendChild(div);
-});
+  const c=sel('co-items');
+  if(!c)return;
+  c.innerHTML='';
+  changeItems.forEach(item=>{
+    const div=document.createElement('div');
+    div.className='change-item';
+    div.innerHTML=`
+      <input type="text" placeholder="Item #" style="font-size:13px;padding:7px 9px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)">
+      <input type="text" value="${item.desc}" placeholder="Description of work" style="font-size:13px;padding:7px 9px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="changeItems.find(x=>x.id==${item.id}).desc=this.value">
+      <input type="number" value="${item.amount||''}" placeholder="Amount $" style="font-size:13px;padding:7px 9px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="changeItems.find(x=>x.id==${item.id}).amount=+this.value;recalcCO()">`;
+    c.appendChild(div);
+  });
 }
 function recalcCO(){
-const sub=changeItems.reduce((s,i)=>s+(+i.amount||0),0);
-const tax=sub*0.13;
-if(sel(‘co-sub’))sel(‘co-sub’).textContent=fmt(sub);
-if(sel(‘co-tax’))sel(‘co-tax’).textContent=fmt(tax);
-if(sel(‘co-total’))sel(‘co-total’).textContent=fmt(sub+tax);
-recalcInvoice();
+  const sub=changeItems.reduce((s,i)=>s+(+i.amount||0),0);
+  const tax=sub*0.13;
+  if(sel('co-sub'))sel('co-sub').textContent=fmt(sub);
+  if(sel('co-tax'))sel('co-tax').textContent=fmt(tax);
+  if(sel('co-total'))sel('co-total').textContent=fmt(sub+tax);
+  recalcInvoice();
 }
 
 // ════════════════════════════════════════════════
 // POST PROJECT
 // ════════════════════════════════════════════════
 function recalcPost(){
-const cost=rooms.reduce((s,r)=>s+calcRoomCost(r),0)*1.13;
-const actual=+v(‘pp-actual’)||0;
-const est=+v(‘pp-est’)||0;
-const materials=+v(‘pp-materials’)||0;
-const wages=+v(‘pp-wages’)||0;
-const gross=cost-materials-wages;
-const margin=cost>0?gross/cost:0;
-const delta=actual-est;
-if(sel(‘pp-gross’))sel(‘pp-gross’).textContent=fmt(gross);
-if(sel(‘pp-eff’))sel(‘pp-eff’).textContent=est>0?((est/Math.max(actual,0.01))*100).toFixed(0)+’%’:’—’;
-if(sel(‘pp-delta’))sel(‘pp-delta’).textContent=delta===0?‘On target’:delta>0?’+’+delta.toFixed(1)+’ hrs over’:Math.abs(delta).toFixed(1)+’ hrs under’;
-if(sel(‘pp-margin’))sel(‘pp-margin’).textContent=(margin*100).toFixed(1)+’%’;
+  const cost=rooms.reduce((s,r)=>s+calcRoomCost(r),0)*1.13;
+  const actual=+v('pp-actual')||0;
+  const est=+v('pp-est')||0;
+  const materials=+v('pp-materials')||0;
+  const wages=+v('pp-wages')||0;
+  const gross=cost-materials-wages;
+  const margin=cost>0?gross/cost:0;
+  const delta=actual-est;
+  if(sel('pp-gross'))sel('pp-gross').textContent=fmt(gross);
+  if(sel('pp-eff'))sel('pp-eff').textContent=est>0?((est/Math.max(actual,0.01))*100).toFixed(0)+'%':'—';
+  if(sel('pp-delta'))sel('pp-delta').textContent=delta===0?'On target':delta>0?'+'+delta.toFixed(1)+' hrs over':Math.abs(delta).toFixed(1)+' hrs under';
+  if(sel('pp-margin'))sel('pp-margin').textContent=(margin*100).toFixed(1)+'%';
 }
 
 // ════════════════════════════════════════════════
 // LABOUR RATES INIT
 // ════════════════════════════════════════════════
 function initLabourRates(){
-const ohC=sel(‘lr-overhead-fields’);
-if(ohC){
-let ohHtml=’’;
-overheadItems.forEach((item,i)=>{
-ohHtml+=`<div style="display:grid;grid-template-columns:1fr 90px 28px;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid var(--cream2)"> <input type="text" value="${item.n}" placeholder="Item name" oninput="overheadItems[${i}].n=this.value" style="font-size:12px;padding:4px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);width:100%"> <input type="number" value="${item.v}" min="0" step="1" oninput="overheadItems[${i}].v=+this.value;recalcRates()" style="font-size:12px;padding:4px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);text-align:right;width:100%"> <button onclick="overheadItems.splice(${i},1);initLabourRates()" style="background:none;border:none;cursor:pointer;color:var(--ink4);font-size:14px;line-height:1;padding:2px 4px;border-radius:3px" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--ink4)'">×</button> </div>`;
-});
-ohHtml+=`<button onclick="overheadItems.push({n:'New item',v:0});initLabourRates()" style="margin-top:8px;width:100%;padding:7px;border:1px dashed var(--ink4);border-radius:var(--r);background:transparent;color:var(--ink3);font-size:12px;cursor:pointer;font-family:var(--sans);transition:all .15s" onmouseover="this.style.background='var(--cream2)';this.style.color='var(--ink)';this.style.borderColor='var(--gold)'" onmouseout="this.style.background='transparent';this.style.color='var(--ink3)';this.style.borderColor='var(--ink4)'">+ Add item</button>`;
-ohC.innerHTML=ohHtml;
-}
-const wC=sel(‘lr-workers’);
-if(wC){
-let wHtml=’<div class="workers-row">’;
-workers.forEach((w,i)=>{
-wHtml+=`<div class="worker-tag" style="position:relative;padding-right:28px"> <input type="checkbox" ${w.active?'checked':''} onchange="workers[${i}].active=this.checked;recalcRates()"> <input type="text" value="${w.n}" placeholder="Name" oninput="workers[${i}].n=this.value" style="width:72px;font-size:12px;padding:4px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"> <span style="font-size:11px;color:var(--ink3)">$</span> <input type="number" value="${w.r}" min="0" step="0.5" oninput="workers[${i}].r=+this.value;recalcRates()" style="width:52px;font-size:12px;padding:4px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);text-align:right"> <span style="font-size:10px;color:var(--ink3)">/hr</span> <button onclick="workers.splice(${i},1);initLabourRates()" title="Remove worker" style="position:absolute;top:4px;right:4px;background:none;border:none;cursor:pointer;color:var(--ink4);font-size:13px;line-height:1;padding:1px 3px;border-radius:3px" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--ink4)'">×</button> </div>`;
-});
-wHtml+=’</div>’;
-wHtml+=`<button onclick="workers.push({n:'Worker ${workers.length+1}',r:25,active:true});initLabourRates()" style="margin-top:10px;width:100%;padding:7px;border:1px dashed var(--ink4);border-radius:var(--r);background:transparent;color:var(--ink3);font-size:12px;cursor:pointer;font-family:var(--sans);transition:all .15s" onmouseover="this.style.background='var(--cream2)';this.style.color='var(--ink)';this.style.borderColor='var(--gold)'" onmouseout="this.style.background='transparent';this.style.color='var(--ink3)';this.style.borderColor='var(--ink4)'">+ Add worker</button>`;
-wC.innerHTML=wHtml;
-}
-recalcRates();
+  const ohC=sel('lr-overhead-fields');
+  if(ohC){
+    let ohHtml='';
+    overheadItems.forEach((item,i)=>{
+      ohHtml+=`<div style="display:grid;grid-template-columns:1fr 90px 28px;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid var(--cream2)">
+        <input type="text" value="${item.n}" placeholder="Item name" oninput="overheadItems[${i}].n=this.value" style="font-size:12px;padding:4px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);width:100%">
+        <input type="number" value="${item.v}" min="0" step="1" oninput="overheadItems[${i}].v=+this.value;recalcRates()" style="font-size:12px;padding:4px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);text-align:right;width:100%">
+        <button onclick="overheadItems.splice(${i},1);initLabourRates()" style="background:none;border:none;cursor:pointer;color:var(--ink4);font-size:14px;line-height:1;padding:2px 4px;border-radius:3px" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--ink4)'">×</button>
+      </div>`;
+    });
+    ohHtml+=`<button onclick="overheadItems.push({n:'New item',v:0});initLabourRates()" style="margin-top:8px;width:100%;padding:7px;border:1px dashed var(--ink4);border-radius:var(--r);background:transparent;color:var(--ink3);font-size:12px;cursor:pointer;font-family:var(--sans);transition:all .15s" onmouseover="this.style.background='var(--cream2)';this.style.color='var(--ink)';this.style.borderColor='var(--gold)'" onmouseout="this.style.background='transparent';this.style.color='var(--ink3)';this.style.borderColor='var(--ink4)'">+ Add item</button>`;
+    ohC.innerHTML=ohHtml;
+  }
+  const wC=sel('lr-workers');
+  if(wC){
+    let wHtml='<div class="workers-row">';
+    workers.forEach((w,i)=>{
+      wHtml+=`<div class="worker-tag" style="position:relative;padding-right:28px">
+        <input type="checkbox" ${w.active?'checked':''} onchange="workers[${i}].active=this.checked;recalcRates()">
+        <input type="text" value="${w.n}" placeholder="Name" oninput="workers[${i}].n=this.value" style="width:72px;font-size:12px;padding:4px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)">
+        <span style="font-size:11px;color:var(--ink3)">$</span>
+        <input type="number" value="${w.r}" min="0" step="0.5" oninput="workers[${i}].r=+this.value;recalcRates()" style="width:52px;font-size:12px;padding:4px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);text-align:right">
+        <span style="font-size:10px;color:var(--ink3)">/hr</span>
+        <button onclick="workers.splice(${i},1);initLabourRates()" title="Remove worker" style="position:absolute;top:4px;right:4px;background:none;border:none;cursor:pointer;color:var(--ink4);font-size:13px;line-height:1;padding:1px 3px;border-radius:3px" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--ink4)'">×</button>
+      </div>`;
+    });
+    wHtml+='</div>';
+    wHtml+=`<button onclick="workers.push({n:'Worker ${workers.length+1}',r:25,active:true});initLabourRates()" style="margin-top:10px;width:100%;padding:7px;border:1px dashed var(--ink4);border-radius:var(--r);background:transparent;color:var(--ink3);font-size:12px;cursor:pointer;font-family:var(--sans);transition:all .15s" onmouseover="this.style.background='var(--cream2)';this.style.color='var(--ink)';this.style.borderColor='var(--gold)'" onmouseout="this.style.background='transparent';this.style.color='var(--ink3)';this.style.borderColor='var(--ink4)'">+ Add worker</button>`;
+    wC.innerHTML=wHtml;
+  }
+  recalcRates();
 }
 
 // ════════════════════════════════════════════════
 // PAINT INPUTS INIT
 // ════════════════════════════════════════════════
 function renderPITable(containerId, dataArr, hasPriceCol, onNameChange, onPriceChange, onDelete, onAdd, addLabel){
-const c=sel(containerId);
-if(!c) return;
-const inp=(val,cb,ph,w,align)=>`<input type="text" value="${val||''}" placeholder="${ph||''}" oninput="${cb}" style="font-size:12px;padding:5px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);width:${w||'100%'};text-align:${align||'left'}">`;
-const inpNum=(val,cb,w)=>`<input type="number" min="0" step="0.01" value="${val||''}" placeholder="$" oninput="${cb}" style="font-size:12px;padding:5px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);width:${w||'80px'};text-align:right">`;
-const delBtn=(cb)=>`<button onclick="${cb}" style="background:none;border:none;cursor:pointer;color:var(--ink4);font-size:15px;line-height:1;padding:2px 6px;border-radius:var(--r)" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--ink4)'">×</button>`;
-let rows=’’;
-dataArr.forEach((item,i)=>{
-const nameInput=inp(item.n, onNameChange(i), ‘Product name’, hasPriceCol?‘calc(100% - 100px)’:‘100%’);
-const priceInput=hasPriceCol?inpNum(item.p, onPriceChange(i)):’’;
-rows+=`<tr> <td style="padding:4px 6px">${nameInput}</td> ${hasPriceCol?`<td style="padding:4px 6px;width:90px">${priceInput}</td>`:''} <td style="padding:4px 6px;width:36px">${delBtn(onDelete(i))}</td> </tr>`;
-});
-const addRow=`<tr><td colspan="${hasPriceCol?3:2}" style="padding:8px 6px 4px">
-<button onclick="${onAdd}" style="width:100%;padding:7px;border:1px dashed var(--ink4);border-radius:var(--r);background:transparent;color:var(--ink3);font-size:12px;cursor:pointer;font-family:var(--sans);transition:all .15s" onmouseover="this.style.background='var(--cream2)';this.style.color='var(--ink)';this.style.borderColor='var(--gold)'" onmouseout="this.style.background='transparent';this.style.color='var(--ink3)';this.style.borderColor='var(--ink4)'">+ ${addLabel||‘Add item’}</button>
-
+  const c=sel(containerId);
+  if(!c) return;
+  const inp=(val,cb,ph,w,align)=>`<input type="text" value="${val||''}" placeholder="${ph||''}" oninput="${cb}" style="font-size:12px;padding:5px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);width:${w||'100%'};text-align:${align||'left'}">`;
+  const inpNum=(val,cb,w)=>`<input type="number" min="0" step="0.01" value="${val||''}" placeholder="$" oninput="${cb}" style="font-size:12px;padding:5px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);width:${w||'80px'};text-align:right">`;
+  const delBtn=(cb)=>`<button onclick="${cb}" style="background:none;border:none;cursor:pointer;color:var(--ink4);font-size:15px;line-height:1;padding:2px 6px;border-radius:var(--r)" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--ink4)'">×</button>`;
+  let rows='';
+  dataArr.forEach((item,i)=>{
+    const nameInput=inp(item.n, onNameChange(i), 'Product name', hasPriceCol?'calc(100% - 100px)':'100%');
+    const priceInput=hasPriceCol?inpNum(item.p, onPriceChange(i)):'';
+    rows+=`<tr>
+      <td style="padding:4px 6px">${nameInput}</td>
+      ${hasPriceCol?`<td style="padding:4px 6px;width:90px">${priceInput}</td>`:''}
+      <td style="padding:4px 6px;width:36px">${delBtn(onDelete(i))}</td>
+    </tr>`;
+  });
+  const addRow=`<tr><td colspan="${hasPriceCol?3:2}" style="padding:8px 6px 4px">
+    <button onclick="${onAdd}" style="width:100%;padding:7px;border:1px dashed var(--ink4);border-radius:var(--r);background:transparent;color:var(--ink3);font-size:12px;cursor:pointer;font-family:var(--sans);transition:all .15s" onmouseover="this.style.background='var(--cream2)';this.style.color='var(--ink)';this.style.borderColor='var(--gold)'" onmouseout="this.style.background='transparent';this.style.color='var(--ink3)';this.style.borderColor='var(--ink4)'">+ ${addLabel||'Add item'}</button>
   </td></tr>`;
   c.innerHTML=`<table class="doc-table" style="width:100%"><thead><tr><th>Product / Name</th>${hasPriceCol?'<th style="width:90px;text-align:right">Price ($)</th>':''}<th style="width:36px"></th></tr></thead><tbody>${rows}${addRow}</tbody></table>`;
 }
 
 function renderColours(){
-const c=sel(‘pi-colours-container’);
-if(!c) return;
-let rows=’’;
-COLOURS.forEach((item,i)=>{
-rows+=`<tr> <td style="padding:4px 6px;width:20px"><span style="display:inline-block;width:16px;height:16px;border-radius:50%;background:${item.h};border:1px solid rgba(0,0,0,.15);vertical-align:middle"></span></td> <td style="padding:4px 6px"><input type="text" value="${item.n||''}" placeholder="Colour name" oninput="COLOURS[${i}].n=this.value;renderRooms();recalcAll()" style="font-size:12px;padding:5px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);width:100%"></td> <td style="padding:4px 6px;width:90px"><input type="color" value="${item.h||'#cccccc'}" oninput="COLOURS[${i}].h=this.value;renderColours();renderRooms()" style="width:50px;height:30px;padding:2px;border:1px solid var(--cream3);border-radius:var(--r);cursor:pointer"></td> <td style="padding:4px 6px;width:36px"><button onclick="COLOURS.splice(${i},1);renderColours();renderRooms()" style="background:none;border:none;cursor:pointer;color:var(--ink4);font-size:15px;line-height:1;padding:2px 6px;border-radius:var(--r)" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--ink4)'">×</button></td> </tr>`;
-});
-const addRow=`<tr><td colspan="4" style="padding:8px 6px 4px">
-<button onclick="COLOURS.push({n:'New Colour',h:'#cccccc'});renderColours();renderRooms()" style="width:100%;padding:7px;border:1px dashed var(--ink4);border-radius:var(--r);background:transparent;color:var(--ink3);font-size:12px;cursor:pointer;font-family:var(--sans)" onmouseover="this.style.background='var(--cream2)';this.style.color='var(--ink)';this.style.borderColor='var(--gold)'" onmouseout="this.style.background='transparent';this.style.color='var(--ink3)';this.style.borderColor='var(--ink4)'">+ Add colour</button>
-
+  const c=sel('pi-colours-container');
+  if(!c) return;
+  let rows='';
+  COLOURS.forEach((item,i)=>{
+    rows+=`<tr>
+      <td style="padding:4px 6px;width:20px"><span style="display:inline-block;width:16px;height:16px;border-radius:50%;background:${item.h};border:1px solid rgba(0,0,0,.15);vertical-align:middle"></span></td>
+      <td style="padding:4px 6px"><input type="text" value="${item.n||''}" placeholder="Colour name" oninput="COLOURS[${i}].n=this.value;renderRooms();recalcAll()" style="font-size:12px;padding:5px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);width:100%"></td>
+      <td style="padding:4px 6px;width:90px"><input type="color" value="${item.h||'#cccccc'}" oninput="COLOURS[${i}].h=this.value;renderColours();renderRooms()" style="width:50px;height:30px;padding:2px;border:1px solid var(--cream3);border-radius:var(--r);cursor:pointer"></td>
+      <td style="padding:4px 6px;width:36px"><button onclick="COLOURS.splice(${i},1);renderColours();renderRooms()" style="background:none;border:none;cursor:pointer;color:var(--ink4);font-size:15px;line-height:1;padding:2px 6px;border-radius:var(--r)" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--ink4)'">×</button></td>
+    </tr>`;
+  });
+  const addRow=`<tr><td colspan="4" style="padding:8px 6px 4px">
+    <button onclick="COLOURS.push({n:'New Colour',h:'#cccccc'});renderColours();renderRooms()" style="width:100%;padding:7px;border:1px dashed var(--ink4);border-radius:var(--r);background:transparent;color:var(--ink3);font-size:12px;cursor:pointer;font-family:var(--sans)" onmouseover="this.style.background='var(--cream2)';this.style.color='var(--ink)';this.style.borderColor='var(--gold)'" onmouseout="this.style.background='transparent';this.style.color='var(--ink3)';this.style.borderColor='var(--ink4)'">+ Add colour</button>
   </td></tr>`;
   c.innerHTML=`<table class="doc-table" style="width:100%"><thead><tr><th style="width:20px"></th><th>Colour name</th><th style="width:90px">Swatch</th><th style="width:36px"></th></tr></thead><tbody>${rows}${addRow}</tbody></table>`;
 }
 
 function initPaintInputs(){
-renderPITable(
-‘pi-paints-container’, PAINTS, true,
-(i)=>`PAINTS[${i}].n=this.value;renderRooms()`,
-(i)=>`PAINTS[${i}].p=+this.value`,
-(i)=>`PAINTS.splice(${i},1);initPaintInputs()`,
-`PAINTS.push({n:'New Paint',p:0});initPaintInputs()`,
-‘Add paint’
-);
-renderPITable(
-‘pi-primers-container’, PRIMERS, true,
-(i)=>`PRIMERS[${i}].n=this.value;renderRooms()`,
-(i)=>`PRIMERS[${i}].p=+this.value`,
-(i)=>`PRIMERS.splice(${i},1);initPaintInputs()`,
-`PRIMERS.push({n:'New Primer',p:0});initPaintInputs()`,
-‘Add primer’
-);
-renderColours();
-renderPITable(
-‘pi-supplies-container’, SUPPLIES, true,
-(i)=>`SUPPLIES[${i}].n=this.value`,
-(i)=>`SUPPLIES[${i}].p=+this.value`,
-(i)=>`SUPPLIES.splice(${i},1);initPaintInputs()`,
-`SUPPLIES.push({n:'New Supply',p:0});initPaintInputs()`,
-‘Add supply’
-);
+  renderPITable(
+    'pi-paints-container', PAINTS, true,
+    (i)=>`PAINTS[${i}].n=this.value;renderRooms()`,
+    (i)=>`PAINTS[${i}].p=+this.value`,
+    (i)=>`PAINTS.splice(${i},1);initPaintInputs()`,
+    `PAINTS.push({n:'New Paint',p:0});initPaintInputs()`,
+    'Add paint'
+  );
+  renderPITable(
+    'pi-primers-container', PRIMERS, true,
+    (i)=>`PRIMERS[${i}].n=this.value;renderRooms()`,
+    (i)=>`PRIMERS[${i}].p=+this.value`,
+    (i)=>`PRIMERS.splice(${i},1);initPaintInputs()`,
+    `PRIMERS.push({n:'New Primer',p:0});initPaintInputs()`,
+    'Add primer'
+  );
+  renderColours();
+  renderPITable(
+    'pi-supplies-container', SUPPLIES, true,
+    (i)=>`SUPPLIES[${i}].n=this.value`,
+    (i)=>`SUPPLIES[${i}].p=+this.value`,
+    (i)=>`SUPPLIES.splice(${i},1);initPaintInputs()`,
+    `SUPPLIES.push({n:'New Supply',p:0});initPaintInputs()`,
+    'Add supply'
+  );
 }
 
 // ════════════════════════════════════════════════
 // INIT
 // ════════════════════════════════════════════════
 (function init(){
-const d=new Date();
-const ds=d.toLocaleDateString(‘en-CA’,{year:‘numeric’,month:‘long’,day:‘numeric’});
-sel(‘topDate’).textContent=ds;
-[‘q-date’,‘inv-date’,‘con-date’,‘co-date’].forEach(id=>{const el=sel(id);if(el)el.textContent=ds;});
-initLabourRates();
-initPaintInputs();
-addRoom();
-// Open first room by default
-if(rooms.length>0){const firstBody=document.querySelector(’.room-body’);if(firstBody){firstBody.classList.add(‘open’);const arr=sel(‘arr_’+rooms[0].id);if(arr)arr.classList.add(‘open’);}}
+  const d=new Date();
+  const ds=d.toLocaleDateString('en-CA',{year:'numeric',month:'long',day:'numeric'});
+  sel('topDate').textContent=ds;
+  ['q-date','inv-date','con-date','co-date'].forEach(id=>{const el=sel(id);if(el)el.textContent=ds;});
+  initLabourRates();
+  initPaintInputs();
+  addRoom();
+  // Open first room by default
+  if(rooms.length>0){const firstBody=document.querySelector('.room-body');if(firstBody){firstBody.classList.add('open');const arr=sel('arr_'+rooms[0].id);if(arr)arr.classList.add('open');}}
 })();
 
 // ── PDF EXPORT ──
 function exportPDF(pageIdOrArray){
-const ids = Array.isArray(pageIdOrArray) ? pageIdOrArray : [pageIdOrArray];
-const allPages = document.querySelectorAll(’.page’);
-allPages.forEach(p => { p.classList.remove(‘print-target’); p.classList.remove(‘cover-target’); });
-const targets = ids.map(id => document.getElementById(id)).filter(Boolean);
-targets.forEach(t => {
-t.classList.add(‘print-target’);
-if(t.id === ‘page-cover’) t.classList.add(‘cover-target’);
-});
-recalcAll();
-setTimeout(function(){
-window.print();
-setTimeout(function(){
-targets.forEach(t => { t.classList.remove(‘print-target’); t.classList.remove(‘cover-target’); });
-}, 1000);
-}, 120);
+  const ids = Array.isArray(pageIdOrArray) ? pageIdOrArray : [pageIdOrArray];
+  const allPages = document.querySelectorAll('.page');
+  allPages.forEach(p => { p.classList.remove('print-target'); p.classList.remove('cover-target'); });
+  const targets = ids.map(id => document.getElementById(id)).filter(Boolean);
+  targets.forEach(t => {
+    t.classList.add('print-target');
+    if(t.id === 'page-cover') t.classList.add('cover-target');
+  });
+  recalcAll();
+  setTimeout(function(){
+    window.print();
+    setTimeout(function(){
+      targets.forEach(t => { t.classList.remove('print-target'); t.classList.remove('cover-target'); });
+    }, 1000);
+  }, 120);
 }
 
+
+
+
 function updWin(id,idx,key,val){
-const r=rooms.find(x=>x.id===id);
-if(!r)return;
-if(!r.winList)r.winList=[{l:0,w:0}];
-r.winList[idx][key]=val;
-r.winLF=calcWinLF(r);
-recalcAll();
+  const r=rooms.find(x=>x.id===id);
+  if(!r)return;
+  if(!r.winList)r.winList=[{l:0,w:0}];
+  r.winList[idx][key]=val;
+  r.winLF=calcWinLF(r);
+  recalcAll();
 }
 
 function addWin(id){
-const r=rooms.find(x=>x.id===id);
-if(!r)return;
-if(!r.winList)r.winList=[{l:0,w:0}];
-r.winList.push({l:0,w:0});
-renderRooms();recalcAll();
+  const r=rooms.find(x=>x.id===id);
+  if(!r)return;
+  if(!r.winList)r.winList=[{l:0,w:0}];
+  r.winList.push({l:0,w:0});
+  renderRooms();recalcAll();
 }
 
 function removeWin(id,idx){
-const r=rooms.find(x=>x.id===id);
-if(!r||!r.winList)return;
-r.winList.splice(idx,1);
-if(!r.winList.length)r.winList=[{l:0,w:0}];
-r.winLF=calcWinLF(r);
-renderRooms();recalcAll();
+  const r=rooms.find(x=>x.id===id);
+  if(!r||!r.winList)return;
+  r.winList.splice(idx,1);
+  if(!r.winList.length)r.winList=[{l:0,w:0}];
+  r.winLF=calcWinLF(r);
+  renderRooms();recalcAll();
 }
 
 function renderWinList(r){
-var wins=r.winList&&r.winList.length?r.winList:[{l:0,w:0}];
-var sty=“font-size:12px;padding:5px 8px;border:1px solid var(–cream3);border-radius:var(–r);background:var(–cream);color:var(–ink);width:100%”;
-var out=”<div style="margin:0 0 10px 18px;padding:10px;background:var(–cream2);border-radius:var(–r)">”;
-out+=”<div style="font-size:10px;color:var(–ink4);margin-bottom:8px">Each window: LF = (L×2)+(W×2)  ·  Wall deduction = L×W</div>”;
-for(var i=0;i<wins.length;i++){
-var w=wins[i];
-out+=”<div style="display:grid;grid-template-columns:50px 1fr 1fr 28px;gap:6px;align-items:end;margin-bottom:6px">”;
-out+=”<span style="font-size:11px;color:var(–ink3);padding-bottom:8px">Win “+(i+1)+”</span>”;
-out+=”<div class="field"><label>Length (ft)</label><input type="number" min="0" step="0.5" value="”+(w.l||””)+”" placeholder="0" oninput="updWin(”+r.id+”,”+i+”,‘l’,+this.value)" style="”+sty+”"></div>”;
-out+=”<div class="field"><label>Width (ft)</label><input type="number" min="0" step="0.5" value="”+(w.w||””)+”" placeholder="0" oninput="updWin(”+r.id+”,”+i+”,‘w’,+this.value)" style="”+sty+”"></div>”;
-out+=i>0?”<button onclick="removeWin(”+r.id+”,”+i+”)" style="background:none;border:none;cursor:pointer;color:var(–ink4);font-size:16px;line-height:1;padding-bottom:6px">×</button>”:”<span></span>”;
-out+=”</div>”;
-}
-out+=”<button onclick="addWin(”+r.id+”)" style="font-size:11px;padding:5px 12px;border:1px dashed var(–ink4);border-radius:var(–r);background:transparent;color:var(–ink3);cursor:pointer;font-family:var(–sans);margin-top:2px">+ Add window</button>”;
-out+=”</div>”;
-return out;
+  var wins=r.winList&&r.winList.length?r.winList:[{l:0,w:0}];
+  var sty="font-size:12px;padding:5px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);width:100%";
+  var out="<div style=\"margin:0 0 10px 18px;padding:10px;background:var(--cream2);border-radius:var(--r)\">";
+  out+="<div style=\"font-size:10px;color:var(--ink4);margin-bottom:8px\">Each window: LF = (L×2)+(W×2) &nbsp;&middot;&nbsp; Wall deduction = L×W</div>";
+  for(var i=0;i<wins.length;i++){
+    var w=wins[i];
+    out+="<div style=\"display:grid;grid-template-columns:50px 1fr 1fr 28px;gap:6px;align-items:end;margin-bottom:6px\">";
+    out+="<span style=\"font-size:11px;color:var(--ink3);padding-bottom:8px\">Win "+(i+1)+"</span>";
+    out+="<div class=\"field\"><label>Length (ft)</label><input type=\"number\" min=\"0\" step=\"0.5\" value=\""+(w.l||"")+"\" placeholder=\"0\" oninput=\"updWin("+r.id+","+i+",'l',+this.value)\" style=\""+sty+"\"></div>";
+    out+="<div class=\"field\"><label>Width (ft)</label><input type=\"number\" min=\"0\" step=\"0.5\" value=\""+(w.w||"")+"\" placeholder=\"0\" oninput=\"updWin("+r.id+","+i+",'w',+this.value)\" style=\""+sty+"\"></div>";
+    out+=i>0?"<button onclick=\"removeWin("+r.id+","+i+")\" style=\"background:none;border:none;cursor:pointer;color:var(--ink4);font-size:16px;line-height:1;padding-bottom:6px\">&#215;</button>":"<span></span>";
+    out+="</div>";
+  }
+  out+="<button onclick=\"addWin("+r.id+")\" style=\"font-size:11px;padding:5px 12px;border:1px dashed var(--ink4);border-radius:var(--r);background:transparent;color:var(--ink3);cursor:pointer;font-family:var(--sans);margin-top:2px\">+ Add window</button>";
+  out+="</div>";
+  return out;
 }
 
 function renderStairsPanel(r){
-var sty=“font-size:12px;padding:5px 8px;border:1px solid var(–cream3);border-radius:var(–r);background:var(–cream);color:var(–ink);width:100%”;
-var out=”<div style="margin:0 0 10px 18px;padding:10px;background:var(–cream2);border-radius:var(–r)">”;
-out+=”<div style="font-size:10px;color:var(–ink4);margin-bottom:8px">Treads $25/ea  ·  Risers $25/ea  ·  Landing $50/ea  ·  Stringer $100/ea</div>”;
-out+=”<div class="stairs-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px">”;
-var fields=[
-{key:“stairTreads”,label:“Treads”,val:r.stairTreads||””},
-{key:“stairRisers”,label:“Risers”,val:r.stairRisers||””},
-{key:“stairLanding”,label:“Landing”,val:r.stairLanding||””},
-{key:“stairStringer”,label:“Stringer”,val:r.stairStringer||””}
-];
-for(var i=0;i<fields.length;i++){
-var f=fields[i];
-out+=”<div class="field"><label>”+f.label+”</label>”;
-out+=”<input type="number" min="0" step="1" value="”+(f.val||””)+”" placeholder="0" oninput="upd(”+r.id+”,’”+f.key+”’,+this.value)" style="”+sty+”"></div>”;
-}
-out+=”</div></div>”;
-return out;
+  var sty="font-size:12px;padding:5px 8px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);width:100%";
+  var out="<div style=\"margin:0 0 10px 18px;padding:10px;background:var(--cream2);border-radius:var(--r)\">";
+  out+="<div style=\"font-size:10px;color:var(--ink4);margin-bottom:8px\">Treads $25/ea &nbsp;&middot;&nbsp; Risers $25/ea &nbsp;&middot;&nbsp; Landing $50/ea &nbsp;&middot;&nbsp; Stringer $100/ea</div>";
+  out+="<div class=\"stairs-grid\" style=\"display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px\">";
+  var fields=[
+    {key:"stairTreads",label:"Treads",val:r.stairTreads||""},
+    {key:"stairRisers",label:"Risers",val:r.stairRisers||""},
+    {key:"stairLanding",label:"Landing",val:r.stairLanding||""},
+    {key:"stairStringer",label:"Stringer",val:r.stairStringer||""}
+  ];
+  for(var i=0;i<fields.length;i++){
+    var f=fields[i];
+    out+="<div class=\"field\"><label>"+f.label+"</label>";
+    out+="<input type=\"number\" min=\"0\" step=\"1\" value=\""+(f.val||"")+"\" placeholder=\"0\" oninput=\"upd("+r.id+",'"+f.key+"',+this.value)\" style=\""+sty+"\"></div>";
+  }
+  out+="</div></div>";
+  return out;
 }
 
 function updDoorType(id,key,val){
-const r=rooms.find(x=>x.id===id);
-if(!r)return;
-if(!r.doorTypes)r.doorTypes={flat:0,panel6:0,glass:0,custom:0};
-r.doorTypes[key]=val;
-// update doorCount to total for backward compatibility
-r.doorCount=calcTotalDoorCount(r);
-const rws=sel(‘rws_’+id),rcs=sel(‘rcs_’+id),rlc=sel(‘rlc_’+id),rtrim=sel(‘rtrim_’+id);
-const ws=calcWalls(r),cs=calcCeil(r),lc=calcRoomCost(r);
-if(rws)rws.textContent=fmtN(ws);
-if(rcs)rcs.textContent=fmtN(cs);
-if(rtrim)rtrim.textContent=fmtN(calcTrims(r));
-if(rlc)rlc.textContent=fmt(lc);
-recalcAll();
+  const r=rooms.find(x=>x.id===id);
+  if(!r)return;
+  if(!r.doorTypes)r.doorTypes={flat:0,panel6:0,glass:0,custom:0};
+  r.doorTypes[key]=val;
+  // update doorCount to total for backward compatibility
+  r.doorCount=calcTotalDoorCount(r);
+  const rws=sel('rws_'+id),rcs=sel('rcs_'+id),rlc=sel('rlc_'+id),rtrim=sel('rtrim_'+id);
+  const ws=calcWalls(r),cs=calcCeil(r),lc=calcRoomCost(r);
+  if(rws)rws.textContent=fmtN(ws);
+  if(rcs)rcs.textContent=fmtN(cs);
+  if(rtrim)rtrim.textContent=fmtN(calcTrims(r));
+  if(rlc)rlc.textContent=fmt(lc);
+  recalcAll();
 }
 
 function updPrep(id,key,val){
-const r=rooms.find(x=>x.id===id);
-if(!r)return;
-if(!r.prep)r.prep={furniture:false,plastic:false,outlets:false,drywall:false,caulking:false,cleanup:false,custom:’’};
-r.prep[key]=val;
-recalcAll();
+  const r=rooms.find(x=>x.id===id);
+  if(!r)return;
+  if(!r.prep)r.prep={furniture:false,plastic:false,outlets:false,drywall:false,caulking:false,cleanup:false,custom:''};
+  r.prep[key]=val;
+  recalcAll();
 }
 
 function updIrreg(id,checked){
-const r=rooms.find(x=>x.id===id);
-if(!r)return;
-r.irregular=checked;
-if(!r.irreg)r.irreg=[0,0,0,0,0,0];
-renderRooms();recalcAll();
+  const r=rooms.find(x=>x.id===id);
+  if(!r)return;
+  r.irregular=checked;
+  if(!r.irreg)r.irreg=[0,0,0,0,0,0];
+  renderRooms();recalcAll();
 }
 
 function updIrregVal(id,idx,val){
-const r=rooms.find(x=>x.id===id);
-if(!r)return;
-if(!r.irreg)r.irreg=[0,0,0,0,0,0];
-r.irreg[idx]=val;
-recalcAll();
+  const r=rooms.find(x=>x.id===id);
+  if(!r)return;
+  if(!r.irreg)r.irreg=[0,0,0,0,0,0];
+  r.irreg[idx]=val;
+  recalcAll();
 }
 
 // ── STANDARDS LIVE EDIT ──
@@ -2687,15 +2734,15 @@ recalcAll();
 const DOOR_SQFT={1:21,2:21,3:21};
 
 function updStd(surface, coats, val){
-if(!val||val<1) return;
-STANDARDS[surface][coats]=val;
-recalcAll();
+  if(!val||val<1) return;
+  STANDARDS[surface][coats]=val;
+  recalcAll();
 }
 
 function updStdDoorSqft(coats, val){
-if(!val||val<1) return;
-DOOR_SQFT[coats]=val;
-recalcAll();
+  if(!val||val<1) return;
+  DOOR_SQFT[coats]=val;
+  recalcAll();
 }
 
 </script>
