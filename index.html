@@ -470,7 +470,7 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
 .workers-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .worker-tag{display:flex;align-items:center;gap:6px;background:var(--cream2);border-radius:var(--r);padding:6px 12px;font-size:12px}
 .worker-tag input[type=checkbox]{accent-color:var(--gold)}
-.change-item{display:grid;grid-template-columns:60px 1fr 120px;gap:8px;align-items:start;margin-bottom:8px}
+.change-item{display:grid;grid-template-columns:100px 1fr 130px;gap:8px;align-items:start;margin-bottom:8px}
 .post-row{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;font-size:12px;padding:8px;background:var(--cream2);border-radius:var(--r);margin-bottom:8px}
 .post-field{display:flex;flex-direction:column;gap:3px}
 .post-field .lbl{font-size:10px;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em}
@@ -598,6 +598,15 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
     background:#fff!important;
   }
   @page{margin:12mm 14mm;size:A4}
+  /* Invoice/CO inputs look like plain text when printing */
+  .inv-amount-input,
+  .co-amount-input{
+    border:none!important;background:transparent!important;
+    -webkit-appearance:none;appearance:none;
+    padding:0!important;width:auto!important;
+    font-size:inherit!important;color:inherit!important;
+    text-align:right!important;
+  }
 }
 </style>
 </head>
@@ -830,13 +839,13 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
 
     <!-- Quote summary at top -->
     <table class="doc-table" style="margin-bottom:16px">
-      <thead><tr><th>ITEM</th><th>Description</th><th class="right">Amount</th></tr></thead>
+      <thead><tr><th>ITEM</th><th>Description</th><th class="right">Qty</th><th class="right">Amount</th></tr></thead>
       <tbody id="q-line-tbody"></tbody>
       <tfoot>
-        <tr id="q-disc-row" style="display:none"><td colspan="2" style="text-align:right"><span id="q-disc-label">Discount</span></td><td class="right"><span id="q-disc-val">−$0.00</span></td></tr>
-        <tr><td colspan="2" style="text-align:right;font-size:12px;color:var(--ink3)">Subtotal</td><td class="right" id="q-subtotal">$0.00</td></tr>
-        <tr><td colspan="2" style="text-align:right;font-size:12px;color:var(--ink3)">HST (13%)</td><td class="right" id="q-tax">$0.00</td></tr>
-        <tr><td colspan="2" style="text-align:right;font-size:13px;font-weight:500;color:var(--ink)">TOTAL</td><td class="right" id="q-total" style="font-size:15px;font-weight:600;color:var(--ink)">$0.00</td></tr>
+        <tr id="q-disc-row" style="display:none"><td colspan="3" style="text-align:right"><span id="q-disc-label">Discount</span></td><td class="right"><span id="q-disc-val">−$0.00</span></td></tr>
+        <tr><td colspan="3" style="text-align:right;font-size:12px;color:var(--ink3)">Subtotal</td><td class="right" id="q-subtotal">$0.00</td></tr>
+        <tr><td colspan="3" style="text-align:right;font-size:12px;color:var(--ink3)" id="q-tax-label">HST (13%)</td><td class="right" id="q-tax">$0.00</td></tr>
+        <tr><td colspan="3" style="text-align:right;font-size:13px;font-weight:500;color:var(--ink)">TOTAL</td><td class="right" id="q-total" style="font-size:15px;font-weight:600;color:var(--ink)">$0.00</td></tr>
       </tfoot>
     </table>
 
@@ -907,28 +916,24 @@ hr.divider{border:none;border-top:1px solid var(--cream3);margin:16px 0}
       <div class="doc-meta"><div><strong>HST #</strong> 71164 5556 RT0001</div><div><strong>Date</strong> <span id="inv-date"></span></div><div><strong>Client</strong> <span id="inv-client">—</span></div><div><strong>Address</strong> <span id="inv-addr">—</span></div></div>
     </div>
     <table class="doc-table" style="margin-bottom:16px">
-      <thead><tr><th>Description</th><th></th><th></th><th class="right">Amount</th></tr></thead>
+      <thead><tr><th>Description</th><th class="right">Amount</th></tr></thead>
       <tbody>
-        <tr><td>Total (Quote + Change Orders)</td><td></td><td></td><td class="right" id="inv-total-line">$0.00</td></tr>
+        <!-- Quote Total row -->
         <tr>
-          <td>Initial Deposit</td>
-          <td><label style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--ink3)"><input type="checkbox" id="inv-dep-paid" onchange="recalcInvoice()"> Paid</label></td>
-          <td><span id="inv-dep-date" style="font-size:11px;color:var(--ink3)"></span></td>
-          <td class="right" id="inv-dep-amt">$0.00</td>
+          <td style="font-size:13px">Quote Total</td>
+          <td class="right"><input type="number" id="inv-quote-amt" class="inv-amount-input" min="0" step="0.01" oninput="recalcInvoice()" style="width:100px;text-align:right;font-size:13px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td>
         </tr>
-        <tr>
-          <td>45% Balance</td>
-          <td><label style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--ink3)"><input type="checkbox" id="inv-bal-paid" onchange="recalcInvoice()"> Paid</label></td>
-          <td><span id="inv-bal-date" style="font-size:11px;color:var(--ink3)"></span></td>
-          <td class="right" id="inv-bal-amt">$0.00</td>
+        <!-- Change Order row — hidden when $0 -->
+        <tr id="inv-co-row" style="display:none">
+          <td style="font-size:13px">Change Order</td>
+          <td class="right"><input type="number" id="inv-co-amt" class="inv-amount-input" min="0" step="0.01" oninput="recalcInvoice()" style="width:100px;text-align:right;font-size:13px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td>
         </tr>
-        <tr>
-          <td>Final Balance</td>
-          <td><label style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--ink3)"><input type="checkbox" id="inv-fin-paid" onchange="recalcInvoice()"> Paid</label></td>
-          <td><span id="inv-fin-date" style="font-size:11px;color:var(--ink3)"></span></td>
-          <td class="right" id="inv-fin-amt">$0.00</td>
+        <!-- Discount row — hidden when $0 -->
+        <tr id="inv-disc-row" style="display:none">
+          <td style="font-size:13px;color:var(--ink2)">Discount</td>
+          <td class="right"><input type="number" id="inv-disc-amt" class="inv-amount-input" min="0" step="0.01" oninput="recalcInvoice()" style="width:100px;text-align:right;font-size:13px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td>
         </tr>
-        <tr class="doc-total-row"><td colspan="3">Total</td><td class="right" id="inv-grand">$0.00</td></tr>
+        <tr class="doc-total-row"><td>Total</td><td class="right" id="inv-grand">$0.00</td></tr>
       </tbody>
     </table>
     <div id="inv-remaining" style="font-size:13px;color:var(--ink2);text-align:right;margin-bottom:12px"></div>
@@ -1130,10 +1135,9 @@ const PAINTS=[
 
 
 const DOOR_TYPES=[
-  {key:'flat',   label:'Flat Door',         price:50},
-  {key:'panel6', label:'6 Panel Door',       price:75},
-  {key:'glass',  label:'Glass Panel Door',   price:100},
-  {key:'custom', label:'Custom Door',        price:100}
+  {key:'flat',   label:'Flat Door',     price:50},
+  {key:'panel6', label:'6 Panel Door',  price:75},
+  {key:'custom', label:'Custom Door',   price:100}
 ];
 
 const CEILING_PAINTS=[
@@ -1253,7 +1257,7 @@ const OVERHEAD_ITEMS=[
 ];
 
 const WORKERS_DEFAULT=[
-  {n:'David',r:30,active:true},{n:'René',r:30,active:true},{n:'Nicky',r:18,active:false}
+  {n:'David',r:40,active:true},{n:'René',r:30,active:true},{n:'Nicky',r:18,active:false}
 ];
 
 // ════════════════════════════════════════════════
@@ -1363,7 +1367,7 @@ function addRoom(){
     doorFrames:false,dfCoats:2,dfLF:0,
     windows:false,winCoats:2,winLF:0,winList:[{l:0,w:0}],
     doors:false,doorCoats:2,doorCount:0,
-    doorTypes:{flat:0,panel6:0,glass:0,custom:0},
+    doorTypes:{flat:0,panel6:0,custom:0},
     stairs:false,stairCoats:2,stairTreads:0,stairRisers:0,stairLanding:0,stairStringer:0,
     prep:{furniture:false,plastic:false,outlets:false,drywall:false,caulking:false,cleanup:false,custom:''},
     wallPaint:'',wallSheen:'',wallPrimer:'',ceilPaint:'',ceilSheen:'',ceilPrimer:'',trimPaint:'',trimSheen:'',trimPrimer:'',stairPaint:'',stairSheen:'',stairPrimer:'',stairColour:'',
@@ -1440,7 +1444,7 @@ function renderRooms(){
           <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);background:var(--cream2);padding:7px 10px;border-radius:var(--r);cursor:pointer"><input type="checkbox" ${r.prep.outlets?'checked':''} onchange="updPrep(${r.id},'outlets',this.checked)" style="accent-color:var(--gold);width:14px;height:14px"> Remove outlets</label>
           <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);background:var(--cream2);padding:7px 10px;border-radius:var(--r);cursor:pointer"><input type="checkbox" ${r.prep.drywall?'checked':''} onchange="updPrep(${r.id},'drywall',this.checked)" style="accent-color:var(--gold);width:14px;height:14px"> Drywall repairs (plastering &amp; sanding)</label>
           <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);background:var(--cream2);padding:7px 10px;border-radius:var(--r);cursor:pointer"><input type="checkbox" ${r.prep.caulking?'checked':''} onchange="updPrep(${r.id},'caulking',this.checked)" style="accent-color:var(--gold);width:14px;height:14px"> Caulking</label>
-          <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);background:var(--cream2);padding:7px 10px;border-radius:var(--r);cursor:pointer"><input type="checkbox" ${r.prep.cleanup?'checked':''} onchange="updPrep(${r.id},'cleanup',this.checked)" style="accent-color:var(--gold);width:14px;height:14px"> Daily site clean up</label>
+          <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);background:var(--cream2);padding:7px 10px;border-radius:var(--r);cursor:pointer"><input type="checkbox" ${r.prep.cleanup?'checked':''} onchange="updPrep(${r.id},'cleanup',this.checked)" style="accent-color:var(--gold);width:14px;height:14px"> Clean up</label>
         </div>
         <div class="field" style="margin-bottom:14px"><label>Additional prep notes</label><input type="text" value="${r.prep.custom||''}" placeholder="Type any additional prep work…" oninput="updPrep(${r.id},'custom',this.value)"></div>
         <div class="card-title">Surfaces</div>
@@ -1449,6 +1453,7 @@ function renderRooms(){
         ${surfRow(r.id,'ceiling',r.ceiling,r.ceilCoats,'Ceiling','ceilCoats',null,null)}
         ${surfRow(r.id,'baseboards',r.baseboards,r.baseCoats,'Baseboards','baseCoats','baseLF',r.baseLF,calcPerimeter(r))}
         ${surfRow(r.id,'crown',r.crown,r.crownCoats,'Crown Moulding','crownCoats','crownLF',r.crownLF,calcPerimeter(r))}
+        ${doorRow(r.id,r.doors,r.doorCoats,r.doorCount)}
         ${surfRow(r.id,'doorFrames',r.doorFrames,r.dfCoats,'Door Frames','dfCoats','dfLF',r.dfLF,calcDoorFramesLF(r))}
         <div class="surf-grid" style="margin-bottom:${r.windows?'4px':'6px'}">
           <label class="surf-label"><input type="checkbox" ${r.windows?'checked':''} onchange="upd(${r.id},'windows',this.checked)" style="width:14px;height:14px;accent-color:var(--gold)"> Windows</label>
@@ -1460,7 +1465,6 @@ function renderRooms(){
           <span style="font-size:11px;color:var(--ink4)">LF: ${fmtN(calcWinLF(r))}</span>
         </div>
         ${r.windows?renderWinList(r):''}
-        ${doorRow(r.id,r.doors,r.doorCoats,r.doorCount)}
         <div class="surf-grid" style="margin-bottom:${r.stairs?'4px':'6px'}">
           <label class="surf-label"><input type="checkbox" ${r.stairs?'checked':''} onchange="upd(${r.id},'stairs',this.checked)" style="width:14px;height:14px;accent-color:var(--gold)"> Stairs</label>
           <select class="coats-sel" onchange="upd(${r.id},'stairCoats',+this.value)">
@@ -1480,18 +1484,17 @@ function renderRooms(){
           <div class="field"><label>Wall sheen</label><select onchange="upd(${r.id},'wallSheen',this.value)">${sheenOpts(r.wallSheen)}</select></div>
           <div class="field"><label>Wall primer ${r.wallCoats!==3?'<span style="font-size:10px;color:var(--ink4)">(3 coats only)</span>':''}</label><select onchange="upd(${r.id},'wallPrimer',this.value)" ${r.wallCoats!==3?'disabled style="opacity:0.4"':''}>${primerOpts(r.wallPrimer)}</select></div>
           <div class="field"><label>Ceiling paint</label><select onchange="upd(${r.id},'ceilPaint',this.value)">${ceilingPaintOpts(r.ceilPaint)}</select></div>
-          <div class="field"><label>Ceiling colour</label><select onchange="upd(${r.id},'ceilColour',this.value)">${colourOpts(r.ceilColour)}</select></div>
+          <div class="field"><label>Ceiling colour</label><select onchange="upd(${r.id},'ceilColour',this.value)">${ceilColourOpts(r.ceilColour)}</select></div>
           <div class="field"><label>Ceiling sheen</label><select onchange="upd(${r.id},'ceilSheen',this.value)">${sheenOpts(r.ceilSheen)}</select></div>
           <div class="field"><label>Ceiling primer ${r.ceilCoats!==3?'<span style="font-size:10px;color:var(--ink4)">(3 coats only)</span>':''}</label><select onchange="upd(${r.id},'ceilPrimer',this.value)" ${r.ceilCoats!==3?'disabled style="opacity:0.4"':''}>${primerOpts(r.ceilPrimer)}</select></div>
           <div class="field"><label>Trim &amp; door paint</label><select onchange="upd(${r.id},'trimPaint',this.value)">${paintOptsNoPrimer(r.trimPaint)}</select></div>
           <div class="field"><label>Trim &amp; door colour</label><select onchange="upd(${r.id},'trimColour',this.value)">${colourOpts(r.trimColour)}</select></div>
           <div class="field"><label>Trim &amp; door sheen</label><select onchange="upd(${r.id},'trimSheen',this.value)">${sheenOpts(r.trimSheen)}</select></div>
           <div class="field"><label>Trim &amp; door primer ${r.doorCoats!==3?'<span style="font-size:10px;color:var(--ink4)">(3 coats only)</span>':''}</label><select onchange="upd(${r.id},'trimPrimer',this.value)" ${r.doorCoats!==3?'disabled style="opacity:0.4"':''}>${primerOpts(r.trimPrimer)}</select></div>
-        ${r.stairs?`
-          <div class="field"><label>Stairs paint</label><select onchange="upd(${r.id},'stairPaint',this.value)">${paintOptsNoPrimer(r.stairPaint)}</select></div>
-          <div class="field"><label>Stairs colour</label><select onchange="upd(${r.id},'stairColour',this.value)">${colourOpts(r.stairColour)}</select></div>
-          <div class="field"><label>Stairs sheen</label><select onchange="upd(${r.id},'stairSheen',this.value)">${sheenOpts(r.stairSheen)}</select></div>
-          <div class="field"><label>Stairs primer</label><select onchange="upd(${r.id},'stairPrimer',this.value)">${primerOpts(r.stairPrimer)}</select></div>`:''}
+        <div class="field"><label>Misc. paint</label><select onchange="upd(${r.id},'stairPaint',this.value)">${paintOptsNoPrimer(r.stairPaint)}</select></div>
+          <div class="field"><label>Misc. colour</label><select onchange="upd(${r.id},'stairColour',this.value)">${colourOpts(r.stairColour)}</select></div>
+          <div class="field"><label>Misc. sheen</label><select onchange="upd(${r.id},'stairSheen',this.value)">${sheenOpts(r.stairSheen)}</select></div>
+          <div class="field"><label>Misc. primer</label><select onchange="upd(${r.id},'stairPrimer',this.value)">${primerOpts(r.stairPrimer)}</select></div>
         </div>
         ${colourChips(r)}
         <div class="field" style="margin-top:10px"><label>Notes</label><textarea oninput="upd(${r.id},'notes',this.value)">${r.notes||''}</textarea></div>
@@ -1510,10 +1513,19 @@ function renderRooms(){
   sel('addRoomBtn').style.display=rooms.length>=10?'none':'block';
 }
 
+function ceilColourOpts(sel_val=''){
+  const opts=[
+    {n:'SW 7005 Pure White',h:'#f6f4f0'},
+    {n:'SW 7006 Extra White',h:'#f8f7f4'},
+    {n:'Matching Room Colour',h:'#cccccc'}
+  ];
+  return '<option value="">— Select colour —</option>'+
+    opts.map(c=>`<option value="${c.n}" ${sel_val===c.n?'selected':''}>${c.n}</option>`).join('');
+}
 function colourChips(r){
   const chips=[];
   if(r.wallColour){const c=COLOURS.find(x=>x.n===r.wallColour);chips.push(`<span class="colour-chip"><span class="chip-dot" style="background:${c?c.h:'#ccc'}"></span>Wall: ${r.wallColour}${r.wallSheen?' · '+r.wallSheen:''}</span>`);}
-  if(r.ceilColour){const c=COLOURS.find(x=>x.n===r.ceilColour);chips.push(`<span class="colour-chip"><span class="chip-dot" style="background:${c?c.h:'#ccc'}"></span>Ceil: ${r.ceilColour}${r.ceilSheen?' · '+r.ceilSheen:''}</span>`);}
+  if(r.ceilColour){const ceilCols=[{n:'SW 7005 Pure White',h:'#f6f4f0'},{n:'SW 7006 Extra White',h:'#f8f7f4'},{n:'Matching Room Colour',h:'#cccccc'}];const c=ceilCols.find(x=>x.n===r.ceilColour)||COLOURS.find(x=>x.n===r.ceilColour);chips.push(`<span class="colour-chip"><span class="chip-dot" style="background:${c?c.h:'#ccc'}"></span>Ceil: ${r.ceilColour}${r.ceilSheen?' · '+r.ceilSheen:''}</span>`);}
   if(r.trimColour){const c=COLOURS.find(x=>x.n===r.trimColour);chips.push(`<span class="colour-chip"><span class="chip-dot" style="background:${c?c.h:'#ccc'}"></span>Trim: ${r.trimColour}${r.trimSheen?' · '+r.trimSheen:''}</span>`);}
   if(r.stairColour){const c=COLOURS.find(x=>x.n===r.stairColour);chips.push(`<span class="colour-chip"><span class="chip-dot" style="background:${c?c.h:'#ccc'}"></span>Stairs: ${r.stairColour}${r.stairSheen?' · '+r.stairSheen:''}</span>`);}
   return chips.length?`<div class="paint-chips">${chips.join('')}</div>`:'';
@@ -1545,7 +1557,7 @@ function surfRow(rid,key,en,coats,label,coatsKey,lfKey,lfVal,autoVal){
 
 function doorRow(rid,en,coats,count){
   const r=rooms.find(x=>x.id===rid);
-  const dt=r&&r.doorTypes?r.doorTypes:{flat:0,panel6:0,glass:0,custom:0};
+  const dt=r&&r.doorTypes?r.doorTypes:{flat:0,panel6:0,custom:0};
   const panelHtml=en?`<div style="margin:0 0 10px 18px;padding:10px;background:var(--cream2);border-radius:var(--r)">
     <div style="font-size:10px;color:var(--ink4);margin-bottom:8px">Flat $50 &nbsp;&middot;&nbsp; 6 Panel $75 &nbsp;&middot;&nbsp; Glass Panel $100 &nbsp;&middot;&nbsp; Custom $100</div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px" class="stairs-grid">
@@ -1601,7 +1613,7 @@ function calcPerimeter(r){
 }
 
 function calcDoorFramesLF(r){
-  return (r.doorCount||0)*17;
+  return calcTotalDoorCount(r)*14;
 }
 
 function autoFillTrimLF(r){
@@ -1682,13 +1694,24 @@ function calcRoomHours(r){
   if(r.windows&&r.winLF>0)h+=r.winLF/STANDARDS.windows[r.winCoats];
   // Doors: hours based on sqft (# doors × 21) / STANDARDS.doors[coats]
   if(r.doors){const dc=calcTotalDoorCount(r);if(dc>0)h+=(dc*21)/STANDARDS.doors[r.doorCoats];}
+  // Stairs: fixed 6 hours when stairs are selected and have cost
+  if(r.stairs&&calcStairsCost(r)>0) h+=6;
   h+=r.prepHrs||0;
   return h;
 }
-function calcRoomCost(r){const buf=+v('lr-buffer')||1.25;const aw=workers.filter(w=>w.active).length||1;return calcRoomHours(r)*globalRate*aw*buf+calcStairsCost(r)+calcDoorsCost(r);}
+function calcRoomCost(r){const aw=workers.filter(w=>w.active).length||1;return calcRoomHours(r)*globalRate*aw+calcStairsCost(r)+calcDoorsCost(r);}
 
 // Persistent qty overrides for paint table — survives recalcAll() calls
 const qtyOverrides={};
+// Paint quantity helpers — global so renderPaintTableCombined can access them
+function calcPailQty(area){ return Math.max(0, Math.floor(area/1900)); }
+function calcGallonQty(area){
+  const pails=calcPailQty(area);
+  const remainingArea=Math.max(0, area - pails*1900);
+  return Math.max(0, Math.round(remainingArea/350));
+}
+function calcPrimerQty(area){ return Math.max(1, Math.ceil(area/350)); }
+
 function renderPaintTableCombined(tbodyId){
   const tbody=sel(tbodyId);
   if(!tbody) return;
@@ -1761,23 +1784,49 @@ function renderPrimerTable(){
     return;
   }
   let grandTotal=0;
+  let hasRows=false;
   entries.forEach(e=>{
-    // Primers always 1 coat (gallon only — no pail threshold for primer)
-    const galQty=calcGallonQty(e.area);
     const pailQty=calcPailQty(e.area);
-    const primerKey=e.product+'||Primer';
-    const galQtyEff=qtyOverrides[primerKey]!==undefined?qtyOverrides[primerKey]:galQty;
-    const lineTotalEff=e.price&&galQtyEff>0?galQtyEff*e.price:null;
-    if(lineTotalEff) grandTotal+=lineTotalEff;
-    tbody.innerHTML+=`<tr>
-      <td style="font-size:12px">${stripUnit(e.product)}</td>
-      <td style="font-size:12px;color:var(--ink3)">—</td>
-      <td class="num">${fmtN(e.area)}</td>
-      <td class="num" style="color:var(--ink);font-size:11px">Gallon</td>
-      <td class="num"><input type="number" min="0" step="1" value="${galQtyEff}" oninput="setQtyOverride('${primerKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td>
-      <td class="num">${e.price?'$'+e.price:'—'}</td>
-      <td class="num">${lineTotalEff?fmt(lineTotalEff):'—'}</td>
-    </tr>`;
+    const galQty=calcGallonQty(e.area);
+    // Pail row (if area ≥ 1900)
+    if(pailQty>0){
+      const pailName=e.product.replace(/\bGallon\b/gi,'Pail');
+      const pailObj=[...PAINTS,...PRIMERS,...CEILING_PAINTS].find(p=>p.n===pailName);
+      const pailPrice=pailObj?pailObj.p:null;
+      const pailKey=e.product+'||PrimerPail';
+      const pailQtyEff=qtyOverrides[pailKey]!==undefined?qtyOverrides[pailKey]:pailQty;
+      const pailTotal=pailPrice?pailQtyEff*pailPrice:null;
+      if(pailTotal) grandTotal+=pailTotal;
+      hasRows=true;
+      tbody.innerHTML+=`<tr>
+        <td style="font-size:12px">${stripUnit(e.product)}</td>
+        <td style="font-size:12px;color:var(--ink3)">—</td>
+        <td class="num">${fmtN(e.area)}</td>
+        <td class="num" style="color:var(--ink);font-size:11px">Pail</td>
+        <td class="num"><input type="number" min="0" step="1" value="${pailQtyEff}" oninput="setQtyOverride('${pailKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td>
+        <td class="num">${pailPrice?'$'+pailPrice:'—'}</td>
+        <td class="num">${pailTotal?fmt(pailTotal):'—'}</td>
+      </tr>`;
+    }
+    // Gallon row: <350 sqft = 1 gallon, otherwise use calcGallonQty
+    const rawGalQty=e.area<350?1:galQty;
+    const galQtyActual=Math.max(rawGalQty,galQty>0||pailQty===0?rawGalQty:0);
+    if(galQtyActual>0){
+      const primerKey=e.product+'||Primer';
+      const galQtyEff=qtyOverrides[primerKey]!==undefined?qtyOverrides[primerKey]:galQtyActual;
+      const lineTotalEff=e.price&&galQtyEff>0?galQtyEff*e.price:null;
+      if(lineTotalEff) grandTotal+=lineTotalEff;
+      hasRows=true;
+      tbody.innerHTML+=`<tr>
+        <td style="font-size:12px">${stripUnit(e.product)}</td>
+        <td style="font-size:12px;color:var(--ink3)">—</td>
+        <td class="num">${fmtN(e.area)}</td>
+        <td class="num" style="color:var(--ink);font-size:11px">Gallon</td>
+        <td class="num"><input type="number" min="0" step="1" value="${galQtyEff}" oninput="setQtyOverride('${primerKey}',+this.value)" style="width:52px;text-align:center;font-size:12px;padding:3px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)"></td>
+        <td class="num">${e.price?'$'+e.price:'—'}</td>
+        <td class="num">${lineTotalEff?fmt(lineTotalEff):'—'}</td>
+      </tr>`;
+    }
   });
   if(grandTotal>0){
     tbody.innerHTML+=`<tr style="background:var(--cream2);font-weight:500"><td colspan="6" style="text-align:right;padding-right:12px;font-size:12px">Primer total</td><td class="num">${fmt(grandTotal)}</td></tr>`;
@@ -1791,6 +1840,12 @@ function setQtyOverride(key,val){
   if(typeof renderPrimerTable==='function') renderPrimerTable();
 }
 
+function adjustSalaryForDavid(){
+  const davidActive=workers[0]&&workers[0].active;
+  const salaryItem=overheadItems.find(i=>i.n==='Salary');
+  if(salaryItem) salaryItem.v=davidActive?50000:75000;
+  initLabourRates();
+}
 function recalcRates(){
   const billable=+v('lr-billable')||1700;
   const buffer=+v('lr-buffer')||1.25;
@@ -1872,7 +1927,8 @@ function recalcAll(){
         if(!d.en||!d.area)return;
         const rate=d.std?STANDARDS[d.std][d.coats]:1;
         const hrs=d.fixedHrs!==undefined?d.fixedHrs:(d.flat?0:(d.std?(d.area/rate):(d.area)));
-        const cost=d.stairsCost!==undefined?d.stairsCost:(d.flat?d.area:(hrs*globalRate*activeWorkerCount*(+v('lr-buffer')||1.25)));
+        const buf=+v('lr-buffer')||1.25;
+        const cost=d.stairsCost!==undefined?d.stairsCost:(d.flat?d.area:(hrs*globalRate*activeWorkerCount*buf));
         roomTotal+=cost;
         const showHrs=d.fixedHrs!==undefined?true:!d.flat;
         const rateDisplay=d.doorRate?d.doorRate:(d.stairsCost!==undefined?'Flat $':(d.flat?'Flat $':(d.std?rate:'—')));
@@ -1889,7 +1945,7 @@ function recalcAll(){
   const stbody=sel('bd-surface-tbody');
   if(stbody){
     stbody.innerHTML='';
-    const surfTotals={Walls:{area:0,hrs:0},Ceiling:{area:0,hrs:0},'Trims & Doors':{area:0,hrs:0},Prep:{area:0,hrs:0}};
+    const surfTotals={Walls:{area:0,hrs:0},Ceiling:{area:0,hrs:0},'Trims & Doors':{area:0,hrs:0},Stairs:{area:0,hrs:0},Prep:{area:0,hrs:0}};
     rooms.forEach(r=>{
       const wArea=calcWalls(r);if(r.walls&&wArea){surfTotals.Walls.area+=wArea;surfTotals.Walls.hrs+=wArea/STANDARDS.walls[r.wallCoats];}
       const cArea=calcCeil(r);if(r.ceiling&&cArea){surfTotals.Ceiling.area+=cArea;surfTotals.Ceiling.hrs+=cArea/STANDARDS.ceiling[r.ceilCoats];}
@@ -1900,11 +1956,12 @@ function recalcAll(){
       if(r.windows&&r.winLF){tArea+=r.winLF;tHrs+=r.winLF/STANDARDS.windows[r.winCoats];}
       if(r.doors){const dc=calcTotalDoorCount(r);if(dc>0){tArea+=dc*21;tHrs+=(dc*21)/STANDARDS.doors[r.doorCoats];}}
       surfTotals['Trims & Doors'].area+=tArea;surfTotals['Trims & Doors'].hrs+=tHrs;
+      if(r.stairs&&calcStairsCost(r)>0){surfTotals.Stairs.area+=calcStairsSqft(r);surfTotals.Stairs.hrs+=6;}
       if(r.prepHrs){surfTotals.Prep.area+=r.prepHrs;surfTotals.Prep.hrs+=r.prepHrs;}
     });
     Object.entries(surfTotals).forEach(([name,d])=>{
       if(!d.hrs)return;
-      const _buf=+v('lr-buffer')||1.25;const _aw2=workers.filter(w=>w.active).length||1;stbody.innerHTML+=`<tr><td>${name}</td><td class="num">${fmtN(d.area)}</td><td class="num">${d.hrs.toFixed(1)}</td><td class="num">${(d.hrs/6).toFixed(1)}</td><td class="num">${fmt(d.hrs*globalRate*_aw2*_buf)}</td></tr>`;
+      const _aw2=workers.filter(w=>w.active).length||1;stbody.innerHTML+=`<tr><td>${name}</td><td class="num">${fmtN(d.area)}</td><td class="num">${d.hrs.toFixed(1)}</td><td class="num">${(d.hrs/6).toFixed(1)}</td><td class="num">${fmt(d.hrs*globalRate*_aw2)}</td></tr>`;
     });
   }
 
@@ -1952,13 +2009,13 @@ function recalcAll(){
   // Paint stored as area*coats so qty formula gives correct gallons/pails
   // Primer always 1 coat
   function addPaint(product, colour, area, coats){
-    if(!product||!area) return;
+    if(!product) return; if(!area&&area!==0) return;
     const key=product+'||'+(colour||'');
     if(!paintMap[key]){
       const nameLower=product.toLowerCase();
       const isPail=nameLower.includes('pail');
       const isPrimer=PRIMERS.some(p=>p.n===product);
-      const pObj=PAINTS.find(p=>p.n===product)||PRIMERS.find(p=>p.n===product);
+      const pObj=PAINTS.find(p=>p.n===product)||PRIMERS.find(p=>p.n===product)||CEILING_PAINTS.find(p=>p.n===product);
       paintMap[key]={product,colour:colour||'',type:isPrimer?'primer':(isPail?'pail':'gallon'),area:0,price:pObj?pObj.p:null};
     }
     // Multiply area by coats so quantity formula reflects total coverage needed
@@ -1985,29 +2042,16 @@ function recalcAll(){
     if(r.wallCoats===3 && r.wallPrimer && wArea) addPaint(r.wallPrimer,'',wArea,1);
     if(r.ceilCoats===3 && r.ceilPrimer && cArea) addPaint(r.ceilPrimer,'',cArea,1);
     if(r.doorCoats===3 && r.trimPrimer && tArea) addPaint(r.trimPrimer,'',tArea,1);
-    // Stairs paint: use sqft from treads+risers+landings (show even if 0 sqft)
-    if(r.stairs && r.stairPaint){
-      const sSqft=calcStairsSqft(r);
-      const sPaintCoats=(r.stairCoats||2)===3?2:(r.stairCoats||2);
-      addPaint(r.stairPaint,r.stairColour,Math.max(sSqft,1),sPaintCoats);
+    // Misc. paint: always active, not tied to stairs toggle
+    if(r.stairPaint){
+      addPaint(r.stairPaint,r.stairColour,1,1);
     }
-    if(r.stairs && r.stairCoats===3 && r.stairPrimer){
-      const sSqft=calcStairsSqft(r);
-      addPaint(r.stairPrimer,'',Math.max(sSqft,1),1);
+    if(r.stairPrimer){
+      addPaint(r.stairPrimer,'',1,1);
     }
   });
 
-  // Pail qty: FLOOR(area / 1900, 1)
-  function calcPailQty(area){ return Math.max(0, Math.floor(area/1900)); }
-  // Gallon qty: CEILING(area / 350, 1) minus 5 gallons for every whole pail already counted
-  function calcGallonQty(area){
-    const pails=calcPailQty(area);
-    const remainingArea=Math.max(0, area - pails*1900);
-    return Math.max(0, Math.round(remainingArea/350));
-  }
-  // Primer qty: CEILING(area / 350, 1)
-  function calcPrimerQty(area){ return Math.max(1, Math.ceil(area/350)); }
-  // qtyOverrides is defined globally below recalcAll — persists between calls
+  // calcPailQty, calcGallonQty, calcPrimerQty moved to global scope
 
   // renderPaintTableCombined moved to global scope
 
@@ -2023,7 +2067,7 @@ function recalcAll(){
     tbody.innerHTML='';
 
     // ── Labour row ──
-    const prepLabels={furniture:'Move furniture',plastic:'Cover furniture with plastic',outlets:'Remove outlets',drywall:'Drywall repairs (plastering & sanding)',caulking:'Caulking',cleanup:'Daily site clean up'};
+    const prepLabels={furniture:'Move furniture',plastic:'Cover furniture with plastic',outlets:'Remove outlets',drywall:'Drywall repairs (plastering & sanding)',caulking:'Caulking',cleanup:'Clean up'};
     const allPrep=new Set();
     const customPreps=[];
     rooms.forEach(r=>{
@@ -2045,81 +2089,63 @@ function recalcAll(){
       {key:'stairs',   label:'Stairs',         coatsKey:null,         areaFn:(r)=>r,                     unit:'', isStairs:true},
     ];
 
-    // ── PREPARATIONS header + items ──
-    const prepItems=[...allPrep,...customPreps];
+    // ── Labour description: per-room with surfaces + area, prep combined per room ──
     let labourDescHtml='';
-    let labourQtyHtml='';
 
-    if(prepItems.length){
-      labourDescHtml+=`<div style="font-size:10px;font-weight:600;letter-spacing:.08em;color:var(--ink);text-transform:uppercase;margin-bottom:4px">Preparations</div>`;
-      labourQtyHtml+=`<div>&nbsp;</div>`;
-      prepItems.forEach(p=>{
-        labourDescHtml+=`<div style="padding-left:10px;color:var(--ink)">• ${p}</div>`;
-        labourQtyHtml+=`<div>&nbsp;</div>`;
-      });
-    }
-
-    // ── AREAS BEING SERVICED header + per-room surfaces ──
-    const hasRoomSurfs=rooms.some(r=>surfDefs.some(s=>r[s.key]&&s.areaFn(r)>0));
-    if(hasRoomSurfs){
-      const topMargin=prepItems.length?'10px':'0';
-      labourDescHtml+=`<div style="font-size:10px;font-weight:600;letter-spacing:.08em;color:var(--ink);text-transform:uppercase;margin-top:${topMargin};margin-bottom:4px">Areas Being Serviced</div>`;
-      labourQtyHtml+=`<div style="margin-top:${topMargin}">&nbsp;</div>`;
-      rooms.forEach((r,ri)=>{
-        const roomSurfs=surfDefs.filter(s=>s.isDoorTypes?(r.doors&&calcDoorsCost(r)>0):s.isStairs?(r.stairs&&calcStairsCost(r)>0):(r[s.key]&&s.areaFn(r)>0));
-        if(!roomSurfs.length) return;
-        labourDescHtml+=`<div style="font-weight:500;margin-top:${ri>0?'6px':'0'}">${r.name}</div>`;
-        labourQtyHtml+=`<div style="margin-top:${ri>0?'6px':'0'}">&nbsp;</div>`;
+    rooms.forEach((r,ri)=>{
+      const roomSurfs=surfDefs.filter(s=>s.isDoorTypes?(r.doors&&calcDoorsCost(r)>0):s.isStairs?(r.stairs&&calcStairsCost(r)>0):(r[s.key]&&s.areaFn(r)>0));
+      // Collect this room's prep items
+      const rPrepItems=[];
+      if(r.prep){
+        Object.keys(prepLabels).forEach(k=>{ if(r.prep[k]) rPrepItems.push(prepLabels[k]); });
+        if(r.prep.custom&&r.prep.custom.trim()){r.prep.custom.split(',').forEach(s=>{const t=s.trim();if(t)rPrepItems.push(t);});}
+      }
+      if(!roomSurfs.length && !rPrepItems.length) return;
+      // Room name header
+      const rName=r.name||'Room '+r.id;
+      labourDescHtml+=`<div style="font-weight:600;margin-top:${ri>0?'10px':'0'};color:var(--ink)">${rName}</div>`;
+      // Prep items for this room
+      if(rPrepItems.length){
+        labourDescHtml+=`<div style="font-size:10px;font-weight:600;letter-spacing:.08em;color:var(--ink3);text-transform:uppercase;margin-top:3px;margin-bottom:2px">Prep</div>`;
+        rPrepItems.forEach(p=>{
+          labourDescHtml+=`<div style="padding-left:10px;color:var(--ink2);font-size:11px">• ${p}</div>`;
+        });
+      }
+      // Surfaces for this room
+      if(roomSurfs.length){
+        labourDescHtml+=`<div style="font-size:10px;font-weight:600;letter-spacing:.08em;color:var(--ink3);text-transform:uppercase;margin-top:3px;margin-bottom:2px">Surfaces</div>`;
         roomSurfs.forEach(s=>{
           const area=s.areaFn(r);
           const coats=s.coatsKey?r[s.coatsKey]||2:null;
           if(s.isDoorTypes){
             const dr=area;
+            const dc=calcTotalDoorCount(dr);
             const dtParts=[];
-            DOOR_TYPES.forEach(t=>{ if(dr.doorTypes&&dr.doorTypes[t.key]) dtParts.push((dr.doorTypes[t.key])+' '+t.label+(dr.doorTypes[t.key]>1?'s':'')); });
-            labourDescHtml+=`<div style="padding-left:12px;color:var(--ink)">${s.label}${dtParts.length?' ('+dtParts.join(', ')+')':''}</div>`;
+            DOOR_TYPES.forEach(t=>{ if(dr.doorTypes&&dr.doorTypes[t.key]) dtParts.push(dr.doorTypes[t.key]+' '+t.label+(dr.doorTypes[t.key]>1?'s':'')); });
+            const fullDoors=Math.floor(dc/2),extraSides=dc%2;
+            const doorCountStr=fullDoors>0?(fullDoors+' door'+(fullDoors>1?'s':''))+(extraSides?' + 1 side':''):dc+' side'+(dc>1?'s':'');
+            labourDescHtml+=`<div style="padding-left:10px;color:var(--ink2);font-size:11px">• ${s.label}${dtParts.length?' ('+dtParts.join(', ')+')':''} — ${doorCountStr}</div>`;
           } else if(s.isStairs){
             const sr=area;
             const stairParts=[];
-            if(sr.stairTreads)stairParts.push('Treads');
-            if(sr.stairRisers)stairParts.push('Risers');
-            if(sr.stairLanding)stairParts.push('Landing');
-            if(sr.stairStringer)stairParts.push('Stringer');
-            labourDescHtml+=`<div style="padding-left:12px;color:var(--ink)">${s.label}${stairParts.length?' ('+stairParts.join(', ')+')':''}</div>`;
+            if(sr.stairTreads)stairParts.push(sr.stairTreads+' tread'+(sr.stairTreads>1?'s':''));
+            if(sr.stairRisers)stairParts.push(sr.stairRisers+' riser'+(sr.stairRisers>1?'s':''));
+            if(sr.stairLanding)stairParts.push(sr.stairLanding+' landing'+(sr.stairLanding>1?'s':''));
+            if(sr.stairStringer)stairParts.push(sr.stairStringer+' stringer'+(sr.stairStringer>1?'s':''));
+            labourDescHtml+=`<div style="padding-left:10px;color:var(--ink2);font-size:11px">• ${s.label}${stairParts.length?' — '+stairParts.join(', '):''}</div>`;
           } else {
-            labourDescHtml+=`<div style="padding-left:12px;color:var(--ink)">${s.label}${s.isFlat?'':' ('+coats+' coat'+(coats>1?'s':'')+')'}</div>`;
-          }
-          const unitLabel=s.isDoors?(area===1?'door':'doors'):s.unit;
-          if(s.isDoorTypes){
-            const dr=area;
-            const total=calcTotalDoorCount(dr);
-            labourQtyHtml+=`<div style="text-align:right">${total} ${total===1?'door':'doors'}</div>`;
-          } else
-          if(s.isDoorTypes){
-            const dr=area;
-            const dtParts=[];
-            DOOR_TYPES.forEach(t=>{ if(dr.doorTypes&&dr.doorTypes[t.key]) dtParts.push((dr.doorTypes[t.key])+' '+t.label+(dr.doorTypes[t.key]>1?'s':'')); });
-            labourDescHtml+=`<div style="padding-left:12px;color:var(--ink)">${s.label}${dtParts.length?' ('+dtParts.join(', ')+')':''}</div>`;
-          } else if(s.isStairs){
-            const sr=area;
-            const stairQtyParts=[];
-            if(sr.stairTreads)stairQtyParts.push(sr.stairTreads+' tread'+(sr.stairTreads>1?'s':''));
-            if(sr.stairRisers)stairQtyParts.push(sr.stairRisers+' riser'+(sr.stairRisers>1?'s':''));
-            if(sr.stairLanding)stairQtyParts.push(sr.stairLanding+' landing'+(sr.stairLanding>1?'s':''));
-            if(sr.stairStringer)stairQtyParts.push(sr.stairStringer+' stringer'+(sr.stairStringer>1?'s':''));
-            labourQtyHtml+=`<div style="text-align:right">${stairQtyParts.join(', ')||'—'}</div>`;
-          } else if(s.isFlat){
-            labourQtyHtml+=`<div style="text-align:right">${fmt(area)}</div>`;
-          } else {
-            labourQtyHtml+=`<div style="text-align:right">${fmtN(area)} ${unitLabel}</div>`;
+            const areaVal=typeof area==='number'?area:0;
+            const areaStr=s.unit==='sqft'?fmtN(areaVal)+' sqft':fmtN(areaVal)+' lin ft';
+            labourDescHtml+=`<div style="padding-left:10px;color:var(--ink2);font-size:11px">• ${s.label} (${coats} coat${coats>1?'s':''}) — ${areaStr}</div>`;
           }
         });
-      });
-    }
+      }
+    });
 
     tbody.innerHTML+=`<tr>
       <td style="font-size:12px;font-weight:500;vertical-align:top;white-space:nowrap">Labour</td>
       <td style="font-size:12px;vertical-align:top">${labourDescHtml||'—'}</td>
+      <td class="right" style="font-size:12px;vertical-align:top;color:var(--ink3)">—</td>
       <td class="right" style="font-size:12px;vertical-align:top;font-weight:500">${fmt(labourTotal)}</td>
     </tr>`;
 
@@ -2152,12 +2178,12 @@ function recalcAll(){
         if(e.price) matTotal+=qty*e.price;
         matLines.push({product:stripUnit(e.product),colour:'',dot:'',unit:'Gallon',qty,price:e.price,area:e.area});
       });
-      const matDescRows=matLines.map(m=>`${m.dot}${m.product}${m.colour?' · '+m.colour:''} <span style="color:var(--ink)">${m.unit}</span>`).join('<br>');
+      const matDescRows=matLines.map(m=>`${m.dot}${stripUnit(m.product)}${m.colour?' · '+m.colour:''}`).join('<br>');
       const matQtyRows=matLines.map(m=>`${m.qty}`).join('<br>');
-      const matUnitRows=matLines.map(m=>`<span style="color:var(--ink)">${m.unit}</span>`).join('<br>');
       tbody.innerHTML+=`<tr>
         <td style="font-size:12px;font-weight:500;vertical-align:top;white-space:nowrap">Materials</td>
         <td style="font-size:12px;vertical-align:top;color:var(--ink)">${matDescRows}</td>
+        <td class="right" style="font-size:12px;vertical-align:top;color:var(--ink3)">${matQtyRows}</td>
         <td class="right" style="font-size:12px;vertical-align:top;font-weight:500">${fmt(matTotal)}</td>
       </tr>`;
     }
@@ -2178,9 +2204,11 @@ function recalcAll(){
         if(galQty>0&&e.price) matGrandTotal+=galQty*e.price;
       }
     });
-    // Recalc totals including materials
-    const combinedSubtotal=(labourTotal+matGrandTotal)-discAmt;
-    const combinedTax=combinedSubtotal*0.13;
+    // Discount on labour only; HST on labour only
+    const labourAfterDisc=labourTotal-discAmt;
+    const labourHST=labourAfterDisc*0.13;
+    const combinedSubtotal=labourAfterDisc+matGrandTotal;
+    const combinedTax=labourHST;
     const combinedTotal=combinedSubtotal+combinedTax;
     const combinedDep=combinedTotal*0.1;
     const combinedBal45=combinedTotal*0.45;
@@ -2192,6 +2220,7 @@ function recalcAll(){
     if(sel('q-disc-val'))sel('q-disc-val').textContent='−'+fmt(discAmt);
     if(sel('q-subtotal'))sel('q-subtotal').textContent=fmt(combinedSubtotal);
     if(sel('q-tax'))sel('q-tax').textContent=fmt(combinedTax);
+    if(sel('q-tax-label'))sel('q-tax-label').textContent='Labour HST (13%)';
     if(sel('q-total'))sel('q-total').textContent=fmt(combinedTotal);
     if(sel('q-pay1'))sel('q-pay1').textContent=fmt(combinedDep);
     if(sel('q-pay2'))sel('q-pay2').textContent=fmt(combinedBal45);
@@ -2241,8 +2270,8 @@ function recalcAll(){
       if(r.ceilPrimer&&!seenPaints.has(r.ceilPrimer)){seenPaints.add(r.ceilPrimer);paintList.push({label:'Ceiling Primer',product:r.ceilPrimer});}
       if(r.trimPrimer&&!seenPaints.has(r.trimPrimer)){seenPaints.add(r.trimPrimer);paintList.push({label:'Trim Primer',product:r.trimPrimer});}
       if(r.misc&&!seenPaints.has(r.misc)){seenPaints.add(r.misc);paintList.push({label:'Misc.',product:r.misc});}
-      if(r.stairs&&r.stairPaint&&!seenPaints.has(r.stairPaint)){seenPaints.add(r.stairPaint);paintList.push({label:'Stairs Paint',product:r.stairPaint});}
-      if(r.stairs&&r.stairPrimer&&!seenPaints.has(r.stairPrimer)){seenPaints.add(r.stairPrimer);paintList.push({label:'Stairs Primer',product:r.stairPrimer});}
+      if(r.stairPaint&&!seenPaints.has(r.stairPaint)){seenPaints.add(r.stairPaint);paintList.push({label:'Misc. Paint',product:r.stairPaint});}
+      if(r.stairPrimer&&!seenPaints.has(r.stairPrimer)){seenPaints.add(r.stairPrimer);paintList.push({label:'Misc. Primer',product:r.stairPrimer});}
     });
     let html='';
     if(paintList.length){
@@ -2298,6 +2327,7 @@ function recalcAll(){
 }
 
 function recalcInvoice(){
+  // ── Compute quote total (same as quote page) ──
   const discOn=sel('lr-discount')&&sel('lr-discount').checked;
   const discPct=(+(v('lr-disc-pct')||10))/100;
   let totHours=0;
@@ -2309,25 +2339,49 @@ function recalcInvoice(){
   const discAmt=discOn?labourTotalInv*discPct:0;
   const subtotal=labourTotalInv-discAmt;
   const tax=subtotal*0.13;
-  const quoteTotal=subtotal+tax;
+  // Materials from paintMap
+  let _matInv=0;
+  Object.values(paintMap).forEach(e=>{
+    const pq=calcPailQty(e.area),gq=calcGallonQty(e.area);
+    if(e.type==='primer'){if(e.price&&gq>0)_matInv+=gq*e.price;}
+    else{
+      if(pq>0){const pn=e.product.replace(/Gallon/gi,'Pail');const po=[...PAINTS,...PRIMERS,...CEILING_PAINTS].find(p=>p.n===pn);if(po&&po.p)_matInv+=pq*po.p;}
+      if(gq>0&&e.price)_matInv+=gq*e.price;
+    }
+  });
+  const combinedSub=(labourTotalInv+_matInv)-discAmt;
+  const combinedTax=combinedSub*0.13;
+  const quoteTotal=combinedSub+combinedTax;
+
+  // Change order total
   const coSub=changeItems.reduce((s,i)=>s+(+i.amount||0),0);
-  const coTotal=coSub+coSub*0.13;
-  const grandTotal=quoteTotal+coTotal;
-  const dep=grandTotal*0.1,bal45=grandTotal*0.45,fin=grandTotal-dep-bal45;
-  if(sel('inv-total-line'))sel('inv-total-line').textContent=fmt(grandTotal);
-  if(sel('inv-dep-amt'))sel('inv-dep-amt').textContent=fmt(dep);
-  if(sel('inv-bal-amt'))sel('inv-bal-amt').textContent=fmt(bal45);
-  if(sel('inv-fin-amt'))sel('inv-fin-amt').textContent=fmt(fin);
+  const coTotal=coSub>0?coSub+coSub*0.13:0;
+
+  // ── Populate inputs (only when user hasn't manually edited them) ──
+  // Use a flag to avoid overwriting manual edits during typing
+  const qEl=sel('inv-quote-amt');
+  const coEl=sel('inv-co-amt');
+  const discEl=sel('inv-disc-amt');
+  // Auto-populate quote amount
+  if(qEl&&!qEl.dataset.manual) qEl.value=quoteTotal.toFixed(2);
+  // Show/populate CO row
+  if(coEl&&sel('inv-co-row')){
+    sel('inv-co-row').style.display=coTotal>0?'':'none';
+    if(!coEl.dataset.manual) coEl.value=coTotal.toFixed(2);
+  }
+  // Show/populate discount row
+  if(discEl&&sel('inv-disc-row')){
+    sel('inv-disc-row').style.display=discAmt>0?'':'none';
+    if(!discEl.dataset.manual) discEl.value=discAmt.toFixed(2);
+  }
+
+  // Compute grand total from editable fields
+  const qAmt=parseFloat((qEl&&qEl.value)||0)||0;
+  const coAmt=coTotal>0?parseFloat((coEl&&coEl.value)||0)||0:0;
+  const dAmt=discAmt>0?parseFloat((discEl&&discEl.value)||0)||0:0;
+  const grandTotal=qAmt+coAmt-dAmt;
+
   if(sel('inv-grand'))sel('inv-grand').textContent=fmt(grandTotal);
-  const depPaid=sel('inv-dep-paid')&&sel('inv-dep-paid').checked;
-  const balPaid=sel('inv-bal-paid')&&sel('inv-bal-paid').checked;
-  const finPaid=sel('inv-fin-paid')&&sel('inv-fin-paid').checked;
-  const paid=(depPaid?dep:0)+(balPaid?bal45:0)+(finPaid?fin:0);
-  const remaining=grandTotal-paid;
-  if(sel('inv-remaining'))sel('inv-remaining').textContent=remaining>0?`Outstanding: ${fmt(remaining)}`:'✓ Fully paid';
-  if(sel('inv-dep-date'))sel('inv-dep-date').textContent=depPaid?today():'';
-  if(sel('inv-bal-date'))sel('inv-bal-date').textContent=balPaid?today():'';
-  if(sel('inv-fin-date'))sel('inv-fin-date').textContent=finPaid?today():'';
   if(sel('inv-client'))sel('inv-client').textContent=v('ci-name')||'—';
   if(sel('inv-addr'))sel('inv-addr').textContent=[v('ci-addr1'),v('ci-addr2')].filter(Boolean).join(', ')||'—';
 }
@@ -2365,7 +2419,7 @@ function buildContract(total,dep,bal45,fin,days){
       if(ws>0) details.push('<strong>'+fmtN(ws)+'</strong> sqft walls');
       if(cs>0) details.push('<strong>'+fmtN(cs)+'</strong> sqft ceiling');
       if(tr>0) details.push('<strong>'+fmtN(tr)+'</strong> lin ft trims');
-      if(dc>0) details.push('<strong>'+dc+'</strong> door'+(dc>1?'s':''));
+      if(dc>0){const fd=Math.floor(dc/2),xs=dc%2;const dstr=fd>0?(fd+' door'+(fd>1?'s':''))+(xs?' + 1 side':''):dc+' side'+(dc>1?'s':'');details.push('<strong>'+dstr+'</strong>');}
       if(stairParts.length) details.push('Stairs: '+stairParts.join(', '));
       if(details.length) rows+='<tr><td style="padding:6px 8px;font-weight:500;white-space:nowrap;border-bottom:1px solid var(--cream2)">'+rName+'</td><td style="padding:6px 8px;font-size:12px;color:var(--ink2);border-bottom:1px solid var(--cream2)">'+details.join(' &nbsp;·&nbsp; ')+'</td></tr>';
     });
@@ -2446,9 +2500,9 @@ function renderChangeItems(){
     const div=document.createElement('div');
     div.className='change-item';
     div.innerHTML=`
-      <input type="text" placeholder="Item #" style="font-size:13px;padding:7px 9px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)">
+      <input type="text" value="${item.num||''}" placeholder="Item #" style="font-size:13px;padding:7px 9px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);width:100%" oninput="changeItems.find(x=>x.id==${item.id}).num=this.value">
       <input type="text" value="${item.desc}" placeholder="Description of work" style="font-size:13px;padding:7px 9px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="changeItems.find(x=>x.id==${item.id}).desc=this.value">
-      <input type="number" value="${item.amount||''}" placeholder="Amount $" style="font-size:13px;padding:7px 9px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)" oninput="changeItems.find(x=>x.id==${item.id}).amount=+this.value;recalcCO()">`;
+      <input type="number" value="${item.amount||''}" placeholder="0.00" class="co-amount-input" style="font-size:13px;padding:7px 9px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);text-align:right;width:100%" oninput="changeItems.find(x=>x.id==${item.id}).amount=+this.value;recalcCO()">`;
     c.appendChild(div);
   });
 }
@@ -2501,7 +2555,7 @@ function initLabourRates(){
     let wHtml='<div class="workers-row">';
     workers.forEach((w,i)=>{
       wHtml+=`<div class="worker-tag" style="position:relative;padding-right:28px">
-        <input type="checkbox" ${w.active?'checked':''} onchange="workers[${i}].active=this.checked;recalcRates()">
+        <input type="checkbox" ${w.active?'checked':''} onchange="workers[${i}].active=this.checked;adjustSalaryForDavid();recalcRates()">
         <input type="text" value="${w.n}" placeholder="Name" oninput="workers[${i}].n=this.value" style="width:72px;font-size:12px;padding:4px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink)">
         <span style="font-size:11px;color:var(--ink3)">$</span>
         <input type="number" value="${w.r}" min="0" step="0.5" oninput="workers[${i}].r=+this.value;recalcRates()" style="width:52px;font-size:12px;padding:4px 6px;border:1px solid var(--cream3);border-radius:var(--r);background:var(--cream);color:var(--ink);text-align:right">
@@ -2692,7 +2746,7 @@ function renderStairsPanel(r){
 function updDoorType(id,key,val){
   const r=rooms.find(x=>x.id===id);
   if(!r)return;
-  if(!r.doorTypes)r.doorTypes={flat:0,panel6:0,glass:0,custom:0};
+  if(!r.doorTypes)r.doorTypes={flat:0,panel6:0,custom:0};
   r.doorTypes[key]=val;
   // update doorCount to total for backward compatibility
   r.doorCount=calcTotalDoorCount(r);
